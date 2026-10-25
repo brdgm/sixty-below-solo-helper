@@ -13,8 +13,8 @@ import getStarLimit from '@/util/getStarLimit'
 export const MAX_EXPERTS_PER_COLUMN = 5
 /** Upgrades of one color: 4 level one, 4 level two, 3 level three */
 export const MAX_UPGRADES = 11
-/** Explorers available for the board (15 of one color, minus the ones for the Expedition Path and the Rondel) */
-export const EXPLORER_COUNT = 13
+/** Explorers available for the board: 17 of one color, minus the 2 on the Expedition Path and the Rondel replaced by the app (C19) */
+export const EXPLORER_COUNT = 15
 export const STATION_COUNT = 5
 
 /** Expert type printed at the bottom of each column, Experts of this type are placed in this column */

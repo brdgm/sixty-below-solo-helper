@@ -136,17 +136,17 @@ describe('services/BotState', () => {
   })
 
   it('explorers-stations', () => {
-    const botState = mockBotState({explorersLandscape: 10, explorersExpertActionTile: 2, stationsBuilt: 4})
+    const botState = mockBotState({explorersLandscape: EXPLORER_COUNT - 3, explorersExpertActionTile: 2, stationsBuilt: 4})
     expect(botState.explorersLeft).to.eq(1)
     expect(botState.stationsLeft).to.eq(1)
-    expect(botState.presenceLandscapes).to.eq(14)
+    expect(botState.presenceLandscapes).to.eq(16)
 
     botState.placeExplorerLandscape()
     botState.buildStation()
 
     expect(botState.explorersLeft).to.eq(0)
     expect(botState.stationsLeft).to.eq(0)
-    expect(botState.presenceLandscapes).to.eq(16)
+    expect(botState.presenceLandscapes).to.eq(18)
     expect(() => botState.placeExplorerLandscape()).to.throw()
     expect(() => botState.placeExplorerExpertActionTile()).to.throw()
     expect(() => botState.buildStation()).to.throw()
