@@ -1,0 +1,77 @@
+<template>
+  <SideBar :navigationState="navigationState"/>
+
+  <h1>{{t('roundStart.title', {round})}}</h1>
+
+  <h4 class="mt-4">{{t('roundStart.preparation.title')}}</h4>
+  <ul>
+    <li v-html="t('roundStart.preparation.drawCards')"></li>
+    <li v-html="t('roundStart.preparation.expeditionBonus')"></li>
+  </ul>
+
+  <h4 class="mt-4">{{t('roundStart.planning.title')}}</h4>
+  <ul>
+    <li v-html="t('roundStart.planning.takeExplorers')"></li>
+    <li v-html="t('roundStart.planning.drawCards')"></li>
+  </ul>
+
+  <p class="fst-italic" v-html="t('roundStart.arkaSkipsPhases')"></p>
+  <p v-if="isMilestoneRound" class="fst-italic" v-html="t('roundStart.milestoneRound')"></p>
+
+  <!-- TODO: route to the first turn of the round in step 5 (game flow) -->
+  <button type="button" class="btn btn-primary btn-lg mt-4" disabled>
+    {{t('action.next')}}
+  </button>
+
+  <DebugInfo :navigationState="navigationState"/>
+
+  <FooterButtons :backButtonRouteTo="backButtonRouteTo" endGameButtonType="abortGame"/>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRoute } from 'vue-router'
+import { useStateStore } from '@/store/state'
+import FooterButtons from '@/components/structure/FooterButtons.vue'
+import SideBar from '@/components/round/SideBar.vue'
+import DebugInfo from '@/components/round/DebugInfo.vue'
+import NavigationState from '@/util/NavigationState'
+import getMilestoneIndex from '@/util/getMilestoneIndex'
+
+export default defineComponent({
+  name: 'RoundStart',
+  components: {
+    FooterButtons,
+    SideBar,
+    DebugInfo
+  },
+  setup() {
+    const { t } = useI18n()
+    const route = useRoute()
+    const state = useStateStore()
+
+    const navigationState = new NavigationState(route, state)
+    const { round } = navigationState
+
+    return { t, navigationState, round }
+  },
+  computed: {
+    isMilestoneRound() : boolean {
+      return getMilestoneIndex(this.round) != undefined
+    },
+    backButtonRouteTo() : string {
+      if (this.round > 1) {
+        return `/round/${this.round - 1}/end`
+      }
+      return '/setupBot'
+    }
+  }
+})
+</script>
+
+<style lang="scss" scoped>
+ul > li {
+  margin-top: 0.5rem;
+}
+</style>

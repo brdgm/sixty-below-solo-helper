@@ -3,19 +3,23 @@ import { name } from '@/../package.json'
 import Player from '@/services/enum/Player'
 import ExpertColumn from '@/services/enum/ExpertColumn'
 import ExpertType from '@/services/enum/ExpertType'
+import DifficultyLevel from '@/services/enum/DifficultyLevel'
 
 export const useStateStore = defineStore(`${name}.state`, {
   state: () => {
     return {
       language: 'en',
       baseFontSize: 1,
-      setup: {},
+      setup: {
+        difficultyLevel: DifficultyLevel.LEVEL_1
+      },
       rounds: []
     } as State
   },
   actions: {
     resetGame() : void {
       this.rounds = []
+      this.setup.arkaMilestoneCards = undefined
     },
     storeRound(round : Round) : void {
       this.rounds = this.rounds.filter(item => item.round < round.round)
@@ -40,11 +44,16 @@ export interface State {
   rounds: Round[]
 }
 export interface Setup {
+  difficultyLevel: DifficultyLevel
+  /** Ids of Arka's 3 Milestone Cards, in scoring order (left to right) */
+  arkaMilestoneCards?: string[]
   debugMode?: boolean
 }
 
 export interface Round {
   round: number
+  /** Arka's state at the start of the round */
+  initialBotPersistence: BotPersistence
   turns: Turn[]
 }
 export interface Turn {

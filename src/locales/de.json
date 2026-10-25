@@ -3,18 +3,116 @@
   "home": {
     "title": "-60° Solo Helper",
     "play1": "Spiele eine <a href='https://boardgamegeek.com/boardgame/474125/60deg' target='_blank' rel='noopener'><b>-60°</b></a> Solopartie gegen Arka.",
-    "play2": "Diese Applikation ersetzt die Arka-Aktionskarten, die Arka-Meilensteinkarten und das Arka Tableau und führt dich durch das Spiel und das Solo-Regelwerk. Alle Schwierigkeitsgrade werden unterstützt.",
+    "play2": "Diese Applikation verwaltet die Arka-Aktionskarten, die Arka-Meilensteinkarten und das Arka Tableau und führt dich durch das Spiel und das Solo-Regelwerk. Alle Schwierigkeitsgrade werden unterstützt.",
     "feedback": "Diskussion und Feedback:"
   },
   "setup": {
     "title": "Aufbau",
-    "placeholder": "Die Optionen für den Spielaufbau werden hier ergänzt."
+    "difficultyLevel": {
+      "title": "Schwierigkeitsgrad",
+      "easy": "Leicht",
+      "hard": "Schwer",
+      "actionCardsWithoutStar": "keine Arka-Aktionskarten ohne Stern | {count} Arka-Aktionskarte ohne Stern | {count} Arka-Aktionskarten ohne Stern"
+    }
   },
   "setupBot": {
-    "title": "Aufbau für Arka"
+    "title": "Aufbau für Arka",
+    "instructions": {
+      "twoPlayerSetup": "Befolge den allgemeinen Aufbau für zwei Personen. Führe außerdem den persönlichen Aufbau bis zu Schritt 12 aus.",
+      "milestoneCards": "Nimm 4 zufällige Meilensteinkarten. Wähle 3 davon und lege sie oberhalb des Expertenplans aus. Die vierte Meilensteinkarte kannst du in die Spielebox zurücklegen - sie wird nicht gebraucht.",
+      "arkaTableau": "Nimm das Arka Tableau. Es wird nur verwendet, um die Experten, die Arka nimmt, in die drei Expertenspalten zu legen. Expeditionspfad, Expeditionsleiste, Rondell und Ausbauten werden von der App verwaltet.",
+      "arkaComponents": "Wähle eine Farbe für Arka. Lege 4 persönliche Stationsfelder und 5 Stationen dieser Farbe neben ihr Tableau. Nimm alle Explorer dieser Farbe und lege 2 davon in die Spielebox zurück.",
+      "arkaCards": "Lass links neben Arkas Tableau etwas Platz für die Karten, die sie verdeckt zieht.",
+      "arkaMilestoneCards": "Arkas Meilensteinkarten, gewertet von links nach rechts. Du kannst sie optional unterhalb ihres Tableaus auslegen:"
+    },
+    "endOfRound": "Ende Runde {round}",
+    "ruleChanges": {
+      "title": "Von der App verwaltet",
+      "managedByApp": "Die Arka-Aktionskarten und Arkas Meilensteinwertung werden von der App verwaltet. Du benötigst den Expeditionsmarker, den Energiemarker, die Meilensteinplättchen und die Ausbauten von Arkas Farbe nicht, ebenso wenig den Startmarker.",
+      "actionCardDeck": "Arkas Aktionskartenstapel besteht aus allen 9 Arka-Aktionskarten mit einem Stern und keinen Arka-Aktionskarten ohne Stern. | Arkas Aktionskartenstapel besteht aus allen 9 Arka-Aktionskarten mit einem Stern und {count} zufälligen Arka-Aktionskarte ohne Stern. | Arkas Aktionskartenstapel besteht aus allen 9 Arka-Aktionskarten mit einem Stern und {count} zufälligen Arka-Aktionskarten ohne Stern.",
+      "arkaPhases": "Für Arka entfällt die Vorbereitungs- und Planungsphase. Arka ist somit nur in der Aktionsphase aktiv und wertet am Ende der dritten, fünften und sechsten Runde Meilensteine.",
+      "firstPlayer": "Du bist in Runde 1 die Startperson.",
+      "meteorite": "Arka ignoriert den Meteoriten. Sie stellt keinen Explorer darauf und erhält keine Siegpunkte davon."
+    }
+  },
+  "roundStart": {
+    "title": "Runde {round}",
+    "preparation": {
+      "title": "I. Vorbereitung",
+      "drawCards": "<b>Karte ziehen</b> von deinem Expeditionsdeck.",
+      "expeditionBonus": "<b>Expeditionsvorschuss</b> erhalten."
+    },
+    "planning": {
+      "title": "II. Planung",
+      "takeExplorers": "Nimm <b>2 Explorer</b> deiner Farbe vom allgemeinen Vorrat und stelle sie in die Reserve auf dein Tableau.",
+      "drawCards": "Ziehe <b>5 Karten</b> vom allgemeinen Nachziehstapel. Behalte eine davon oder zahle zwei Energie um zwei davon zu behalten."
+    },
+    "arkaSkipsPhases": "Für Arka entfällt die Vorbereitungs- und Planungsphase.",
+    "milestoneRound": "Am Ende dieser Runde werten du und Arka einen Meilenstein."
   },
   "sideBar": {
     "round": "Runde {round}"
+  },
+  "arkaMilestoneCard": {
+    "alwaysFulfilled": "Immer erfüllt",
+    "overfulfill": "Übererfüllt:",
+    "specialAction": "Spezialaktion:"
+  },
+  "milestoneCondition": {
+    "twice-as-many-engineers": "Doppelt so viele Ingenieure",
+    "two-upgrades-more": "Zwei Ausbauten mehr",
+    "two-experts-more": "Zwei Experten mehr",
+    "three-project-cards-more": "Drei Projektkarten mehr",
+    "twice-as-many-radio-operators": "Doppelt so viele Funker",
+    "one-presence-more-landscapes": "Eine Präsenz mehr auf Landschaften"
+  },
+  "difficultyMode": {
+    "standard": "Standard",
+    "legendary": "Legendär",
+    "epic": "Episch"
+  },
+  "rules": {
+    "action": {
+      "rondel": {
+        "title": "Rondell"
+      },
+      "build-station": {
+        "title": "Station bauen"
+      },
+      "build-station-if-3-engineers": {
+        "title": "Station bauen, wenn zumindest 3 Ingenieurssymbole vorhanden sind"
+      },
+      "take-expert": {
+        "title": "Nimm den obersten am weitesten links verfügbaren Experten"
+      },
+      "take-engineer": {
+        "title": "Nimm den weitesten links verfügbaren Ingenieur"
+      },
+      "take-investor": {
+        "title": "Nimm die weiteste links verfügbare Investorin"
+      },
+      "take-radio-operator": {
+        "title": "Nimm den weitesten links verfügbaren Funker"
+      },
+      "take-upgrade": {
+        "title": "Nimm einen Ausbau"
+      },
+      "explore-landscape": {
+        "title": "Erschließe die nächst mögliche Landschaft"
+      },
+      "place-explorer-landscape": {
+        "title": "Stelle einen Explorer auf eine Landschaft"
+      },
+      "place-explorer-expert-action-tile": {
+        "title": "Stelle einen Explorer auf ein Expertenaktionsplättchen"
+      },
+      "milestone-special-action": {
+        "title": "Spezialaktion der nächsten Arka-Meilensteinkarte"
+      },
+      "milestone-special-action-all": {
+        "title": "Spezialaktionen aller noch nicht gewerteten Arka-Meilensteinkarten"
+      }
+    }
   },
   "notfound": {
     "title": "Nicht Gefunden"

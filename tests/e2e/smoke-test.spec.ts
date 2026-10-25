@@ -9,6 +9,14 @@ test('smoke test', async ({ page }) => {
 
   // setup game
   await expect(page.locator('h1')).toHaveText('Setup')
+  await page.getByRole('button', { name: 'Setup Arka' }).click()
+
+  // setup Arka
+  await expect(page.locator('h1')).toHaveText('Setup Arka')
+  await page.getByRole('button', { name: 'Start Game' }).click()
+
+  // round 1 start
+  await expect(page.locator('h1')).toHaveText('Round 1')
 
   // abort game
   await page.getByRole('button', { name: 'Abort Game' }).click()

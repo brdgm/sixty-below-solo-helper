@@ -3,18 +3,116 @@
   "home": {
     "title": "-60° Solo Helper",
     "play1": "Play a <a href='https://boardgamegeek.com/boardgame/474125/60deg' target='_blank' rel='noopener'><b>-60°</b></a> solo game against Arka.",
-    "play2": "This application replaces Arka's Action Cards, Arka's Milestone Cards and Arka's Tableau and guides you through the game and solo ruleset. It supports all difficulty levels.",
+    "play2": "This application manages Arka's Action Cards, Arka's Milestone Cards and Arka's Tableau and guides you through the game and solo ruleset. It supports all difficulty levels.",
     "feedback": "Discussion and Feedback:"
   },
   "setup": {
     "title": "Setup",
-    "placeholder": "The game setup options will be added here."
+    "difficultyLevel": {
+      "title": "Difficulty Level",
+      "easy": "Easy",
+      "hard": "Hard",
+      "actionCardsWithoutStar": "no Action Cards without a star | {count} Action Card without a star | {count} Action Cards without a star"
+    }
   },
   "setupBot": {
-    "title": "Setup Arka"
+    "title": "Setup Arka",
+    "instructions": {
+      "twoPlayerSetup": "Follow the normal setup for a two player game. Also, complete the personal setup until step 12.",
+      "milestoneCards": "Take 4 Milestone Cards at random. Choose 3 of them and place them above the Expert Plan. Place the fourth Milestone Card back in the box, as it won't be needed.",
+      "arkaTableau": "Take Arka's Tableau. It is only used to place the Experts Arka takes in its three Expert columns. The Expedition Path, Expedition Track, Rondel and Upgrades are managed by the app.",
+      "arkaComponents": "Choose a color for Arka. Place the 4 personal Station Sites and 5 Stations of this color next to her Tableau. Take all Explorers of this color and place 2 of them back in the box.",
+      "arkaCards": "Leave some space to the left of Arka's Tableau for the Cards she draws face down.",
+      "arkaMilestoneCards": "Arka's Milestone Cards, scored from left to right. Optionally, place them below her Tableau:"
+    },
+    "endOfRound": "End of round {round}",
+    "ruleChanges": {
+      "title": "Managed by the App",
+      "managedByApp": "Arka's Action Cards and her Milestone scoring are managed by the app. You do not need the Expedition Marker, Energy Marker, Milestone Tiles and Upgrades of Arka's color, nor the Starting Indicator.",
+      "actionCardDeck": "Arka's Action Card deck consists of all 9 Action Cards with one star and no Action Cards without a star. | Arka's Action Card deck consists of all 9 Action Cards with one star and {count} random Action Card without a star. | Arka's Action Card deck consists of all 9 Action Cards with one star and {count} random Action Cards without a star.",
+      "arkaPhases": "Arka does not perform a Preparation and a Planning Phase. She is only active during the Action Phase and scores Milestones at the end of the third, fifth and sixth round.",
+      "firstPlayer": "You are the first player in round 1.",
+      "meteorite": "Arka ignores the Meteorite. She never places an Explorer on it and scores no victory points from it."
+    }
+  },
+  "roundStart": {
+    "title": "Round {round}",
+    "preparation": {
+      "title": "I. Preparation",
+      "drawCards": "<b>Draw Cards</b> from your Expedition Deck.",
+      "expeditionBonus": "Gain the <b>Expedition Bonus</b>."
+    },
+    "planning": {
+      "title": "II. Planning",
+      "takeExplorers": "Take <b>2 Explorers</b> from the general supply and place them on your Reserve.",
+      "drawCards": "Draw <b>5 Cards</b> from the common deck. Keep one of them for free or spend two Energy to keep two Cards."
+    },
+    "arkaSkipsPhases": "Arka does not perform a Preparation and a Planning Phase.",
+    "milestoneRound": "At the end of this round, you and Arka score a Milestone."
   },
   "sideBar": {
     "round": "Round {round}"
+  },
+  "arkaMilestoneCard": {
+    "alwaysFulfilled": "Always fulfilled",
+    "overfulfill": "Overfulfill:",
+    "specialAction": "Special Action:"
+  },
+  "milestoneCondition": {
+    "twice-as-many-engineers": "Twice as many Engineers",
+    "two-upgrades-more": "Two Upgrades more",
+    "two-experts-more": "Two Experts more",
+    "three-project-cards-more": "Three Project Cards more",
+    "twice-as-many-radio-operators": "Twice as many Radio Operators",
+    "one-presence-more-landscapes": "One more presence on Landscapes"
+  },
+  "difficultyMode": {
+    "standard": "Standard",
+    "legendary": "Legendary",
+    "epic": "Epic"
+  },
+  "rules": {
+    "action": {
+      "rondel": {
+        "title": "Rondel"
+      },
+      "build-station": {
+        "title": "Build a Station"
+      },
+      "build-station-if-3-engineers": {
+        "title": "Building a Station if Arka has at least 3 Engineer icons"
+      },
+      "take-expert": {
+        "title": "Take the upper-most available Expert from the left"
+      },
+      "take-engineer": {
+        "title": "Take the left-most Engineer"
+      },
+      "take-investor": {
+        "title": "Take the left-most Investor"
+      },
+      "take-radio-operator": {
+        "title": "Take the left-most Radio Operator"
+      },
+      "take-upgrade": {
+        "title": "Take an Upgrade"
+      },
+      "explore-landscape": {
+        "title": "Explore the next Landscape"
+      },
+      "place-explorer-landscape": {
+        "title": "Place an Explorer on a Landscape"
+      },
+      "place-explorer-expert-action-tile": {
+        "title": "Place an Explorer on an Expert Action Tile"
+      },
+      "milestone-special-action": {
+        "title": "Special action of Arka's next Milestone Card"
+      },
+      "milestone-special-action-all": {
+        "title": "Special actions of all Arka's Milestone Cards that haven't been scored yet"
+      }
+    }
   },
   "notfound": {
     "title": "Not Found"
