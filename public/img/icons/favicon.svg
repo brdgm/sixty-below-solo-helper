@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- PLACEHOLDER - replace with the final app icon -->
+  <rect x="16" y="16" width="480" height="480" rx="80" fill="#1c3e60"/>
+  <text x="256" y="320" font-family="Arial, sans-serif" font-weight="bold" font-size="170" fill="#ebf5ff" text-anchor="middle">-60°</text>
+</svg>

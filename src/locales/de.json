@@ -1,0 +1,43 @@
+{
+  "gameTitle": "-60°",
+  "home": {
+    "title": "-60° Solo Helper",
+    "play1": "Spiele eine <a href='https://boardgamegeek.com/boardgame/474125/60deg' target='_blank' rel='noopener'><b>-60°</b></a> Solopartie gegen Arka.",
+    "play2": "Diese Applikation ersetzt die Arka-Aktionskarten, die Arka-Meilensteinkarten und das Arka Tableau und führt dich durch das Spiel und das Solo-Regelwerk. Alle Schwierigkeitsgrade werden unterstützt.",
+    "feedback": "Diskussion und Feedback:"
+  },
+  "setup": {
+    "title": "Aufbau",
+    "placeholder": "Die Optionen für den Spielaufbau werden hier ergänzt."
+  },
+  "setupBot": {
+    "title": "Aufbau für Arka"
+  },
+  "sideBar": {
+    "round": "Runde {round}"
+  },
+  "notfound": {
+    "title": "Nicht Gefunden"
+  },
+  "action": {
+    "playGame": "Spielen",
+    "startGame": "Spiel starten",
+    "next": "Weiter",
+    "abortGame": "Spiel abbrechen",
+    "abortGameConfirm": "Das aktuelle Spiel wird abgebrochen - bist du sicher?",
+    "endGame": "Spiel beenden",
+    "endGameConfirm": "Dieses Spiel wird beendet - bist du sicher?",
+    "cancel": "Abbrechen",
+    "backToHome": "Zurück zum Anfang",
+    "back": "Zurück",
+    "close": "Schließen",
+    "ok": "OK"
+  },
+  "footer": {
+    "credits": "Credits"
+  },
+  "serviceWorkerUpdatedRefresh": {
+    "title": "Applikation neu laden",
+    "notice": "Die Applikation wurde aktualisiert - möchtest du die Seite neu laden um die neueste Version zu nutzen?"
+  }
+}

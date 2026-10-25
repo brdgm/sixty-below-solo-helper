@@ -1,0 +1,43 @@
+{
+  "gameTitle": "-60°",
+  "home": {
+    "title": "-60° Solo Helper",
+    "play1": "Play a <a href='https://boardgamegeek.com/boardgame/474125/60deg' target='_blank' rel='noopener'><b>-60°</b></a> solo game against Arka.",
+    "play2": "This application replaces Arka's Action Cards, Arka's Milestone Cards and Arka's Tableau and guides you through the game and solo ruleset. It supports all difficulty levels.",
+    "feedback": "Discussion and Feedback:"
+  },
+  "setup": {
+    "title": "Setup",
+    "placeholder": "The game setup options will be added here."
+  },
+  "setupBot": {
+    "title": "Setup Arka"
+  },
+  "sideBar": {
+    "round": "Round {round}"
+  },
+  "notfound": {
+    "title": "Not Found"
+  },
+  "action": {
+    "playGame": "Play Game",
+    "startGame": "Start Game",
+    "next": "Next",
+    "abortGame": "Abort Game",
+    "abortGameConfirm": "Aborting the running game - are you sure?",
+    "endGame": "End Game",
+    "endGameConfirm": "End this game and return to home screen - are you sure?",
+    "cancel": "Cancel",
+    "backToHome": "Back to Home",
+    "back": "Back",
+    "close": "Close",
+    "ok": "OK"
+  },
+  "footer": {
+    "credits": "Credits"
+  },
+  "serviceWorkerUpdatedRefresh": {
+    "title": "Refresh Application",
+    "notice": "The application was updated - do you want to refresh to use the latest version?"
+  }
+}
