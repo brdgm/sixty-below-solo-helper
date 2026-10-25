@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { name } from '@/../package.json'
 import Player from '@/services/enum/Player'
+import ExpertColumn from '@/services/enum/ExpertColumn'
+import ExpertType from '@/services/enum/ExpertType'
 
 export const useStateStore = defineStore(`${name}.state`, {
   state: () => {
@@ -50,4 +52,29 @@ export interface Turn {
   turn: number
   player: Player
   pass?: boolean
+}
+
+export interface BotPersistence {
+  cardDeck: CardDeckPersistence
+  botState: BotStatePersistence
+}
+export interface CardDeckPersistence {
+  pile: string[]
+  discard: string[]
+  /** Action Cards played this round, in the order played */
+  played: string[]
+}
+export interface BotStatePersistence {
+  /** Position of the Rondel Explorer: 0..7, 0 = starting space directly before the Expedition action */
+  rondelPosition: number
+  /** Steps on the Expedition Track (= victory points), the Expedition Path position is derived */
+  expeditionSteps: number
+  /** Experts taken by Arka per column in the order taken (without the printed Expert) */
+  experts: Record<ExpertColumn, ExpertType[]>
+  upgrades: number
+  /** Face-down cards drawn from the common deck (left of the Tableau) */
+  cardsDrawn: number
+  explorersLandscape: number
+  explorersExpertActionTile: number
+  stationsBuilt: number
 }
