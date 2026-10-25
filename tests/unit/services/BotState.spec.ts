@@ -67,13 +67,13 @@ describe('services/BotState', () => {
 
     botState.addExpert(ExpertColumn.ENGINEER, ExpertType.MECHANIC)
     expect(botState.isColumnFull(ExpertColumn.ENGINEER)).to.true
-    expect(() => botState.addExpert(ExpertColumn.ENGINEER, ExpertType.ENGINEER)).to.throw()
+    expect(() => botState.addExpert(ExpertColumn.ENGINEER, ExpertType.ENGINEER)).to.throw('Column engineer is full.')
   })
 
   it('addExpert-wrong-column', () => {
     const botState = BotState.new()
 
-    expect(() => botState.addExpert(ExpertColumn.INVESTOR, ExpertType.ENGINEER)).to.throw()
+    expect(() => botState.addExpert(ExpertColumn.INVESTOR, ExpertType.ENGINEER)).to.throw('Expert engineer cannot be placed in column investor.')
   })
 
   it('getExpertColumn', () => {
@@ -147,9 +147,9 @@ describe('services/BotState', () => {
     expect(botState.explorersLeft).to.eq(0)
     expect(botState.stationsLeft).to.eq(0)
     expect(botState.presenceLandscapes).to.eq(18)
-    expect(() => botState.placeExplorerLandscape()).to.throw()
-    expect(() => botState.placeExplorerExpertActionTile()).to.throw()
-    expect(() => botState.buildStation()).to.throw()
+    expect(() => botState.placeExplorerLandscape()).to.throw('No Explorer left.')
+    expect(() => botState.placeExplorerExpertActionTile()).to.throw('No Explorer left.')
+    expect(() => botState.buildStation()).to.throw('No Station left.')
   })
 
   it('placeExplorerExpertActionTile', () => {

@@ -10,11 +10,11 @@ describe('services/CardDeck', () => {
       const deck = CardDeck.new(difficultyLevel)
       const pile = deck.toPersistence().pile
 
-      expect(pile.length, `level ${difficultyLevel}`).to.eq(9 + difficultyLevel - 1)
-      expect(pile.filter(id => id.startsWith('saa')).length, `level ${difficultyLevel} star`).to.eq(9)
+      expect(pile, `level ${difficultyLevel}`).to.have.lengthOf(9 + difficultyLevel - 1)
+      expect(pile.filter(id => id.startsWith('saa')), `level ${difficultyLevel} star`).to.have.lengthOf(9)
       expect(new Set(pile).size, `level ${difficultyLevel} unique`).to.eq(pile.length)
-      expect(deck.discard.length).to.eq(0)
-      expect(deck.played.length).to.eq(0)
+      expect(deck.discard).to.have.lengthOf(0)
+      expect(deck.played).to.have.lengthOf(0)
       expect(deck.currentCard).to.undefined
     }
   })
@@ -47,15 +47,15 @@ describe('services/CardDeck', () => {
     const card = deck.draw()
 
     expect(['saa3','saa4']).to.include(card.id)
-    expect(deck.pile.length).to.eq(1)
-    expect(deck.discard.length).to.eq(0)
+    expect(deck.pile).to.have.lengthOf(1)
+    expect(deck.discard).to.have.lengthOf(0)
     expect(deck.played.map(item => item.id)).to.eql(['saa1', card.id])
   })
 
   it('draw-empty', () => {
     const deck = mockCardDeck({pile:[], discard:[], played:['saa1']})
 
-    expect(() => deck.draw()).to.throw()
+    expect(() => deck.draw()).to.throw('Pile and discard pile are empty.')
   })
 
   it('persistence', () => {

@@ -13,7 +13,7 @@ describe('services/MilestoneCards', () => {
   })
 
   it('get-invalid', () => {
-    expect(() => MilestoneCards.get('sm7')).to.throw()
+    expect(() => MilestoneCards.get('sm7')).to.throw('No item with key: sm7')
   })
 
   it('getAll', () => {

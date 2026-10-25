@@ -13,11 +13,11 @@ describe('services/Cards', () => {
   })
 
   it('get-invalid', () => {
-    expect(() => Cards.get('saa99')).to.throw()
+    expect(() => Cards.get('saa99')).to.throw('No item with key: saa99')
   })
 
   it('getAll', () => {
-    expect(Cards.getAll().length).to.eq(14)
+    expect(Cards.getAll()).to.have.lengthOf(14)
     expect(Cards.getAll(true).map(card => card.id)).to.eql(['saa1','saa2','saa3','saa4','saa5','saa6','saa7','saa8','saa9'])
     expect(Cards.getAll(false).map(card => card.id)).to.eql(['sab10','sab11','sab12','sab13','sab14'])
   })

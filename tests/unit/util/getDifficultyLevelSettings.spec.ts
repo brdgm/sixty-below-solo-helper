@@ -16,6 +16,6 @@ describe('util/getDifficultyLevelSettings', () => {
   })
 
   it('invalid', () => {
-    expect(() => getDifficultyLevelSettings(99 as DifficultyLevel)).to.throw()
+    expect(() => getDifficultyLevelSettings(99 as DifficultyLevel)).to.throw('Invalid difficulty level: 99')
   })
 })
