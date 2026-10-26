@@ -3,11 +3,8 @@
 
   <h1>{{t('roundEnd.title', {round})}}</h1>
 
-  <ul class="instructions mt-4">
-    <li v-if="isMilestoneRound" v-html="t('roundEnd.scoreMilestone')"></li>
-    <li v-if="isForecastRound" v-html="t('roundEnd.gainForecastTile')"></li>
-    <li v-if="!isLastRound" v-html="t('roundEnd.moveRoundIndicator')"></li>
-  </ul>
+  <p v-if="isMilestoneRound" class="mt-4" v-html="t('roundEnd.scoreMilestone')"></p>
+  <div v-if="isForecastRound" class="alert alert-warning notice mt-4" role="status" v-html="t('roundEnd.gainForecastTile')"></div>
 
   <template v-if="milestoneCard && milestoneIndex != undefined">
     <ArkaMilestoneScoring :milestoneCard="milestoneCard" :milestoneIndex="milestoneIndex" :botState="botState"/>
@@ -117,10 +114,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.instructions {
-  max-width: 1000px;
-  & > li {
-    margin-top: 0.5rem;
-  }
+.notice {
+  max-width: 40rem;
 }
 </style>

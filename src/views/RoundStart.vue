@@ -5,22 +5,23 @@
 
   <p class="mt-4" v-html="t(`roundStart.startPlayer.${startPlayer}`)"></p>
 
-  <h4 class="mt-4">{{t('roundStart.preparation.title')}}</h4>
+  <h5 class="mt-4">{{t('roundStart.preparation.title')}}</h5>
   <ul>
     <li v-html="t('roundStart.preparation.drawCards')"></li>
     <li v-html="t('roundStart.preparation.expeditionBonus')"></li>
   </ul>
 
-  <h4 class="mt-4">{{t('roundStart.planning.title')}}</h4>
+  <h5>{{t('roundStart.planning.title')}}</h5>
   <ul>
     <li v-html="t('roundStart.planning.takeExplorers')"></li>
     <li v-html="t('roundStart.planning.drawCards')"></li>
   </ul>
 
   <p class="fst-italic" v-html="t('roundStart.arkaSkipsPhases')"></p>
-  <p v-if="isMilestoneRound" class="fst-italic" v-html="t('roundStart.milestoneRound')"></p>
 
-  <button type="button" class="btn btn-primary btn-lg mt-4" @click="next()">
+  <div v-if="isMilestoneRound" class="alert alert-warning notice" role="status" v-html="t('roundStart.milestoneRound')"></div>
+
+  <button type="button" class="btn btn-primary btn-lg mt-3" @click="next()">
     {{t('action.next')}}
   </button>
 
@@ -80,7 +81,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-ul > li {
-  margin-top: 0.5rem;
+.notice {
+  max-width: 40rem;
 }
 </style>

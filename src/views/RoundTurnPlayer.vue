@@ -15,7 +15,6 @@
   <ModalDialog id="passModal" :title="t('action.pass')">
     <template #body>
       <p v-html="t('roundTurnPlayer.passConfirm')"></p>
-      <p v-html="t('roundTurnPlayer.passInfo')"></p>
     </template>
     <template #footer>
       <button type="button" class="btn btn-danger" @click="pass()" data-bs-dismiss="modal">{{t('action.pass')}}</button>

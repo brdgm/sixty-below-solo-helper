@@ -43,22 +43,21 @@
     },
     "preparation": {
       "title": "I. Vorbereitung",
-      "drawCards": "<b>Karte ziehen</b> von deinem Expeditionsdeck.",
-      "expeditionBonus": "<b>Expeditionsvorschuss</b> erhalten."
+      "drawCards": "<b>Karten ziehen</b> von deinem Expeditionsdeck",
+      "expeditionBonus": "<b>Expeditionsvorschuss</b> erhalten"
     },
     "planning": {
       "title": "II. Planung",
-      "takeExplorers": "Nimm <b>2 Explorer</b> deiner Farbe vom allgemeinen Vorrat und stelle sie in die Reserve auf dein Tableau.",
-      "drawCards": "Ziehe <b>5 Karten</b> vom allgemeinen Nachziehstapel. Behalte eine davon oder zahle zwei Energie um zwei davon zu behalten."
+      "takeExplorers": "Nimm <b>2 Explorer</b>",
+      "drawCards": "Ziehe <b>5 Karten</b>, behalte 1 (oder 2 für 2 Energie)"
     },
-    "arkaSkipsPhases": "Für Arka entfällt die Vorbereitungs- und Planungsphase.",
-    "milestoneRound": "Am Ende dieser Runde werten du und Arka einen Meilenstein."
+    "arkaSkipsPhases": "Für Arka entfallen diese Phasen.",
+    "milestoneRound": "Am Ende dieser Runde werten du und Arka einen <b>Meilenstein</b>."
   },
   "roundTurnPlayer": {
     "title": "Dein Zug",
-    "execute": "Immer wenn du an der Reihe bist, führst du <b>genau eine Aktion</b> aus oder passt.",
-    "passConfirm": "Passen und aus der Aktionsphase aussteigen?",
-    "passInfo": "Lege alle Stürme und Expeditionskarten von deinem Tableau auf deine Expeditionsablage. Falls du einen Explorer nicht einsetzen willst, kannst du ihn in die nächste Runde mitnehmen."
+    "execute": "Führe deinen Zug aus.",
+    "passConfirm": "Passen und aus der Aktionsphase aussteigen?"
   },
   "roundTurnBot": {
     "title": "Arka",
@@ -94,9 +93,8 @@
   },
   "roundEnd": {
     "title": "Ende Runde {round}",
-    "scoreMilestone": "<b>Meilenstein:</b> Wähle eine Meilensteinkarte die du jetzt wertest. Lege dein Meilensteinplättchen mit der passenden Seite nach oben auf diese Karte. Diese Meilensteinkarte steht dir zur Wertung nicht mehr zur Verfügung.",
+    "scoreMilestone": "Werte deinen <b>Meilenstein</b>.",
     "gainForecastTile": "Du erhältst ein <b>Forecastplättchen</b>.",
-    "moveRoundIndicator": "Schiebe den <b>Rundenmarker</b> um ein Feld weiter.",
     "arkaOverfulfills": "Erfüllt Arka die Bedingung im Vergleich zu dir?",
     "overfulfilled": "Ja: {vp} Siegpunkte",
     "notOverfulfilled": "Nein: {vp} Siegpunkte"

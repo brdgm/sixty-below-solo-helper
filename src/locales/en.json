@@ -43,22 +43,21 @@
     },
     "preparation": {
       "title": "I. Preparation",
-      "drawCards": "<b>Draw Cards</b> from your Expedition Deck.",
-      "expeditionBonus": "Gain the <b>Expedition Bonus</b>."
+      "drawCards": "<b>Draw Cards</b> from your Expedition Deck",
+      "expeditionBonus": "Gain the <b>Expedition Bonus</b>"
     },
     "planning": {
       "title": "II. Planning",
-      "takeExplorers": "Take <b>2 Explorers</b> from the general supply and place them on your Reserve.",
-      "drawCards": "Draw <b>5 Cards</b> from the common deck. Keep one of them for free or spend two Energy to keep two Cards."
+      "takeExplorers": "Take <b>2 Explorers</b>",
+      "drawCards": "Draw <b>5 Cards</b>, keep 1 (or 2 for 2 Energy)"
     },
-    "arkaSkipsPhases": "Arka does not perform a Preparation and a Planning Phase.",
-    "milestoneRound": "At the end of this round, you and Arka score a Milestone."
+    "arkaSkipsPhases": "Arka does not perform these phases.",
+    "milestoneRound": "At the end of this round, you and Arka score a <b>Milestone</b>."
   },
   "roundTurnPlayer": {
     "title": "Your Turn",
-    "execute": "On your turn, you must perform <b>exactly one action</b> or pass.",
-    "passConfirm": "Pass and drop out of the Action Phase?",
-    "passInfo": "Place all Storm and Expedition Cards from your Tableau on your personal discard pile. You can bring one unused Explorer to the next round."
+    "execute": "Execute your turn.",
+    "passConfirm": "Pass and drop out of the Action Phase?"
   },
   "roundTurnBot": {
     "title": "Arka",
@@ -94,9 +93,8 @@
   },
   "roundEnd": {
     "title": "End of Round {round}",
-    "scoreMilestone": "<b>Milestone:</b> Choose which Milestone Card you want to score. Place your Milestone Tile with the correct side face up on the Milestone Card. You may not score this Milestone Card again.",
+    "scoreMilestone": "Score your <b>Milestone</b>.",
     "gainForecastTile": "Gain one <b>Forecast Tile</b>.",
-    "moveRoundIndicator": "Move the <b>Round Indicator</b> one space forward.",
     "arkaOverfulfills": "Does Arka meet the condition compared to you?",
     "overfulfilled": "Yes: {vp} VP",
     "notOverfulfilled": "No: {vp} VP"
