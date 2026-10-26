@@ -1,5 +1,5 @@
 import Player from '@/services/enum/Player'
-import { BotPersistence, Turn } from '@/store/state'
+import { BotActionDecision, BotPersistence, Turn } from '@/store/state'
 
 export default function mockTurn(params?: MockTurnParams) : Turn {
   return {
@@ -7,7 +7,8 @@ export default function mockTurn(params?: MockTurnParams) : Turn {
     turn: params?.turn ?? 1,
     player: params?.player ?? Player.PLAYER,
     pass: params?.pass,
-    botPersistence: params?.botPersistence
+    botPersistence: params?.botPersistence,
+    botActionDecisions: params?.botActionDecisions
   }
 }
 
@@ -17,4 +18,5 @@ export interface MockTurnParams {
   player?: Player
   pass?: boolean
   botPersistence?: BotPersistence
+  botActionDecisions?: BotActionDecision[]
 }

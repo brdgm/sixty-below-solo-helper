@@ -85,6 +85,12 @@ describe('services/BotState', () => {
     expect(BotState.getExpertColumn(ExpertType.MECHANIC)).to.undefined
   })
 
+  it('getColumnExpertType', () => {
+    expect(BotState.getColumnExpertType(ExpertColumn.INVESTOR)).to.eq(ExpertType.INVESTOR)
+    expect(BotState.getColumnExpertType(ExpertColumn.RADIO_OPERATOR)).to.eq(ExpertType.RADIO_OPERATOR)
+    expect(BotState.getColumnExpertType(ExpertColumn.ENGINEER)).to.eq(ExpertType.ENGINEER)
+  })
+
   it('moveRondel', () => {
     const botState = mockBotState({
       rondelPosition: 7,

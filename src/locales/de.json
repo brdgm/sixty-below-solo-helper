@@ -62,11 +62,29 @@
   },
   "roundTurnBot": {
     "title": "Arka",
-    "revealActionCard": "Arka deckt ihre nächste Aktionskarte auf und führt die Aktionen von oben nach unten aus:",
-    "pass": "Arka hat in dieser Runde bereits die {count} Sterne ihres Expeditionspfads gespielt und <b>passt</b>."
+    "pass": "Arka hat in dieser Runde bereits die {count} Sterne ihres Expeditionspfads gespielt und <b>passt</b>.",
+    "nothingToDo": "Auf dem Spielplan gibt es für dich nichts zu tun. Die App hat Arkas Tableau aktualisiert."
   },
-  "actionCardOverview": {
-    "otherwise": "Andernfalls: {action}"
+  "actionBox": {
+    "notPossible": "Nicht möglich"
+  },
+  "notPossibleReason": {
+    "no-explorer": "kein Explorer übrig",
+    "no-station": "keine Station übrig",
+    "column-full": "Expertenspalte voll"
+  },
+  "actionBuildStation": {
+    "stationSite": "Stationsfeld {value}"
+  },
+  "actionDrawCards": {
+    "cards": "{count} Karte | {count} Karten"
+  },
+  "botActionDecision": {
+    "executed": "Ausgeführt",
+    "notPossible": "Nicht möglich",
+    "whichExpert": "Welchen Experten hat Arka genommen?",
+    "whichColumn": "Mehrere Spalten haben die meisten Experten. Wähle die Spalte für: <b>{expert}</b>",
+    "column": "Spalte {expert}"
   },
   "actionCardStarMarker": {
     "star": "Aktionskarte mit einem Stern",
@@ -84,7 +102,14 @@
   "sideBar": {
     "round": "Runde {round}",
     "turn": "Zug {turn}",
-    "starsPlayed": "Sterne: {played} / {limit}"
+    "starsPlayed": "Sterne: {played} / {limit}",
+    "expeditionSteps": "Expeditionsleiste",
+    "upgrades": "Ausbauten",
+    "cardsDrawn": "Karten links vom Tableau",
+    "explorersLeft": "Explorer übrig",
+    "stationsLeft": "Stationen übrig",
+    "experts": "Experten",
+    "nextMilestone": "Meilenstein Ende Runde {round}:"
   },
   "arkaMilestoneCard": {
     "alwaysFulfilled": "Immer erfüllt",
@@ -98,6 +123,14 @@
     "three-project-cards-more": "Drei Projektkarten mehr",
     "twice-as-many-radio-operators": "Doppelt so viele Funker",
     "one-presence-more-landscapes": "Eine Präsenz mehr auf Landschaften"
+  },
+  "expertType": {
+    "radio-operator": "Funker",
+    "engineer": "Ingenieur",
+    "investor": "Investorin",
+    "mission-coordinator": "Missionsleiter",
+    "pilot": "Pilotin",
+    "mechanic": "Mechaniker"
   },
   "difficultyMode": {
     "standard": "Standard",
@@ -113,42 +146,62 @@
         "title": "Rondell"
       },
       "build-station": {
-        "title": "Station bauen"
+        "title": "Station bauen",
+        "text": "Nimm das Stationsfeld entsprechend der Ingenieurssymbolanzahl +1 und eine Station. Baue neben der kältesten Landschaft. Grenze dabei an möglichst viele Landschaften an. Bei Gleichstand entscheidest du. Sind mehrere Stationsfelder verfügbar, dann nimm das kälteste. Ist kein Stationsfeld verfügbar, dann nimm das nächst niedrigere."
       },
       "build-station-if-3-engineers": {
-        "title": "Station bauen, wenn zumindest 3 Ingenieurssymbole vorhanden sind"
+        "title": "Station bauen, wenn zumindest 3 Ingenieurssymbole vorhanden sind",
+        "text": "Diese Aktion funktioniert genau gleich wie „Station bauen“, allerdings wird sie nur ausgelöst, wenn Arka zumindest 3 Ingenieurssymbole auf ihrem Tableau hat.",
+        "otherwise": "Arka hat weniger als 3 Ingenieurssymbole auf ihrem Tableau und baut daher keine Station. <i>Andernfalls:</i>"
       },
       "take-expert": {
-        "title": "Nimm den obersten am weitesten links verfügbaren Experten"
+        "title": "Nimm den obersten am weitesten links verfügbaren Experten",
+        "text": "Nimm den obersten am weitesten links verfügbaren Experten. Falls es eine Pilotin oder ein Mechaniker ist, lege sie oder ihn in die Spalte mit den meisten Experten. Bei Gleichstand entscheidest du."
       },
       "take-engineer": {
-        "title": "Nimm den weitesten links verfügbaren Ingenieur"
+        "title": "Nimm den weitesten links verfügbaren Ingenieur",
+        "text": "Nimm den weitesten links verfügbaren Ingenieur. Falls keiner verfügbar ist, nimm einen Missionsleiter."
       },
       "take-investor": {
-        "title": "Nimm die weiteste links verfügbare Investorin"
+        "title": "Nimm die weiteste links verfügbare Investorin",
+        "text": "Nimm die weiteste links verfügbare Investorin. Falls keine verfügbar ist, nimm einen Missionsleiter."
       },
       "take-radio-operator": {
-        "title": "Nimm den weitesten links verfügbaren Funker"
+        "title": "Nimm den weitesten links verfügbaren Funker",
+        "text": "Nimm den weitesten links verfügbaren Funker. Falls keiner verfügbar ist, nimm einen Missionsleiter."
       },
       "take-upgrade": {
         "title": "Nimm einen Ausbau"
       },
       "explore-landscape": {
-        "title": "Erschließe die nächst mögliche Landschaft"
+        "title": "Erschließe die nächst mögliche Landschaft",
+        "text": "Nimm einen Explorer und erschließe die nächst mögliche Landschaft (achte auf die rote Markierung). Arka erhält kein Radarplättchen.",
+        "noLandscapeLeft": "Wurde die letzte unentdeckte Landschaft erschlossen, nimm eine zufällige weggelegte -62,1° bis -63° Landschaft und lege sie an die rote Markierung der gerade erschlossenen Landschaft an."
       },
       "place-explorer-landscape": {
-        "title": "Stelle einen Explorer auf eine Landschaft"
+        "title": "Stelle einen Explorer auf eine Landschaft",
+        "text": "Nimm einen Explorer und stelle ihn auf die Landschaft mit den meisten freien Aktionsfeldern. Bei Gleichstand auf die kälteste. Wähle bevorzugt eine Münzbelohnung und dann eine Energiebelohnung. Arka führt die Aktion nicht aus und nimmt sich auch keinen Platzierungsbonus. Arka ignoriert den Meteoriten."
       },
       "place-explorer-expert-action-tile": {
-        "title": "Stelle einen Explorer auf ein Expertenaktionsplättchen"
+        "title": "Stelle einen Explorer auf ein Expertenaktionsplättchen",
+        "text": "Nimm einen Explorer und stelle ihn auf ein Expertenaktionsplättchen. Wähle das Feld mit der höchsten Münzbelohnung. Falls alle besetzt sind, wähle die höchste Energiebelohnung. Bei Gleichstand das weiter links befindliche Feld. Arka führt die Aktion nicht aus, sondern belegt nur das Feld."
       },
       "milestone-special-action": {
-        "title": "Spezialaktion der nächsten Arka-Meilensteinkarte"
+        "title": "Spezialaktion der nächsten Arka-Meilensteinkarte",
+        "text": "Führe die Spezialaktion der nächsten Arka-Meilensteinkarte aus."
       },
       "milestone-special-action-all": {
-        "title": "Spezialaktionen aller noch nicht gewerteten Arka-Meilensteinkarten"
+        "title": "Spezialaktionen aller noch nicht gewerteten Arka-Meilensteinkarten",
+        "text": "Führe die Spezialaktionen aller noch nicht gewerteten Arka-Meilensteinkarten aus."
       }
-    }
+    },
+    "rondel": {
+      "draw-cards": {
+        "title": "Rondell: Karten ziehen",
+        "text": "Überquerst du diese Aktion, dann ziehe für Arka so viele Karten vom allgemeinen Nachziehstapel, wie Investorensymbole auf dem Tableau vorhanden sind. Lege die Karten links neben dem Tableau verdeckt ab. Die Karten haben keinen Effekt, lediglich die Siegpunkte zählen bei Spielende."
+      }
+    },
+    "expertAvailability": "Wie für dich gibt die Position des Rundenmarkers an, welche Experten Arka zur Verfügung stehen: In der ersten Runde die Experten der ersten drei Spalten des Expertenplans, in jeder weiteren Runde einer zusätzlichen Spalte."
   },
   "notfound": {
     "title": "Nicht Gefunden"

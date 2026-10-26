@@ -66,6 +66,23 @@ describe('services/RouteCalculator', () => {
     expect(new RouteCalculator({round:1, turn:3, player:Player.BOT}).getBackRouteTo(state)).to.eq('/round/1/turn/2/bot')
   })
 
+  it('getBackRouteTo-bot-action-steps', () => {
+    const state = mockState({rounds:[mockRound({round:1, turns:[
+      mockTurn({round:1, turn:1, player:Player.BOT, botActionDecisions:[{executed:true}, {executed:false}]}),
+      mockTurn({round:1, turn:2, player:Player.PLAYER})
+    ]})]})
+    expect(new RouteCalculator({round:1, turn:1, player:Player.BOT, action:2}).getBackRouteTo(state)).to.eq('/round/1/turn/1/bot/action/1')
+    expect(new RouteCalculator({round:1, turn:1, player:Player.BOT, action:1}).getBackRouteTo(state)).to.eq('/round/1/turn/1/bot')
+    expect(new RouteCalculator({round:1, turn:1, player:Player.BOT}).getBackRouteTo(state)).to.eq('/round/1/start')
+    expect(new RouteCalculator({round:1, turn:2, player:Player.PLAYER}).getBackRouteTo(state)).to.eq('/round/1/turn/1/bot/action/2')
+  })
+
+  it('getBotActionRouteTo', () => {
+    const routeCalculator = new RouteCalculator({round:2, turn:3, player:Player.BOT})
+    expect(routeCalculator.getBotActionRouteTo(0)).to.eq('/round/2/turn/3/bot')
+    expect(routeCalculator.getBotActionRouteTo(2)).to.eq('/round/2/turn/3/bot/action/2')
+  })
+
   it('getFirstTurnRouteTo', () => {
     expect(new RouteCalculator({round:1}).getFirstTurnRouteTo()).to.eq('/round/1/turn/1/player')
     expect(new RouteCalculator({round:2}).getFirstTurnRouteTo()).to.eq('/round/2/turn/1/bot')

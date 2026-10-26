@@ -62,11 +62,29 @@
   },
   "roundTurnBot": {
     "title": "Arka",
-    "revealActionCard": "Arka reveals her next Action Card and carries out the actions from top to bottom:",
-    "pass": "Arka has already played the {count} stars of her Expedition Level in this round, so she <b>passes</b>."
+    "pass": "Arka has already played the {count} stars of her Expedition Level in this round, so she <b>passes</b>.",
+    "nothingToDo": "Nothing to do for you on the board. The app has updated Arka's Tableau."
   },
-  "actionCardOverview": {
-    "otherwise": "Otherwise: {action}"
+  "actionBox": {
+    "notPossible": "Not possible"
+  },
+  "notPossibleReason": {
+    "no-explorer": "no Explorer left",
+    "no-station": "no Station left",
+    "column-full": "Expert column full"
+  },
+  "actionBuildStation": {
+    "stationSite": "Station Site {value}"
+  },
+  "actionDrawCards": {
+    "cards": "{count} Card | {count} Cards"
+  },
+  "botActionDecision": {
+    "executed": "Executed",
+    "notPossible": "Not Possible",
+    "whichExpert": "Which Expert did Arka take?",
+    "whichColumn": "Several columns have the most Experts. Choose the column for: <b>{expert}</b>",
+    "column": "{expert} column"
   },
   "actionCardStarMarker": {
     "star": "Action Card with one star",
@@ -84,7 +102,14 @@
   "sideBar": {
     "round": "Round {round}",
     "turn": "Turn {turn}",
-    "starsPlayed": "Stars: {played} / {limit}"
+    "starsPlayed": "Stars: {played} / {limit}",
+    "expeditionSteps": "Expedition Track",
+    "upgrades": "Upgrades",
+    "cardsDrawn": "Cards left of the Tableau",
+    "explorersLeft": "Explorers left",
+    "stationsLeft": "Stations left",
+    "experts": "Experts",
+    "nextMilestone": "Milestone end of round {round}:"
   },
   "arkaMilestoneCard": {
     "alwaysFulfilled": "Always fulfilled",
@@ -98,6 +123,14 @@
     "three-project-cards-more": "Three Project Cards more",
     "twice-as-many-radio-operators": "Twice as many Radio Operators",
     "one-presence-more-landscapes": "One more presence on Landscapes"
+  },
+  "expertType": {
+    "radio-operator": "Radio Operator",
+    "engineer": "Engineer",
+    "investor": "Investor",
+    "mission-coordinator": "Mission Coordinator",
+    "pilot": "Pilot",
+    "mechanic": "Mechanic"
   },
   "difficultyMode": {
     "standard": "Standard",
@@ -113,42 +146,62 @@
         "title": "Rondel"
       },
       "build-station": {
-        "title": "Build a Station"
+        "title": "Build a Station",
+        "text": "Take a Station and the Station Site corresponding to the number of Engineer icons +1. Build next to the coldest Landscape adjacent to as many Landscapes as possible. In the event of a tie, you decide. If there are several Station Sites available, choose the coldest one. If there are no more Station Sites with that value available, take the next lower one."
       },
       "build-station-if-3-engineers": {
-        "title": "Building a Station if Arka has at least 3 Engineer icons"
+        "title": "Building a Station if Arka has at least 3 Engineer icons",
+        "text": "This action works just like \"Build a Station\", except it can only be carried out if Arka has at least 3 Engineer icons on her Tableau.",
+        "otherwise": "Arka has fewer than 3 Engineer icons on her Tableau, so she does not build a Station. <i>Otherwise:</i>"
       },
       "take-expert": {
-        "title": "Take the upper-most available Expert from the left"
+        "title": "Take the upper-most available Expert from the left",
+        "text": "Take the upper-most available Expert from the left. If Arka takes a Pilot or Mechanic this way, place it in the column with the most Experts on her Tableau. In case of a tie, choose freely."
       },
       "take-engineer": {
-        "title": "Take the left-most Engineer"
+        "title": "Take the left-most Engineer",
+        "text": "Take the left-most Engineer. If none is available, take a Mission Coordinator instead."
       },
       "take-investor": {
-        "title": "Take the left-most Investor"
+        "title": "Take the left-most Investor",
+        "text": "Take the left-most Investor. If none is available, take a Mission Coordinator instead."
       },
       "take-radio-operator": {
-        "title": "Take the left-most Radio Operator"
+        "title": "Take the left-most Radio Operator",
+        "text": "Take the left-most Radio Operator. If none is available, take a Mission Coordinator instead."
       },
       "take-upgrade": {
         "title": "Take an Upgrade"
       },
       "explore-landscape": {
-        "title": "Explore the next Landscape"
+        "title": "Explore the next Landscape",
+        "text": "Take an Explorer and explore the next Landscape (following the red marks). Arka does not gain a Radar Tile.",
+        "noLandscapeLeft": "If the last unexplored Landscape has been explored, take a random unused Landscape in the range of -62.1° to -63° and place it at the red mark of the Landscape just explored."
       },
       "place-explorer-landscape": {
-        "title": "Place an Explorer on a Landscape"
+        "title": "Place an Explorer on a Landscape",
+        "text": "Take an Explorer and place it on the Landscape with the most available Action Spaces. In the event of a tie, place it on the coldest one. Prioritize choosing a Coin reward and then an Energy reward. Arka does not carry out the action and does not take a Placement Bonus. Arka ignores the Meteorite."
       },
       "place-explorer-expert-action-tile": {
-        "title": "Place an Explorer on an Expert Action Tile"
+        "title": "Place an Explorer on an Expert Action Tile",
+        "text": "Take an Explorer and place it on an Expert Action Tile. Choose the space with the highest Coin reward. If all are occupied, choose the one with the highest Energy reward. In the event of a tie, choose the leftmost space. Arka does not carry out the action, but only occupies the action space."
       },
       "milestone-special-action": {
-        "title": "Special action of Arka's next Milestone Card"
+        "title": "Special action of Arka's next Milestone Card",
+        "text": "Carry out the special action of Arka's next Milestone Card."
       },
       "milestone-special-action-all": {
-        "title": "Special actions of all Arka's Milestone Cards that haven't been scored yet"
+        "title": "Special actions of all Arka's Milestone Cards that haven't been scored yet",
+        "text": "Carry out the special actions of all Arka's Milestone Cards that haven't been scored yet."
       }
-    }
+    },
+    "rondel": {
+      "draw-cards": {
+        "title": "Rondel: Draw Cards",
+        "text": "If the Explorer crosses this action, Arka draws a number of Cards from the common deck equal to the number of Investor icons on her Tableau. Place these Cards face down to the left of Arka's Tableau. The Cards do not trigger any effects. They are worth only the victory points shown during final scoring."
+      }
+    },
+    "expertAvailability": "Like you, Arka can only take Experts that are available according to the Round Indicator: in the first round from the first three columns of the Expert Plan, in each following round from one additional column."
   },
   "notfound": {
     "title": "Not Found"

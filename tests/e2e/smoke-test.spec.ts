@@ -1,4 +1,23 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, Page } from '@playwright/test'
+
+/**
+ * Play all screens of Arka's turns until another view is shown: confirm each action step
+ * ("Executed", first Expert offered, first column offered) or continue with "Next".
+ */
+async function playArkaTurns(page: Page) : Promise<void> {
+  while (await page.locator('h1').textContent() == 'Arka') {
+    // each navigation re-creates the view, wait until the old heading is gone
+    const heading = await page.locator('h1').elementHandle()
+    const decision = page.locator('.decision')
+    if (await decision.count() > 0) {
+      await decision.getByRole('button').first().click()
+    }
+    else {
+      await page.getByRole('button', { name: 'Next', exact: true }).click()
+    }
+    await heading?.waitForElementState('hidden')
+  }
+}
 
 test('smoke test', async ({ page }) => {
   await page.goto('/')
@@ -17,32 +36,31 @@ test('smoke test', async ({ page }) => {
 
   // round 1 start
   await expect(page.locator('h1')).toHaveText('Round 1')
-  await page.getByRole('button', { name: 'Next' }).click()
+  await page.getByRole('button', { name: 'Next', exact: true }).click()
 
   // round 1: player starts, then Arka
   await expect(page.locator('h1')).toHaveText('Your Turn')
-  await page.getByRole('button', { name: 'Next' }).click()
+  await page.getByRole('button', { name: 'Next', exact: true }).click()
   await expect(page.locator('h1')).toHaveText('Arka')
-  await page.getByRole('button', { name: 'Next' }).click()
+  await expect(page.locator('.action-box').first()).toBeVisible()
+  await playArkaTurns(page)
 
   // player passes
   await expect(page.locator('h1')).toHaveText('Your Turn')
   await page.getByRole('button', { name: 'Pass' }).click()
   await page.locator('#passModal').getByRole('button', { name: 'Pass' }).click()
 
-  // Arka continues alone until she has played 3 stars (difficulty level 1: only cards with a star) and passes
-  for (let i = 0; i < 3; i++) {
-    await expect(page.locator('h1')).toHaveText('Arka')
-    await page.getByRole('button', { name: 'Next' }).click()
-  }
+  // Arka continues alone until she has played 3 stars and passes
+  await expect(page.locator('h1')).toHaveText('Arka')
+  await playArkaTurns(page)
 
   // round 1 end
   await expect(page.locator('h1')).toHaveText('End of Round 1')
-  await page.getByRole('button', { name: 'Next' }).click()
+  await page.getByRole('button', { name: 'Next', exact: true }).click()
 
   // round 2: Arka starts
   await expect(page.locator('h1')).toHaveText('Round 2')
-  await page.getByRole('button', { name: 'Next' }).click()
+  await page.getByRole('button', { name: 'Next', exact: true }).click()
   await expect(page.locator('h1')).toHaveText('Arka')
 
   // abort game

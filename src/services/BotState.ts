@@ -261,6 +261,14 @@ export default class BotState {
   }
 
   /**
+   * Get the Expert type printed at the bottom of a column.
+   * @param column Column
+   */
+  public static getColumnExpertType(column : ExpertColumn) : ExpertType {
+    return COLUMN_EXPERT_TYPE[column]
+  }
+
+  /**
    * Creates the initial state at game start.
    */
   public static new() : BotState {

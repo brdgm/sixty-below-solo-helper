@@ -1,0 +1,47 @@
+<template>
+  <ActionBox :step="step" :instructionTitle="t('rules.action.take-expert.title')">
+    <template #action>
+      <AppIcon type="action" name="take-expert" class="icon"/>
+    </template>
+    <template #values v-if="step.expertType">
+      <AppIcon type="expert" :name="step.expertType" class="value-icon"/>
+    </template>
+    <template #instruction>
+      <p v-if="isIf3EngineersOtherwise" v-html="t('rules.action.build-station-if-3-engineers.otherwise')"></p>
+      <p v-html="t('rules.action.take-expert.text')"></p>
+      <p v-html="t('rules.expertAvailability')"></p>
+    </template>
+  </ActionBox>
+</template>
+
+<script lang="ts">
+import { defineComponent, PropType } from 'vue'
+import { useI18n } from 'vue-i18n'
+import ActionBox from '../ActionBox.vue'
+import AppIcon from '@/components/structure/AppIcon.vue'
+import { BotActionStep } from '@/services/BotActions'
+import Action from '@/services/enum/Action'
+
+export default defineComponent({
+  name: 'ActionTakeExpert',
+  components: {
+    ActionBox,
+    AppIcon
+  },
+  setup() {
+    const { t } = useI18n()
+    return { t }
+  },
+  props: {
+    step: {
+      type: Object as PropType<BotActionStep>,
+      required: true
+    }
+  },
+  computed: {
+    isIf3EngineersOtherwise() : boolean {
+      return this.step.sourceAction == Action.BUILD_STATION_IF_3_ENGINEERS
+    }
+  }
+})
+</script>

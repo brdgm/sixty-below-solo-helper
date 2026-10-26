@@ -63,6 +63,16 @@ export interface Turn {
   pass?: boolean
   /** Arka's state after her turn (only stored for Arka's turns) */
   botPersistence?: BotPersistence
+  /** Player decisions for Arka's action steps, in order (only stored for Arka's turns) */
+  botActionDecisions?: BotActionDecision[]
+}
+export interface BotActionDecision {
+  /** false if the action was not possible */
+  executed: boolean
+  /** Expert taken by Arka */
+  expertType?: ExpertType
+  /** Column chosen for a Pilot or Mechanic on a tie */
+  expertColumn?: ExpertColumn
 }
 
 export interface BotPersistence {

@@ -8,6 +8,9 @@
       <b>startPlayer</b>: {{navigationState.startPlayer}},
       <b>botPass</b>: {{navigationState.botPass}}<br/>
       <b>currentCard</b>: {{cardDeck.currentCard ?? '-'}}<br/>
+      <b>botActionDecisions</b>: {{navigationState.botActionDecisions}}<br/>
+      <b>botActions</b>: {{navigationState.botActions?.steps ?? '-'}}<br/>
+      <b>milestoneCards</b>: {{navigationState.milestoneCards}}<br/>
       <b>cardDeck</b>: {{cardDeck.toPersistence()}}<br/>
       <b>botState</b>: {{botState.toPersistence()}},
         <b>starLimit</b>: {{botState.starLimit}}

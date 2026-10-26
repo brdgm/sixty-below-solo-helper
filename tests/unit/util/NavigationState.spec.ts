@@ -9,6 +9,9 @@ import mockCardDeck from '../helper/mockCardDeck'
 import mockBotState from '../helper/mockBotState'
 import NavigationState from '@/util/NavigationState'
 import Player from '@/services/enum/Player'
+import Action from '@/services/enum/Action'
+import ExpertColumn from '@/services/enum/ExpertColumn'
+import ExpertType from '@/services/enum/ExpertType'
 import { State } from '@/store/state'
 
 const state = mockState({rounds:[
@@ -109,6 +112,50 @@ describe('util/NavigationState', () => {
     expect(navigationState.turn).to.eq(0)
     expect(navigationState.cardDeck.pile).to.have.lengthOf(9)
     expect(navigationState.botState.expeditionSteps).to.eq(0)
+    expect(navigationState.botActions).to.be.undefined
+  })
+
+  it('bot-turn-resolves-actions', () => {
+    const navigationState = getNavigationState('RoundTurnBot', {round:'1', turn:'6'})
+    expect(navigationState.action).to.eq(0)
+    expect(navigationState.botActionDecisions).to.eql([])
+    expect(navigationState.botActions?.pendingStep?.action).to.eq(Action.PLACE_EXPLORER_EXPERT_ACTION_TILE)
+    expect(navigationState.botState.rondelPosition).to.eq(1)
+    expect(navigationState.botState.expeditionSteps).to.eq(1)
+  })
+
+  it('bot-turn-action-step-uses-stored-decisions', () => {
+    const actionState = mockState({arkaMilestoneCards:['sm1','sm6','sm3'], rounds:[
+      mockRound({round:1, turns:[
+        mockTurn({round:1, turn:1, player:Player.BOT,
+          botPersistence: mockBotPersistence({cardDeck: mockCardDeck({pile:['saa1'], played:['sab10']})}),
+          botActionDecisions: [{executed:true, expertType:ExpertType.ENGINEER}, {executed:false}]})
+      ]})
+    ]})
+
+    const step0 = getNavigationState('RoundTurnBot', {round:'1', turn:'1'}, actionState)
+    expect(step0.cardDeck.currentCard?.id).to.eq('sab10')
+    expect(step0.botActionDecisions).to.eql([])
+    expect(step0.botActions?.pendingStep?.action).to.eq(Action.TAKE_ENGINEER)
+
+    const step1 = getNavigationState('RoundTurnBotAction', {round:'1', turn:'1', action:'1'}, actionState)
+    expect(step1.action).to.eq(1)
+    expect(step1.cardDeck.currentCard?.id).to.eq('sab10')
+    expect(step1.botActionDecisions).to.eql([{executed:true, expertType:ExpertType.ENGINEER}])
+    expect(step1.botActions?.pendingStep?.action).to.eq(Action.PLACE_EXPLORER_LANDSCAPE)
+    expect(step1.botState.getExperts(ExpertColumn.ENGINEER)).to.eql([ExpertType.ENGINEER])
+
+    const step2 = getNavigationState('RoundTurnBotAction', {round:'1', turn:'1', action:'2'}, actionState)
+    expect(step2.botActions?.pendingStep?.action).to.eq(Action.TAKE_EXPERT)
+    expect(step2.botState.rondelPosition).to.eq(2)
+  })
+
+  it('milestone-cards-not-scored-yet', () => {
+    const milestoneState = mockState({arkaMilestoneCards:['sm1','sm6','sm3']})
+    const milestoneCardIds = (round : string) => getNavigationState('RoundStart', {round}, milestoneState).milestoneCards.map(card => card.id)
+    expect(milestoneCardIds('3')).to.eql(['sm1','sm6','sm3'])
+    expect(milestoneCardIds('4')).to.eql(['sm6','sm3'])
+    expect(milestoneCardIds('6')).to.eql(['sm3'])
   })
 })
 
