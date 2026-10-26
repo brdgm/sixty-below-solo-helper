@@ -6,8 +6,8 @@
       <ActionCardStarMarker v-for="card in playedCards" :key="card.id" :card="card"/>
     </div>
 
-    <div v-for="(row, rowIndex) in valueRows" :key="rowIndex" class="values" :class="{'mt-2': rowIndex == 0}">
-      <div v-for="item in row" :key="item.name" :title="t(`sideBar.${item.name}`)">
+    <div class="values">
+      <div v-for="item in valueItems" :key="item.name" :title="t(`sideBar.${item.name}`)">
         <AppIcon :type="item.iconType" :name="item.icon" class="icon"/>
         <span class="visually-hidden">{{t(`sideBar.${item.name}`)}}</span>
         {{item.value}}
@@ -83,18 +83,14 @@ export default defineComponent({
     playedCards() : readonly Card[] {
       return this.navigationState.cardDeck.played
     },
-    valueRows() : SideBarValue[][] {
+    valueItems() : SideBarValue[] {
       return [
-        [
-          { name: 'expeditionSteps', iconType: 'misc', icon: 'expedition-track', value: this.botState.expeditionSteps },
-          { name: 'explorersLeft', iconType: 'misc', icon: 'explorer', value: this.botState.explorersLeft },
-          { name: 'starLimit', iconType: 'card', icon: 'star', value: this.botState.starLimit }
-        ],
-        [
-          { name: 'cardsDrawn', iconType: 'misc', icon: 'card', value: this.botState.cardsDrawn },
-          { name: 'stationsLeft', iconType: 'misc', icon: 'station', value: this.botState.stationsLeft },
-          { name: 'upgrades', iconType: 'misc', icon: 'upgrade', value: this.botState.upgrades }
-        ]
+        { name: 'expeditionSteps', iconType: 'misc', icon: 'expedition-track', value: this.botState.expeditionSteps },
+        { name: 'explorersLeft', iconType: 'misc', icon: 'explorer', value: this.botState.explorersLeft },
+        { name: 'starLimit', iconType: 'card', icon: 'star', value: this.botState.starLimit },
+        { name: 'cardsDrawn', iconType: 'misc', icon: 'card', value: this.botState.cardsDrawn },
+        { name: 'stationsLeft', iconType: 'misc', icon: 'station', value: this.botState.stationsLeft },
+        { name: 'upgrades', iconType: 'misc', icon: 'upgrade', value: this.botState.upgrades }
       ]
     },
     expertColumns() : SideBarExpertColumn[] {
@@ -145,7 +141,7 @@ interface SideBarMilestone {
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   @media (max-width: 600px) {
-    width: 165px;
+    width: 145px;
   }
 }
 .played-cards {
@@ -156,12 +152,16 @@ interface SideBarMilestone {
 }
 .values {
   display: flex;
-  gap: 0.6rem;
+  flex-wrap: wrap;
+  gap: 0.3rem;
   margin-bottom: 0.25rem;
-  .icon {
-    height: 1.5rem;
-    width: 1.5rem;
-    object-fit: contain;
+  div {
+    width: 3rem;
+    .icon {
+      height: 1.5rem;
+      width: 1.5rem;
+      object-fit: contain;
+    }
   }
 }
 .milestone {

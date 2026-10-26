@@ -3,6 +3,8 @@
 
   <h1>{{t('roundEnd.title', {round})}}</h1>
 
+  <p class="mt-4" v-html="t('roundEnd.discardCards')"></p>
+
   <p v-if="isMilestoneRound" class="mt-4" v-html="t('roundEnd.scoreMilestone')"></p>
   <output v-if="isForecastRound" class="alert alert-warning notice mt-4 d-block" v-html="t('roundEnd.gainForecastTile')"></output>
 

@@ -34,7 +34,7 @@
         </tr>
         <tr>
           <th scope="row"><span v-html="t('finalScoring.negativePoints')"></span></th>
-          <td class="text-nowrap">− <NumberInput v-model="playerNegativePoints"/></td>
+          <td class="text-nowrap">− <NumberInput v-model="playerNegativePoints" class="minusVP"/></td>
           <td>–</td>
         </tr>
         <tr>
@@ -167,6 +167,7 @@ export default defineComponent({
 }
 th, td {
   text-align: center;
+  vertical-align: top;
   padding: 0.5rem;
   font-weight: normal;
   min-width: 5rem;
@@ -178,12 +179,12 @@ th:nth-child(1) {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
-th {
-  vertical-align: middle;
-}
 :deep(input) {
   width: 5rem;
   display: inline-block;
+  &.minusVP {
+    width: 4.1rem;
+  }
 }
 .hint {
   font-size: 0.8rem;

@@ -98,6 +98,7 @@
   },
   "roundEnd": {
     "title": "Ende Runde {round}",
+    "discardCards": "Werfe deine Stürme und Expeditionskarten ab.",
     "scoreMilestone": "Werte deinen <b>Meilenstein</b>.",
     "gainForecastTile": "Du erhältst ein <b>Forecastplättchen</b>.",
     "arkaOverfulfills": "Erreicht Arka die Übererfüllt-Bedingung im Vergleich zu dir?",
@@ -128,7 +129,7 @@
     "difficultyLevel": "Schwierigkeitsgrad: <b>{level}</b> ({mode})"
   },
   "finalScoring": {
-    "title": "Schlusswertung",
+    "title": "Schlusswertung (SP)",
     "player": "Du",
     "experts": "<b>Experten</b>",
     "expeditionTrack": "<b>Expeditionsleiste</b>",

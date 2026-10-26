@@ -98,6 +98,7 @@
   },
   "roundEnd": {
     "title": "End of Round {round}",
+    "discardCards": "Discard your Storm and Expedition Cards.",
     "scoreMilestone": "Score your <b>Milestone</b>.",
     "gainForecastTile": "Gain one <b>Forecast Tile</b>.",
     "arkaOverfulfills": "Does Arka meet the overfulfill condition compared to you?",
@@ -128,7 +129,7 @@
     "difficultyLevel": "Difficulty Level: <b>{level}</b> ({mode})"
   },
   "finalScoring": {
-    "title": "Final Scoring",
+    "title": "Final Scoring (VP)",
     "player": "You",
     "experts": "<b>Experts</b>",
     "expeditionTrack": "<b>Expedition Track</b>",
