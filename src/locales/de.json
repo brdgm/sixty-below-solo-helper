@@ -65,8 +65,10 @@
     "pass": "Arka hat in dieser Runde bereits die {count} Sterne ihres Expeditionspfads gespielt und <b>passt</b>.",
     "nothingToDo": "Auf dem Spielplan gibt es für dich nichts zu tun. Die App hat Arkas Tableau aktualisiert."
   },
-  "actionBox": {
-    "notPossible": "Nicht möglich"
+  "botActionNotice": {
+    "upgrade": "Arka nimmt einen <b>Ausbau</b>.",
+    "expedition-level": "Arka zieht auf dem Expeditionspfad weiter. Arka spielt ab sofort <b>{count} Sterne</b> pro Runde.",
+    "not-possible": "Für Arka nicht möglich: <b>{action}</b> ({reason})."
   },
   "notPossibleReason": {
     "no-explorer": "kein Explorer übrig",

@@ -9,6 +9,7 @@
       <b>botPass</b>: {{navigationState.botPass}}<br/>
       <b>currentCard</b>: {{cardDeck.currentCard ?? '-'}}<br/>
       <b>botActionDecisions</b>: {{navigationState.botActionDecisions}}<br/>
+      <b>botActionScreen</b>: {{navigationState.botActionScreen ?? '-'}}<br/>
       <b>botActions</b>: {{navigationState.botActions?.steps ?? '-'}}<br/>
       <b>milestoneCards</b>: {{navigationState.milestoneCards}}<br/>
       <b>cardDeck</b>: {{cardDeck.toPersistence()}}<br/>

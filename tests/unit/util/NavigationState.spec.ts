@@ -143,6 +143,7 @@ describe('util/NavigationState', () => {
     expect(step1.cardDeck.currentCard?.id).to.eq('sab10')
     expect(step1.botActionDecisions).to.eql([{executed:true, expertType:ExpertType.ENGINEER}])
     expect(step1.botActions?.pendingStep?.action).to.eq(Action.PLACE_EXPLORER_LANDSCAPE)
+    expect(step1.botActionScreen?.step?.action).to.eq(Action.PLACE_EXPLORER_LANDSCAPE)
     expect(step1.botState.getExperts(ExpertColumn.ENGINEER)).to.eql([ExpertType.ENGINEER])
 
     const step2 = getNavigationState('RoundTurnBotAction', {round:'1', turn:'1', action:'2'}, actionState)

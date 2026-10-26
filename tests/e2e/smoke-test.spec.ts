@@ -3,9 +3,12 @@ import { test, expect, Page } from '@playwright/test'
 /**
  * Play all screens of Arka's turns until another view is shown: confirm each action step
  * ("Executed", first Expert offered, first column offered) or continue with "Next".
+ * @returns URL of the last screen of Arka's turn
  */
-async function playArkaTurns(page: Page) : Promise<void> {
+async function playArkaTurns(page: Page) : Promise<string> {
+  let lastUrl = page.url()
   while (await page.locator('h1').textContent() == 'Arka') {
+    lastUrl = page.url()
     // each navigation re-creates the view, wait until the old heading is gone
     const heading = await page.locator('h1').elementHandle()
     const decision = page.locator('.decision')
@@ -17,6 +20,7 @@ async function playArkaTurns(page: Page) : Promise<void> {
     }
     await heading?.waitForElementState('hidden')
   }
+  return lastUrl
 }
 
 test('smoke test', async ({ page }) => {
@@ -42,20 +46,15 @@ test('smoke test', async ({ page }) => {
   await expect(page.locator('h1')).toHaveText('Your Turn')
   await page.getByRole('button', { name: 'Next', exact: true }).click()
   await expect(page.locator('h1')).toHaveText('Arka')
-  await expect(page.locator('.action-box').first()).toBeVisible()
-  await playArkaTurns(page)
+  await expect(page.locator('.action-box, .alert').first()).toBeVisible()
+  const lastArkaUrl = await playArkaTurns(page)
 
-  // back from the player turn: Arka's last screen shows the state before its decision again
+  // back from the player turn: Arka's last screen again, before its decision (buttons available)
   await expect(page.locator('h1')).toHaveText('Your Turn')
   await page.getByRole('link', { name: 'Back' }).click()
   await expect(page.locator('h1')).toHaveText('Arka')
-  const decidedTiles = page.locator('.action-box.status-executed, .action-box.status-not-possible')
-  const decidedBefore = await decidedTiles.count()
-  await playArkaTurns(page)
-  await expect(page.locator('h1')).toHaveText('Your Turn')
-  await page.getByRole('link', { name: 'Back' }).click()
-  await expect(page.locator('h1')).toHaveText('Arka')
-  await expect(decidedTiles).toHaveCount(decidedBefore)
+  await expect(page).toHaveURL(lastArkaUrl)
+  await expect(page.locator('.decision button, button:text-is("Next")').first()).toBeVisible()
   await playArkaTurns(page)
 
   // player passes

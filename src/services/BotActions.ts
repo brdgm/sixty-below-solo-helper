@@ -1,8 +1,9 @@
-import { BotActionDecision } from '@/store/state'
+import { BotActionDecision, BotStatePersistence } from '@/store/state'
 import BotState, { RondelEffect } from './BotState'
 import Card, { CardAction } from './Card'
 import MilestoneCard from './MilestoneCard'
 import Action from './enum/Action'
+import BotActionNoticeType from './enum/BotActionNoticeType'
 import BotActionStatus from './enum/BotActionStatus'
 import ExpertColumn from './enum/ExpertColumn'
 import ExpertType from './enum/ExpertType'
@@ -20,20 +21,24 @@ const TAKE_COLUMN_EXPERT : Partial<Record<Action, ExpertType>> = {
 }
 
 /**
- * Resolves Arka's Action Card into the steps shown to the player as action tiles:
+ * Resolves Arka's Action Card into screens, each with one action the player carries out:
  * Rondel move first, then the card actions from top to bottom.
  * Everything that can be derived from Arka's state is decided and applied by the app (branches, Milestone special actions,
- * Rondel effects, Upgrades, Explorers/Stations/Expert columns). Fully automated effects get no step, except drawing Cards.
- * Steps that need the board are resolved with the player's decisions, in order; the first step without a decision is pending.
+ * Rondel effects, Upgrades, Explorers/Stations/Expert columns). Fully automated effects get no screen; the important ones
+ * (Upgrade, Expedition Level, action not possible) are shown as notices on the following screen.
+ * Steps that need the board are resolved with the player's decisions, in order; the first step without a decision is pending,
+ * the resolution stops there.
  * "Not possible" moves the Rondel Explorer one step forward.
  */
 export default class BotActions {
 
   readonly botState : BotState
   private readonly _steps : BotActionStep[] = []
+  private readonly _screens : BotActionScreen[] = []
   private readonly decisions : readonly BotActionDecision[]
   private _decisionCount = 0
   private pending = false
+  private pendingNotices : BotActionNotice[] = []
 
   /**
    * @param card Action Card
@@ -44,14 +49,28 @@ export default class BotActions {
   constructor(card : Card, botState : BotState, milestoneCards : readonly MilestoneCard[], decisions : readonly BotActionDecision[]) {
     this.botState = botState
     this.decisions = decisions
-    this.addRondelEffects(this.botState.moveRondel(card.rondelSteps))
+    this.moveRondel(card.rondelSteps)
     for (const cardAction of card.actions) {
       this.resolveCardAction(cardAction, milestoneCards)
     }
+    if (!this.pending && (this.pendingNotices.length > 0 || this._screens.length == 0)) {
+      // final screen for notices after the last action, or "nothing to do"
+      this._screens.push({ notices: this.pendingNotices, botState: this.botState.toPersistence() })
+    }
   }
 
+  /**
+   * All steps, incl. decided, automated and upcoming ones (for debugging).
+   */
   public get steps() : readonly BotActionStep[] {
     return this._steps
+  }
+
+  /**
+   * Screens shown to the player, one action each - up to the screen of the pending decision.
+   */
+  public get screens() : readonly BotActionScreen[] {
+    return this._screens
   }
 
   /**
@@ -69,12 +88,13 @@ export default class BotActions {
   }
 
   /**
-   * Checks if there are steps after the step with the given decision.
-   * @param decisionIndex Index of the decision
+   * Number of decisions made on the screens before the given screen.
+   * @param screenIndex Screen index
    */
-  public hasStepsAfterDecision(decisionIndex : number) : boolean {
-    const stepIndex = this._steps.findIndex(step => step.decisionIndex == decisionIndex)
-    return stepIndex >= 0 && stepIndex < this._steps.length - 1
+  public getDecisionCountBefore(screenIndex : number) : number {
+    return this._screens.slice(0, screenIndex)
+        .filter(screen => screen.step?.decisionIndex != undefined)
+        .length
   }
 
   private resolveCardAction(cardAction : CardAction, milestoneCards : readonly MilestoneCard[]) : void {
@@ -107,23 +127,23 @@ export default class BotActions {
   }
 
   private resolveAction(action : Action, source : StepSource) : void {
-    if (action == Action.TAKE_UPGRADE) {
-      // fully automated, no step
-      if (!this.pending) {
-        this.botState.takeUpgrade()
-      }
-      return
-    }
     const step : BotActionStep = { action, ...source, status: BotActionStatus.UPCOMING }
     this._steps.push(step)
     if (this.pending) {
       return
     }
     switch (action) {
+      case Action.TAKE_UPGRADE:
+        step.status = BotActionStatus.EXECUTED
+        if (this.botState.takeUpgrade()) {
+          this.pendingNotices.push({ type: BotActionNoticeType.UPGRADE })
+        }
+        break
       case Action.EXPLORE_LANDSCAPE:
         if (this.botState.explorersLeft > 0) {
-          this.botState.placeExplorerLandscape()
           step.status = BotActionStatus.TODO
+          this.addScreen(step)
+          this.botState.placeExplorerLandscape()
         }
         else {
           this.notPossible(step, NotPossibleReason.NO_EXPLORER)
@@ -212,12 +232,13 @@ export default class BotActions {
   }
 
   /**
-   * Resolve step with the next player decision, or mark it as pending if there is none.
+   * Show the step on its own screen and resolve it with the next player decision, or mark it as pending if there is none.
    * @param step Step
    * @param apply Applies the executed action, returns false if it turns out to be not possible
    */
   private decide(step : BotActionStep, apply : (decision : BotActionDecision) => boolean|void) : void {
     step.decisionIndex = this._decisionCount
+    this.addScreen(step)
     const decision = this.decisions[this._decisionCount]
     if (!decision) {
       step.status = BotActionStatus.PENDING
@@ -229,27 +250,54 @@ export default class BotActions {
       step.status = BotActionStatus.EXECUTED
     }
     else {
-      this.notPossible(step, step.notPossibleReason)
+      step.status = BotActionStatus.NOT_POSSIBLE
+      if (step.notPossibleReason) {
+        this.pendingNotices.push({ type: BotActionNoticeType.NOT_POSSIBLE, action: step.action, reason: step.notPossibleReason })
+      }
+      this.moveRondel(1)
     }
   }
 
-  private notPossible(step : BotActionStep, reason? : NotPossibleReason) : void {
+  /**
+   * Action not possible as known by the app: no screen, only a notice.
+   */
+  private notPossible(step : BotActionStep, reason : NotPossibleReason) : void {
     step.status = BotActionStatus.NOT_POSSIBLE
     step.notPossibleReason = reason
-    this.addRondelEffects(this.botState.moveRondel(1))
+    this.pendingNotices.push({ type: BotActionNoticeType.NOT_POSSIBLE, action: step.action, reason })
+    this.moveRondel(1)
   }
 
   /**
-   * Rondel effects are applied by BotState; only drawing Cards needs the player.
+   * Show the step on a screen, together with the notices of the automated effects before it.
    */
-  private addRondelEffects(effects : RondelEffect[]) : void {
-    effects
-      .filter(effect => effect.action == RondelAction.DRAW_CARDS)
-      .forEach(effect => this._steps.push({
-        action: RondelAction.DRAW_CARDS,
-        status: BotActionStatus.TODO,
-        cardCount: effect.amount
-      }))
+  private addScreen(step : BotActionStep) : void {
+    this._screens.push({ step, notices: this.pendingNotices, botState: this.botState.toPersistence() })
+    this.pendingNotices = []
+  }
+
+  /**
+   * Move the Rondel Explorer. Rondel effects are applied by BotState; drawing Cards needs the player (screen),
+   * Upgrades and a higher Expedition Level are noticed.
+   */
+  private moveRondel(steps : number) : void {
+    const starLimit = this.botState.starLimit
+    const effects = this.botState.moveRondel(steps)
+    if (this.botState.starLimit > starLimit) {
+      this.pendingNotices.push({ type: BotActionNoticeType.EXPEDITION_LEVEL, starLimit: this.botState.starLimit })
+    }
+    effects.forEach(effect => this.addRondelEffect(effect))
+  }
+
+  private addRondelEffect(effect : RondelEffect) : void {
+    if (effect.action == RondelAction.UPGRADE && effect.amount > 0) {
+      this.pendingNotices.push({ type: BotActionNoticeType.UPGRADE })
+    }
+    else if (effect.action == RondelAction.DRAW_CARDS) {
+      const step : BotActionStep = { action: RondelAction.DRAW_CARDS, status: BotActionStatus.TODO, cardCount: effect.amount }
+      this._steps.push(step)
+      this.addScreen(step)
+    }
   }
 
 }
@@ -260,10 +308,10 @@ interface StepSource {
 }
 
 /**
- * Step of Arka's turn, shown as an action tile.
+ * Step of Arka's turn.
  */
 export interface BotActionStep extends StepSource {
-  /** Action of the tile: card action or Rondel action */
+  /** Action: card action or Rondel action */
   action: Action|RondelAction
   status: BotActionStatus
   /** Index of the player decision for this step */
@@ -279,4 +327,24 @@ export interface BotActionStep extends StepSource {
   expertColumn?: ExpertColumn
   /** Take an Expert: columns with the most Experts, for a Pilot or Mechanic */
   pilotMechanicColumns?: ExpertColumn[]
+}
+
+/**
+ * Screen of Arka's turn: one action tile (or none on the final screen) and the notices of the automated effects before it.
+ */
+export interface BotActionScreen {
+  step?: BotActionStep
+  notices: BotActionNotice[]
+  /** Arka's state when the screen is shown (before its own action) */
+  botState: BotStatePersistence
+}
+
+export interface BotActionNotice {
+  type: BotActionNoticeType
+  /** Not possible: action */
+  action?: Action|RondelAction
+  /** Not possible: reason */
+  reason?: NotPossibleReason
+  /** Expedition Level: new star limit */
+  starLimit?: number
 }

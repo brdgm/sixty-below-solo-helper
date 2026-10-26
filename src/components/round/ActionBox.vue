@@ -1,5 +1,5 @@
 <template>
-  <div class="action-box" :class="statusClass" role="button" tabindex="0" :aria-label="instructionTitle"
+  <div class="action-box" role="button" tabindex="0" :aria-label="instructionTitle"
       @click="showInstructions" @keydown.enter="showInstructions">
     <div class="action">
       <template v-if="step.milestoneCard">
@@ -8,13 +8,9 @@
       </template>
       <slot name="action"></slot>
     </div>
-    <div class="values" v-if="hasValues && !isUpcoming">
+    <div class="values" v-if="hasValues">
       <slot name="values"></slot>
     </div>
-    <div class="result" v-if="isNotPossible">
-      ✗ {{t('actionBox.notPossible')}}<template v-if="step.notPossibleReason">: {{t(`notPossibleReason.${step.notPossibleReason}`)}}</template>
-    </div>
-    <div class="result" v-else-if="isExecuted">✓</div>
   </div>
 
   <ModalDialog :id="modalId" :title="instructionTitle" :scrollable="true">
@@ -32,7 +28,6 @@ import ModalDialog from '@brdgm/brdgm-commons/src/components/structure/ModalDial
 import showModal from '@brdgm/brdgm-commons/src/util/modal/showModal'
 import AppIcon from '@/components/structure/AppIcon.vue'
 import { BotActionStep } from '@/services/BotActions'
-import BotActionStatus from '@/services/enum/BotActionStatus'
 
 /**
  * Colored action tile with the iconography of Arka's Action Card. Click shows the rules text.
@@ -61,18 +56,6 @@ export default defineComponent({
   computed: {
     hasValues() : boolean {
       return this.$slots.values != undefined
-    },
-    isUpcoming() : boolean {
-      return this.step.status == BotActionStatus.UPCOMING
-    },
-    isExecuted() : boolean {
-      return this.step.status == BotActionStatus.EXECUTED
-    },
-    isNotPossible() : boolean {
-      return this.step.status == BotActionStatus.NOT_POSSIBLE
-    },
-    statusClass() : string {
-      return `status-${this.step.status}`
     }
   },
   methods: {
@@ -85,14 +68,14 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .action-box {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  min-width: 9rem;
-  min-height: 7rem;
-  padding: 1rem 1.75rem;
+  min-width: 12rem;
+  min-height: 8rem;
+  padding: 1.25rem 2.25rem;
   color: #212529;
   background-color: #cfe1e8;
   border: 3px solid #7d98a3;
@@ -102,23 +85,16 @@ export default defineComponent({
   background-repeat: no-repeat;
   background-position: right 5px top 5px;
   background-size: 1.25rem;
-  &.status-pending {
-    border-color: #f0ad4e;
-    box-shadow: 0 0 0.6rem #f0ad4e;
-  }
-  &.status-executed, &.status-not-possible {
-    opacity: 0.45;
-  }
   .action {
     display: flex;
     align-items: center;
     gap: 0.25rem;
     :deep(.icon) {
-      height: 4rem;
+      height: 5rem;
       border-radius: 0.5rem;
     }
     .milestone-icon {
-      height: 2.5rem;
+      height: 3rem;
       border-radius: 0.35rem;
     }
     .separator {
@@ -135,9 +111,6 @@ export default defineComponent({
     :deep(.value-icon) {
       height: 2rem;
     }
-  }
-  .result {
-    font-weight: bold;
   }
 }
 </style>

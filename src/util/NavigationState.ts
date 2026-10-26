@@ -4,7 +4,7 @@ import getIntRouteParam from '@brdgm/brdgm-commons/src/util/router/getIntRoutePa
 import Player from '@/services/enum/Player'
 import CardDeck from '@/services/CardDeck'
 import BotState from '@/services/BotState'
-import BotActions from '@/services/BotActions'
+import BotActions, { BotActionScreen } from '@/services/BotActions'
 import MilestoneCard from '@/services/MilestoneCard'
 import MilestoneCards from '@/services/MilestoneCards'
 import getStartPlayer from './getStartPlayer'
@@ -22,22 +22,24 @@ export default class NavigationState {
 
   readonly round : number
   readonly turn : number
-  /** Number of player decisions made in Arka's turn (action step) */
+  /** Screen index within Arka's turn (one action per screen) */
   readonly action : number
   /** Player of the current turn (only on turn routes) */
   readonly player? : Player
   readonly startPlayer : Player
   readonly cardDeck : CardDeck
-  /** Arka's state - on Arka's turn after the actions resolved so far */
+  /** Arka's state - on Arka's turn as of the current screen */
   readonly botState : BotState
   /** Arka passes in this turn because she has already played as many stars as her Expedition Level */
   readonly botPass : boolean
   /** Arka's Milestone Cards that are not scored yet, in scoring order */
   readonly milestoneCards : readonly MilestoneCard[]
-  /** Player decisions for Arka's action steps made so far */
+  /** Player decisions made on the screens before the current screen */
   readonly botActionDecisions : readonly BotActionDecision[]
-  /** Arka's resolved actions (only on Arka's turn when she does not pass) */
+  /** Arka's resolved actions with the decisions before the current screen (only on Arka's turn when she does not pass) */
   readonly botActions? : BotActions
+  /** Current screen of Arka's turn */
+  readonly botActionScreen? : BotActionScreen
 
   private readonly botStateBeforeTurn : BotStatePersistence
 
@@ -56,7 +58,7 @@ export default class NavigationState {
     this.botStateBeforeTurn = botPersistence.botState
     let cardDeck = CardDeck.fromPersistence(botPersistence.cardDeck)
     let botPass = false
-    let botActionDecisions : BotActionDecision[] = []
+    let storedDecisions : BotActionDecision[] = []
 
     if (this.player == Player.BOT) {
       const storedTurn = getStoredTurn(state, this.round, this.turn)
@@ -64,7 +66,7 @@ export default class NavigationState {
         // reuse the card revealed when the turn was stored first (drawing again after a reshuffle would be random)
         cardDeck = CardDeck.fromPersistence(storedTurn.botPersistence.cardDeck)
         botPass = storedTurn.pass ?? false
-        botActionDecisions = (storedTurn.botActionDecisions ?? []).slice(0, this.action)
+        storedDecisions = storedTurn.botActionDecisions ?? []
       }
       else if (cardDeck.starsPlayed >= BotState.fromPersistence(this.botStateBeforeTurn).starLimit) {
         botPass = true
@@ -75,13 +77,18 @@ export default class NavigationState {
     }
     this.cardDeck = cardDeck
     this.botPass = botPass
-    this.botActionDecisions = botActionDecisions
 
     if (this.player == Player.BOT && !this.botPass) {
-      this.botActions = this.getBotActions(botActionDecisions)
-      this.botState = this.botActions.botState
+      // only the decisions of the screens before the current one - the current screen's decision can be taken (again)
+      const decisionCount = this.getBotActions(storedDecisions).getDecisionCountBefore(this.action)
+      this.botActionDecisions = storedDecisions.slice(0, decisionCount)
+      this.botActions = this.getBotActions(this.botActionDecisions)
+      const screens = this.botActions.screens
+      this.botActionScreen = screens[Math.min(this.action, screens.length - 1)]
+      this.botState = BotState.fromPersistence(this.botActionScreen.botState)
     }
     else {
+      this.botActionDecisions = []
       this.botState = BotState.fromPersistence(this.botStateBeforeTurn)
     }
   }

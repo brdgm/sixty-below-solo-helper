@@ -65,8 +65,10 @@
     "pass": "Arka has already played the {count} stars of her Expedition Level in this round, so she <b>passes</b>.",
     "nothingToDo": "Nothing to do for you on the board. The app has updated Arka's Tableau."
   },
-  "actionBox": {
-    "notPossible": "Not possible"
+  "botActionNotice": {
+    "upgrade": "Arka takes an <b>Upgrade</b>.",
+    "expedition-level": "Arka advances on the Expedition Path. From now on, Arka will play Action Cards until <b>{count} stars</b>.",
+    "not-possible": "Not possible for Arka: <b>{action}</b> ({reason})."
   },
   "notPossibleReason": {
     "no-explorer": "no Explorer left",

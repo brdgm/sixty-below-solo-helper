@@ -6,11 +6,14 @@
   <template v-if="botPass">
     <p class="mt-4" v-html="t('roundTurnBot.pass', {count:botState.starLimit})"></p>
   </template>
-  <template v-else-if="botActions">
-    <div class="action-tiles mt-4" v-if="botActions.steps.length > 0">
-      <BotAction v-for="(step, index) in botActions.steps" :key="index" :step="step"/>
+  <template v-else-if="screen">
+    <div class="mt-4" v-if="screen.step">
+      <BotAction :step="screen.step"/>
     </div>
-    <p v-else class="mt-4" v-html="t('roundTurnBot.nothingToDo')"></p>
+    <p v-else-if="screen.notices.length == 0" class="mt-4" v-html="t('roundTurnBot.nothingToDo')"></p>
+    <div :class="{'mt-4': !screen.step}">
+      <BotActionNotices :notices="screen.notices"/>
+    </div>
   </template>
 
   <BotActionDecision v-if="pendingStep" :step="pendingStep" @decide="decide"/>
@@ -33,9 +36,11 @@ import SideBar from '@/components/round/SideBar.vue'
 import DebugInfo from '@/components/round/DebugInfo.vue'
 import BotAction from '@/components/round/BotAction.vue'
 import BotActionDecision from '@/components/round/BotActionDecision.vue'
+import BotActionNotices from '@/components/round/BotActionNotices.vue'
 import NavigationState from '@/util/NavigationState'
 import RouteCalculator from '@/services/RouteCalculator'
-import BotActions, { BotActionStep } from '@/services/BotActions'
+import BotActions, { BotActionScreen, BotActionStep } from '@/services/BotActions'
+import BotActionStatus from '@/services/enum/BotActionStatus'
 import Player from '@/services/enum/Player'
 
 export default defineComponent({
@@ -45,7 +50,8 @@ export default defineComponent({
     SideBar,
     DebugInfo,
     BotAction,
-    BotActionDecision
+    BotActionDecision,
+    BotActionNotices
   },
   setup() {
     const { t } = useI18n()
@@ -60,8 +66,12 @@ export default defineComponent({
     return { t, router, state, navigationState, routeCalculator, round, turn, action, botPass, botState, botActions }
   },
   computed: {
+    screen() : BotActionScreen|undefined {
+      return this.navigationState.botActionScreen
+    },
     pendingStep() : BotActionStep|undefined {
-      return this.botActions?.pendingStep
+      const step = this.screen?.step
+      return step?.status == BotActionStatus.PENDING ? step : undefined
     },
     backButtonRouteTo() : string {
       return this.routeCalculator.getBackRouteTo(this.state)
@@ -70,23 +80,17 @@ export default defineComponent({
   methods: {
     decide(decision : BotActionDecisionData) : void {
       const decisions = [...this.navigationState.botActionDecisions, decision]
-      const botActions = this.navigationState.getBotActions(decisions)
-      if (botActions.pendingStep || botActions.hasStepsAfterDecision(decisions.length - 1)) {
-        // continue on the next action step screen
-        this.storeTurn(botActions, decisions, decisions.length)
-        this.router.push(this.routeCalculator.getBotActionRouteTo(decisions.length))
-      }
-      else {
-        // the turn is completed on this screen: "Back" from the next turn returns here, before this decision
-        this.storeTurn(botActions, decisions, this.action)
-        this.router.push(this.routeCalculator.getNextRouteTo(this.state))
-      }
+      this.storeTurnAndNavigate(this.navigationState.getBotActions(decisions), decisions)
     },
     next() : void {
-      this.storeTurn(this.botActions, [...this.navigationState.botActionDecisions], this.action)
-      this.router.push(this.routeCalculator.getNextRouteTo(this.state))
+      this.storeTurnAndNavigate(this.botActions, [...this.navigationState.botActionDecisions])
     },
-    storeTurn(botActions : BotActions|undefined, decisions : BotActionDecisionData[], lastStep : number) : void {
+    /**
+     * Store the turn and show the next screen of Arka's turn, or continue with the next turn.
+     * The turn remembers the screen on which it was completed, so "Back" from the next turn returns to it (state before its decision).
+     */
+    storeTurnAndNavigate(botActions : BotActions|undefined, decisions : BotActionDecisionData[]) : void {
+      const hasNextScreen = (botActions?.screens.length ?? 0) > this.action + 1
       this.state.storeRoundTurn({
         round: this.round,
         turn: this.turn,
@@ -97,17 +101,15 @@ export default defineComponent({
           botState: (botActions?.botState ?? this.botState).toPersistence()
         },
         botActionDecisions: decisions.length > 0 ? decisions : undefined,
-        botActionLastStep: lastStep > 0 ? lastStep : undefined
+        botActionLastStep: !hasNextScreen && this.action > 0 ? this.action : undefined
       })
+      if (hasNextScreen) {
+        this.router.push(this.routeCalculator.getBotActionRouteTo(this.action + 1))
+      }
+      else {
+        this.router.push(this.routeCalculator.getNextRouteTo(this.state))
+      }
     }
   }
 })
 </script>
-
-<style lang="scss" scoped>
-.action-tiles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-</style>

@@ -3,6 +3,7 @@ import BotActions from '@/services/BotActions'
 import Cards from '@/services/Cards'
 import MilestoneCards from '@/services/MilestoneCards'
 import Action from '@/services/enum/Action'
+import BotActionNoticeType from '@/services/enum/BotActionNoticeType'
 import BotActionStatus from '@/services/enum/BotActionStatus'
 import ExpertColumn from '@/services/enum/ExpertColumn'
 import ExpertType from '@/services/enum/ExpertType'
@@ -18,9 +19,12 @@ describe('services/BotActions', () => {
   it('explore-landscape-no-decision', () => {
     const botActions = resolve('saa4', {})
 
-    expect(botActions.steps).to.eql([{ action: Action.EXPLORE_LANDSCAPE, status: BotActionStatus.TODO }])
+    expect(botActions.screens).to.have.lengthOf(1)
+    expect(botActions.screens[0].step?.action).to.eq(Action.EXPLORE_LANDSCAPE)
+    expect(botActions.screens[0].step?.status).to.eq(BotActionStatus.TODO)
+    expect(botActions.screens[0].notices).to.eql([])
+    expect(botActions.screens[0].botState.explorersLandscape).to.eq(0)
     expect(botActions.pendingStep).to.be.undefined
-    expect(botActions.decisionCount).to.eq(0)
     expect(botActions.botState.rondelPosition).to.eq(1)
     expect(botActions.botState.expeditionSteps).to.eq(1)
     expect(botActions.botState.explorersLandscape).to.eq(1)
@@ -29,7 +33,7 @@ describe('services/BotActions', () => {
   it('build-station-pending', () => {
     const botActions = resolve('saa1', { engineer: [ExpertType.ENGINEER] })
 
-    expect(botActions.steps).to.have.lengthOf(1)
+    expect(botActions.screens).to.have.lengthOf(1)
     expect(botActions.pendingStep?.action).to.eq(Action.BUILD_STATION)
     expect(botActions.pendingStep?.stationSiteValue).to.eq(3)
     expect(botActions.pendingStep?.decisionIndex).to.eq(0)
@@ -39,8 +43,8 @@ describe('services/BotActions', () => {
   it('build-station-executed', () => {
     const botActions = resolve('saa1', {}, [{ executed: true }])
 
-    expect(botActions.steps[0].status).to.eq(BotActionStatus.EXECUTED)
-    expect(botActions.pendingStep).to.be.undefined
+    expect(botActions.screens).to.have.lengthOf(1)
+    expect(botActions.screens[0].step?.status).to.eq(BotActionStatus.EXECUTED)
     expect(botActions.decisionCount).to.eq(1)
     expect(botActions.botState.stationsBuilt).to.eq(1)
   })
@@ -48,22 +52,23 @@ describe('services/BotActions', () => {
   it('build-station-not-possible-rondel-draw-cards', () => {
     const botActions = resolve('saa1', { rondelPosition: 1, investor: [ExpertType.INVESTOR] }, [{ executed: false }])
 
-    expect(botActions.steps).to.eql([
-      { action: Action.BUILD_STATION, status: BotActionStatus.NOT_POSSIBLE, stationSiteValue: 2, decisionIndex: 0, notPossibleReason: undefined },
-      { action: RondelAction.DRAW_CARDS, status: BotActionStatus.TODO, cardCount: 2 }
-    ])
+    expect(botActions.screens.map(screen => screen.step?.action)).to.eql([Action.BUILD_STATION, RondelAction.DRAW_CARDS])
+    expect(botActions.screens[0].step?.status).to.eq(BotActionStatus.NOT_POSSIBLE)
+    expect(botActions.screens[1].step?.cardCount).to.eq(2)
+    expect(botActions.screens[1].notices).to.eql([])
     expect(botActions.botState.rondelPosition).to.eq(3)
     expect(botActions.botState.cardsDrawn).to.eq(2)
     expect(botActions.botState.stationsBuilt).to.eq(0)
-    expect(botActions.hasStepsAfterDecision(0)).to.be.true
   })
 
-  it('build-station-no-station-left', () => {
+  it('build-station-no-station-left-notice', () => {
     const botActions = resolve('saa1', { stationsBuilt: STATION_COUNT })
 
-    expect(botActions.steps[0].status).to.eq(BotActionStatus.NOT_POSSIBLE)
-    expect(botActions.steps[0].notPossibleReason).to.eq(NotPossibleReason.NO_STATION)
-    expect(botActions.pendingStep).to.be.undefined
+    expect(botActions.screens).to.have.lengthOf(1)
+    expect(botActions.screens[0].step).to.be.undefined
+    expect(botActions.screens[0].notices).to.eql([
+      { type: BotActionNoticeType.NOT_POSSIBLE, action: Action.BUILD_STATION, reason: NotPossibleReason.NO_STATION }
+    ])
     expect(botActions.botState.rondelPosition).to.eq(2)
   })
 
@@ -85,62 +90,80 @@ describe('services/BotActions', () => {
   it('take-expert-own-column', () => {
     const botActions = resolve('saa2', {}, [{ executed: true, expertType: ExpertType.RADIO_OPERATOR }])
 
-    expect(botActions.steps[0].status).to.eq(BotActionStatus.EXECUTED)
-    expect(botActions.steps[0].expertColumn).to.eq(ExpertColumn.RADIO_OPERATOR)
+    expect(botActions.screens[0].step?.status).to.eq(BotActionStatus.EXECUTED)
+    expect(botActions.screens[0].step?.expertColumn).to.eq(ExpertColumn.RADIO_OPERATOR)
     expect(botActions.botState.getExperts(ExpertColumn.RADIO_OPERATOR)).to.eql([ExpertType.RADIO_OPERATOR])
   })
 
   it('take-expert-pilot-column-with-most-experts', () => {
     const botActions = resolve('saa2', { investor: [ExpertType.INVESTOR] }, [{ executed: true, expertType: ExpertType.PILOT }])
 
-    expect(botActions.steps[0].pilotMechanicColumns).to.eql([ExpertColumn.INVESTOR])
+    expect(botActions.screens[0].step?.pilotMechanicColumns).to.eql([ExpertColumn.INVESTOR])
     expect(botActions.botState.getExperts(ExpertColumn.INVESTOR)).to.eql([ExpertType.INVESTOR, ExpertType.PILOT])
   })
 
   it('take-expert-mechanic-tie-chosen-column', () => {
     const botActions = resolve('saa2', {}, [{ executed: true, expertType: ExpertType.MECHANIC, expertColumn: ExpertColumn.ENGINEER }])
 
-    expect(botActions.steps[0].pilotMechanicColumns).to.eql([ExpertColumn.INVESTOR, ExpertColumn.RADIO_OPERATOR, ExpertColumn.ENGINEER])
+    expect(botActions.screens[0].step?.pilotMechanicColumns).to.eql([ExpertColumn.INVESTOR, ExpertColumn.RADIO_OPERATOR, ExpertColumn.ENGINEER])
     expect(botActions.botState.getExperts(ExpertColumn.ENGINEER)).to.eql([ExpertType.MECHANIC])
   })
 
-  it('take-expert-column-full', () => {
+  it('take-expert-column-full-notice', () => {
     const fullColumn = [ExpertType.RADIO_OPERATOR, ExpertType.RADIO_OPERATOR, ExpertType.PILOT, ExpertType.MECHANIC]
     const botActions = resolve('saa2', { radioOperator: fullColumn }, [{ executed: true, expertType: ExpertType.RADIO_OPERATOR }])
 
-    expect(botActions.steps[0].status).to.eq(BotActionStatus.NOT_POSSIBLE)
-    expect(botActions.steps[0].notPossibleReason).to.eq(NotPossibleReason.COLUMN_FULL)
+    expect(botActions.screens).to.have.lengthOf(2)
+    expect(botActions.screens[0].step?.status).to.eq(BotActionStatus.NOT_POSSIBLE)
+    expect(botActions.screens[1].notices).to.eql([
+      { type: BotActionNoticeType.NOT_POSSIBLE, action: Action.TAKE_EXPERT, reason: NotPossibleReason.COLUMN_FULL }
+    ])
     expect(botActions.botState.getExperts(ExpertColumn.RADIO_OPERATOR)).to.eql(fullColumn)
     expect(botActions.botState.rondelPosition).to.eq(2)
   })
 
-  it('take-expert-not-possible', () => {
+  it('take-expert-not-possible-by-player', () => {
     const botActions = resolve('saa2', {}, [{ executed: false }])
 
-    expect(botActions.steps[0].status).to.eq(BotActionStatus.NOT_POSSIBLE)
-    expect(botActions.steps[0].notPossibleReason).to.be.undefined
+    expect(botActions.screens).to.have.lengthOf(1)
+    expect(botActions.screens[0].step?.status).to.eq(BotActionStatus.NOT_POSSIBLE)
     expect(botActions.botState.rondelPosition).to.eq(2)
   })
 
-  it('milestone-special-action-take-upgrade-automated', () => {
+  it('milestone-special-action-take-upgrade-notice', () => {
     const botActions = resolve('sab11', {}, [{ executed: true, expertType: ExpertType.MISSION_COORDINATOR }], ['sm2', 'sm1'])
 
-    expect(botActions.steps).to.have.lengthOf(1)
-    expect(botActions.steps[0].action).to.eq(Action.TAKE_ENGINEER)
-    expect(botActions.steps[0].expertType).to.eq(ExpertType.MISSION_COORDINATOR)
+    expect(botActions.screens).to.have.lengthOf(1)
+    expect(botActions.screens[0].step?.action).to.eq(Action.TAKE_ENGINEER)
+    expect(botActions.screens[0].notices).to.eql([{ type: BotActionNoticeType.UPGRADE }])
+    expect(botActions.screens[0].step?.expertType).to.eq(ExpertType.MISSION_COORDINATOR)
     expect(botActions.botState.upgrades).to.eq(1)
     expect(botActions.botState.getIcons(ExpertColumn.ENGINEER)).to.eq(2)
   })
 
-  it('milestone-special-action-all-pending-and-upcoming', () => {
+  it('rondel-upgrade-notice', () => {
+    const botActions = resolve('saa4', { rondelPosition: 4 })
+
+    expect(botActions.screens[0].step?.action).to.eq(Action.EXPLORE_LANDSCAPE)
+    expect(botActions.screens[0].notices).to.eql([{ type: BotActionNoticeType.UPGRADE }])
+    expect(botActions.botState.upgrades).to.eq(1)
+  })
+
+  it('rondel-expedition-level-notice', () => {
+    const botActions = resolve('saa4', { expeditionSteps: 9 })
+
+    expect(botActions.screens[0].notices).to.eql([{ type: BotActionNoticeType.EXPEDITION_LEVEL, starLimit: 4 }])
+    expect(botActions.botState.starLimit).to.eq(4)
+  })
+
+  it('milestone-special-action-all-pending', () => {
     const botActions = resolve('sab10', {})
 
-    expect(botActions.steps.map(step => [step.action, step.status, step.milestoneCard?.id])).to.eql([
-      [Action.TAKE_ENGINEER, BotActionStatus.PENDING, 'sm1'],
-      [Action.PLACE_EXPLORER_LANDSCAPE, BotActionStatus.UPCOMING, 'sm6'],
-      [Action.TAKE_EXPERT, BotActionStatus.UPCOMING, 'sm3']
-    ])
-    expect(botActions.steps[0].sourceAction).to.eq(Action.MILESTONE_SPECIAL_ACTION_ALL)
+    expect(botActions.screens).to.have.lengthOf(1)
+    expect(botActions.screens[0].step?.action).to.eq(Action.TAKE_ENGINEER)
+    expect(botActions.screens[0].step?.milestoneCard?.id).to.eq('sm1')
+    expect(botActions.screens[0].step?.sourceAction).to.eq(Action.MILESTONE_SPECIAL_ACTION_ALL)
+    expect(botActions.steps.map(step => step.status)).to.eql([BotActionStatus.PENDING, BotActionStatus.UPCOMING, BotActionStatus.UPCOMING])
   })
 
   it('milestone-special-action-all-resolved', () => {
@@ -151,38 +174,47 @@ describe('services/BotActions', () => {
     ]
     const botActions = resolve('sab10', {}, decisions)
 
-    expect(botActions.steps.map(step => step.status)).to.eql([BotActionStatus.EXECUTED, BotActionStatus.EXECUTED, BotActionStatus.EXECUTED])
+    expect(botActions.screens.map(screen => screen.step?.action)).to.eql([Action.TAKE_ENGINEER, Action.PLACE_EXPLORER_LANDSCAPE, Action.TAKE_EXPERT])
     expect(botActions.decisionCount).to.eq(3)
+    expect(botActions.getDecisionCountBefore(0)).to.eq(0)
+    expect(botActions.getDecisionCountBefore(2)).to.eq(2)
+    expect(botActions.screens[2].botState.explorersLandscape).to.eq(1)
     expect(botActions.botState.getExperts(ExpertColumn.ENGINEER)).to.eql([ExpertType.ENGINEER])
     expect(botActions.botState.getExperts(ExpertColumn.INVESTOR)).to.eql([ExpertType.INVESTOR])
     expect(botActions.botState.explorersLandscape).to.eq(1)
-    expect(botActions.hasStepsAfterDecision(2)).to.be.false
   })
 
-  it('milestone-special-action-no-milestone-left', () => {
+  it('draw-cards-only', () => {
     const botActions = resolve('sab13', {}, [], [])
 
-    expect(botActions.steps).to.eql([
-      { action: RondelAction.DRAW_CARDS, status: BotActionStatus.TODO, cardCount: 1 }
-    ])
+    expect(botActions.screens).to.have.lengthOf(1)
+    expect(botActions.screens[0].step).to.eql({ action: RondelAction.DRAW_CARDS, status: BotActionStatus.TODO, cardCount: 1 })
     expect(botActions.botState.rondelPosition).to.eq(3)
   })
 
-  it('take-column-expert-column-full', () => {
-    const fullColumn = [ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR]
-    const botActions = resolve('sab12', { investor: fullColumn }, [], ['sm2'])
+  it('nothing-to-do', () => {
+    const botActions = resolve('sab13', { rondelPosition: 7 }, [], [])
 
-    expect(botActions.steps[0].action).to.eq(Action.TAKE_INVESTOR)
-    expect(botActions.steps[0].status).to.eq(BotActionStatus.NOT_POSSIBLE)
-    expect(botActions.steps[0].notPossibleReason).to.eq(NotPossibleReason.COLUMN_FULL)
-    expect(botActions.pendingStep).to.be.undefined
+    expect(botActions.screens).to.eql([{ notices: [], botState: botActions.botState.toPersistence() }])
   })
 
-  it('place-explorer-no-explorer-left', () => {
+  it('take-column-expert-column-full-notice', () => {
+    const fullColumn = [ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR]
+    const botActions = resolve('sab12', { investor: fullColumn }, [{ executed: true, expertType: ExpertType.ENGINEER }], ['sm1'])
+
+    expect(botActions.screens.map(screen => screen.step?.action)).to.eql([Action.TAKE_ENGINEER, undefined])
+    expect(botActions.screens[1].notices).to.eql([
+      { type: BotActionNoticeType.NOT_POSSIBLE, action: Action.TAKE_INVESTOR, reason: NotPossibleReason.COLUMN_FULL }
+    ])
+    expect(botActions.getDecisionCountBefore(1)).to.eq(1)
+  })
+
+  it('place-explorer-no-explorer-left-notice', () => {
     const botActions = resolve('saa5', { explorersLandscape: EXPLORER_COUNT })
 
-    expect(botActions.steps[0].status).to.eq(BotActionStatus.NOT_POSSIBLE)
-    expect(botActions.steps[0].notPossibleReason).to.eq(NotPossibleReason.NO_EXPLORER)
+    expect(botActions.screens[0].notices).to.eql([
+      { type: BotActionNoticeType.NOT_POSSIBLE, action: Action.PLACE_EXPLORER_LANDSCAPE, reason: NotPossibleReason.NO_EXPLORER }
+    ])
     expect(botActions.decisionCount).to.eq(0)
   })
 
