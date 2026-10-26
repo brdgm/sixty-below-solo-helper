@@ -56,13 +56,13 @@
   },
   "roundTurnPlayer": {
     "title": "Dein Zug",
-    "execute": "Immer wenn du an der Reihe bist, f?hrst du <b>genau eine Aktion</b> aus oder passt.",
+    "execute": "Immer wenn du an der Reihe bist, führst du <b>genau eine Aktion</b> aus oder passt.",
     "passConfirm": "Passen und aus der Aktionsphase aussteigen?",
-    "passInfo": "Lege alle St?rme und Expeditionskarten von deinem Tableau auf deine Expeditionsablage. Falls du einen Explorer nicht einsetzen willst, kannst du ihn in die n?chste Runde mitnehmen."
+    "passInfo": "Lege alle Stürme und Expeditionskarten von deinem Tableau auf deine Expeditionsablage. Falls du einen Explorer nicht einsetzen willst, kannst du ihn in die nächste Runde mitnehmen."
   },
   "roundTurnBot": {
     "title": "Arka",
-    "revealActionCard": "Arka deckt ihre n?chste Aktionskarte auf und f?hrt die Aktionen von oben nach unten aus:",
+    "revealActionCard": "Arka deckt ihre nächste Aktionskarte auf und führt die Aktionen von oben nach unten aus:",
     "pass": "Arka hat in dieser Runde bereits die {count} Sterne ihres Expeditionspfads gespielt und <b>passt</b>."
   },
   "actionCardOverview": {
@@ -75,8 +75,8 @@
   },
   "roundEnd": {
     "title": "Ende Runde {round}",
-    "scoreMilestone": "<b>Meilenstein:</b> W?hle eine Meilensteinkarte die du jetzt wertest. Lege dein Meilensteinpl?ttchen mit der passenden Seite nach oben auf diese Karte. Diese Meilensteinkarte steht dir zur Wertung nicht mehr zur Verf?gung.",
-    "gainForecastTile": "Du erh?ltst ein <b>Forecastpl?ttchen</b>.",
+    "scoreMilestone": "<b>Meilenstein:</b> Wähle eine Meilensteinkarte die du jetzt wertest. Lege dein Meilensteinplättchen mit der passenden Seite nach oben auf diese Karte. Diese Meilensteinkarte steht dir zur Wertung nicht mehr zur Verfügung.",
+    "gainForecastTile": "Du erhältst ein <b>Forecastplättchen</b>.",
     "moveRoundIndicator": "Schiebe den <b>Rundenmarker</b> um ein Feld weiter."
   },
   "gameEnd": {
