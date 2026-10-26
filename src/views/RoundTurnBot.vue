@@ -57,7 +57,7 @@ export default defineComponent({
     const { round, turn, action, botPass, botState, botActions } = navigationState
     const routeCalculator = new RouteCalculator({round, turn, player:Player.BOT, action})
 
-    return { t, router, state, navigationState, routeCalculator, round, turn, botPass, botState, botActions }
+    return { t, router, state, navigationState, routeCalculator, round, turn, action, botPass, botState, botActions }
   },
   computed: {
     pendingStep() : BotActionStep|undefined {
@@ -71,19 +71,22 @@ export default defineComponent({
     decide(decision : BotActionDecisionData) : void {
       const decisions = [...this.navigationState.botActionDecisions, decision]
       const botActions = this.navigationState.getBotActions(decisions)
-      this.storeTurn(botActions, decisions)
       if (botActions.pendingStep || botActions.hasStepsAfterDecision(decisions.length - 1)) {
+        // continue on the next action step screen
+        this.storeTurn(botActions, decisions, decisions.length)
         this.router.push(this.routeCalculator.getBotActionRouteTo(decisions.length))
       }
       else {
+        // the turn is completed on this screen: "Back" from the next turn returns here, before this decision
+        this.storeTurn(botActions, decisions, this.action)
         this.router.push(this.routeCalculator.getNextRouteTo(this.state))
       }
     },
     next() : void {
-      this.storeTurn(this.botActions, [...this.navigationState.botActionDecisions])
+      this.storeTurn(this.botActions, [...this.navigationState.botActionDecisions], this.action)
       this.router.push(this.routeCalculator.getNextRouteTo(this.state))
     },
-    storeTurn(botActions : BotActions|undefined, decisions : BotActionDecisionData[]) : void {
+    storeTurn(botActions : BotActions|undefined, decisions : BotActionDecisionData[], lastStep : number) : void {
       this.state.storeRoundTurn({
         round: this.round,
         turn: this.turn,
@@ -93,7 +96,8 @@ export default defineComponent({
           cardDeck: this.navigationState.cardDeck.toPersistence(),
           botState: (botActions?.botState ?? this.botState).toPersistence()
         },
-        botActionDecisions: decisions.length > 0 ? decisions : undefined
+        botActionDecisions: decisions.length > 0 ? decisions : undefined,
+        botActionLastStep: lastStep > 0 ? lastStep : undefined
       })
     }
   }

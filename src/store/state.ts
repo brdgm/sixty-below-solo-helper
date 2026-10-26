@@ -65,6 +65,8 @@ export interface Turn {
   botPersistence?: BotPersistence
   /** Player decisions for Arka's action steps, in order (only stored for Arka's turns) */
   botActionDecisions?: BotActionDecision[]
+  /** Action step (route param) of the screen on which Arka's turn was completed - target of "Back" from the following turn */
+  botActionLastStep?: number
 }
 export interface BotActionDecision {
   /** false if the action was not possible */

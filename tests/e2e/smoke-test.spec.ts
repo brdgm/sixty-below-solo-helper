@@ -45,6 +45,19 @@ test('smoke test', async ({ page }) => {
   await expect(page.locator('.action-box').first()).toBeVisible()
   await playArkaTurns(page)
 
+  // back from the player turn: Arka's last screen shows the state before its decision again
+  await expect(page.locator('h1')).toHaveText('Your Turn')
+  await page.getByRole('link', { name: 'Back' }).click()
+  await expect(page.locator('h1')).toHaveText('Arka')
+  const decidedTiles = page.locator('.action-box.status-executed, .action-box.status-not-possible')
+  const decidedBefore = await decidedTiles.count()
+  await playArkaTurns(page)
+  await expect(page.locator('h1')).toHaveText('Your Turn')
+  await page.getByRole('link', { name: 'Back' }).click()
+  await expect(page.locator('h1')).toHaveText('Arka')
+  await expect(decidedTiles).toHaveCount(decidedBefore)
+  await playArkaTurns(page)
+
   // player passes
   await expect(page.locator('h1')).toHaveText('Your Turn')
   await page.getByRole('button', { name: 'Pass' }).click()

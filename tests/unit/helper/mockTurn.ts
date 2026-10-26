@@ -8,7 +8,8 @@ export default function mockTurn(params?: MockTurnParams) : Turn {
     player: params?.player ?? Player.PLAYER,
     pass: params?.pass,
     botPersistence: params?.botPersistence,
-    botActionDecisions: params?.botActionDecisions
+    botActionDecisions: params?.botActionDecisions,
+    botActionLastStep: params?.botActionLastStep
   }
 }
 
@@ -19,4 +20,5 @@ export interface MockTurnParams {
   pass?: boolean
   botPersistence?: BotPersistence
   botActionDecisions?: BotActionDecision[]
+  botActionLastStep?: number
 }

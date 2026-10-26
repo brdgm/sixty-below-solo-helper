@@ -68,13 +68,22 @@ describe('services/RouteCalculator', () => {
 
   it('getBackRouteTo-bot-action-steps', () => {
     const state = mockState({rounds:[mockRound({round:1, turns:[
-      mockTurn({round:1, turn:1, player:Player.BOT, botActionDecisions:[{executed:true}, {executed:false}]}),
+      mockTurn({round:1, turn:1, player:Player.BOT, botActionDecisions:[{executed:true}, {executed:false}], botActionLastStep:1}),
       mockTurn({round:1, turn:2, player:Player.PLAYER})
     ]})]})
-    expect(new RouteCalculator({round:1, turn:1, player:Player.BOT, action:2}).getBackRouteTo(state)).to.eq('/round/1/turn/1/bot/action/1')
     expect(new RouteCalculator({round:1, turn:1, player:Player.BOT, action:1}).getBackRouteTo(state)).to.eq('/round/1/turn/1/bot')
     expect(new RouteCalculator({round:1, turn:1, player:Player.BOT}).getBackRouteTo(state)).to.eq('/round/1/start')
-    expect(new RouteCalculator({round:1, turn:2, player:Player.PLAYER}).getBackRouteTo(state)).to.eq('/round/1/turn/1/bot/action/2')
+    // back to the screen of the last decision, not to a screen with this decision already applied
+    expect(new RouteCalculator({round:1, turn:2, player:Player.PLAYER}).getBackRouteTo(state)).to.eq('/round/1/turn/1/bot/action/1')
+  })
+
+  it('getBackRouteTo-bot-turn-completed-on-first-screen', () => {
+    const state = mockState({rounds:[mockRound({round:1, turns:[
+      mockTurn({round:1, turn:1, player:Player.BOT, botActionDecisions:[{executed:false}]}),
+      mockTurn({round:1, turn:2, player:Player.PLAYER})
+    ]})]})
+    expect(new RouteCalculator({round:1, turn:2, player:Player.PLAYER}).getBackRouteTo(state)).to.eq('/round/1/turn/1/bot')
+    expect(new RouteCalculator({round:1}).getLastTurnRouteTo(state)).to.eq('/round/1/turn/2/player')
   })
 
   it('getBotActionRouteTo', () => {

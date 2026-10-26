@@ -42,8 +42,8 @@ export default class RouteCalculator {
   }
 
   /**
-   * Get route to the previous action step of Arka's turn, the previous turn (its last action step),
-   * or to the round start if this is the first turn.
+   * Get route to the previous action step of Arka's turn, the previous turn (for Arka's turns the screen
+   * on which her turn was completed), or to the round start if this is the first turn.
    */
   public getBackRouteTo(state: State) : string {
     if (this.player == Player.BOT && this.action > 0) {
@@ -106,8 +106,9 @@ function routeTo(round: number, turn: number, player: Player, action: number = 0
 }
 
 /**
- * Route to a stored turn - for Arka's turns to the last action step.
+ * Route to a stored turn, used for "Back": for Arka's turns the screen on which her turn was completed.
+ * That screen restores the state before its own decision, so the decision can be taken again.
  */
 function routeToTurn(turn: Turn) : string {
-  return routeTo(turn.round, turn.turn, turn.player, turn.botActionDecisions?.length ?? 0)
+  return routeTo(turn.round, turn.turn, turn.player, turn.botActionLastStep ?? 0)
 }
