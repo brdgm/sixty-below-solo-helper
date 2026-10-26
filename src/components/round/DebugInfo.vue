@@ -14,6 +14,7 @@
       <b>milestoneCards</b>: {{navigationState.milestoneCards}}<br/>
       <b>cardDeck</b>: {{cardDeck.toPersistence()}}<br/>
       <b>botState</b>: {{botState.toPersistence()}},
+        <b>expeditionPathPosition</b>: {{botState.expeditionPathPosition}},
         <b>starLimit</b>: {{botState.starLimit}}
     </p>
   </div>
