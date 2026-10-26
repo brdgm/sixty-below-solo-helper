@@ -121,10 +121,7 @@
   "finalScoring": {
     "title": "Final Scoring",
     "player": "You",
-    "expertsRow4And5": "<b>Experts</b> in the 4th and 5th row <small>(number, 2 VP each)</small>",
-    "missionCoordinators": "<b>Mission Coordinators</b> <small>(number, 1 VP each)</small>",
-    "pilotsMechanics": "<b>Pilots and Mechanics</b> <small>(number, 2 VP each)</small>",
-    "experts": "Victory points for Experts",
+    "experts": "<b>Experts</b>",
     "expeditionTrack": "<b>Expedition Track</b>",
     "stationSites": "<b>Station Sites</b>",
     "stations": "<b>Stations</b>",
@@ -132,15 +129,11 @@
     "negativePoints": "<b>Negative points for Upgrades</b>",
     "expeditionCards": "<b>Expedition Cards</b>",
     "projectCards": "<b>Project Cards</b>",
-    "arkaCards": "Cards left of her Tableau. Project Cards with Game End effect always score the lower victory point value.",
+    "arkaProjectCards": "For Arka, Project Cards with Game End effect always score the lower victory point value.",
     "milestones": "<b>Milestones</b>",
     "meteorite": "<b>Meteorite</b> <small>(at the -60.6° Meteorite you always take first place)</small>",
     "total": "Sum",
-    "winner": {
-      "player": "You win!",
-      "bot": "Arka wins!"
-    },
-    "tie": "In case of a tie, Arka wins."
+    "tie": "<b>Tie:</b> Arka wins."
   },
   "sideBar": {
     "round": "Round {round}",

@@ -8,24 +8,9 @@
           <th scope="col"><span class="fw-bold">{{t('player.bot')}}</span></th>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.expertsRow4And5')"></span></th>
-          <td><NumberInput v-model="playerExpertsRow4And5" :max="15"/></td>
-          <td><NumberInput v-model="botExpertsRow4And5" :max="15"/></td>
-        </tr>
-        <tr>
-          <th scope="row"><span v-html="t('finalScoring.missionCoordinators')"></span></th>
-          <td><NumberInput v-model="playerMissionCoordinators" :max="15"/></td>
-          <td><NumberInput v-model="botMissionCoordinators" :max="15"/></td>
-        </tr>
-        <tr>
-          <th scope="row"><span v-html="t('finalScoring.pilotsMechanics')"></span></th>
-          <td><NumberInput v-model="playerPilotsMechanics" :max="15"/></td>
-          <td><NumberInput v-model="botPilotsMechanics" :max="15"/></td>
-        </tr>
-        <tr class="subtotal">
           <th scope="row"><span v-html="t('finalScoring.experts')"></span></th>
-          <td>{{playerExpertVP}}</td>
-          <td>{{botExpertVP}}</td>
+          <td><NumberInput v-model="playerExpertsVP"/></td>
+          <td>{{botExpertsVP}}</td>
         </tr>
         <tr>
           <th scope="row"><span v-html="t('finalScoring.expeditionTrack')"></span></th>
@@ -55,14 +40,15 @@
         <tr>
           <th scope="row"><span v-html="t('finalScoring.expeditionCards')"></span></th>
           <td><NumberInput v-model="playerExpeditionCardsVP"/></td>
-          <td rowspan="2">
-            <NumberInput v-model="botCardsVP"/>
-            <div class="hint" v-html="t('finalScoring.arkaCards')"></div>
-          </td>
+          <td><NumberInput v-model="botExpeditionCardsVP"/></td>
         </tr>
         <tr>
           <th scope="row"><span v-html="t('finalScoring.projectCards')"></span></th>
           <td><NumberInput v-model="playerProjectCardsVP"/></td>
+          <td>
+            <NumberInput v-model="botProjectCardsVP"/>
+            <div class="hint" v-html="t('finalScoring.arkaProjectCards')"></div>
+          </td>
         </tr>
         <tr>
           <th scope="row"><span v-html="t('finalScoring.milestones')"></span></th>
@@ -83,30 +69,30 @@
     </table>
   </div>
 
-  <div class="alert mt-3 winner" :class="winnerAlertClass" role="status">
-    <b>{{t(`finalScoring.winner.${winner}`)}}</b>
-    <span class="ms-2 small">{{t('finalScoring.tie')}}</span>
-  </div>
+  <div v-if="isTie" class="alert alert-info mt-3 tie" role="status" v-html="t('finalScoring.tie')"></div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import NumberInput from '@brdgm/brdgm-commons/src/components/form/NumberInput.vue'
 import toNumber from '@brdgm/brdgm-commons/src/util/form/toNumber'
 import NavigationState from '@/util/NavigationState'
-import Player from '@/services/enum/Player'
 import getExpertVP from '@/util/getExpertVP'
 import getArkaUpgradeVP from '@/util/getArkaUpgradeVP'
-import getWinner from '@/util/getWinner'
 
 /**
- * Final scoring for the player and Arka, one row per scoring category of the base game plus the Meteorite.
+ * Final scoring for the player and Arka: victory points per scoring category of the base game plus the Meteorite.
+ * The player enters victory points, Arka's are calculated where tracked by the app.
  */
 export default defineComponent({
   name: 'FinalScoring',
   components: {
     NumberInput
+  },
+  setup() {
+    const { t } = useI18n()
+    return { t }
   },
   props: {
     navigationState: {
@@ -114,22 +100,9 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
-    const { t } = useI18n()
-    const { botState } = props.navigationState
-
-    // Arka's Expert counts are tracked by the app, but can be corrected
-    const botExpertsRow4And5 = ref<number|undefined>(botState.expertsRow4And5Count)
-    const botMissionCoordinators = ref<number|undefined>(botState.missionCoordinatorCount)
-    const botPilotsMechanics = ref<number|undefined>(botState.pilotMechanicCount)
-
-    return { t, botExpertsRow4And5, botMissionCoordinators, botPilotsMechanics }
-  },
   data() {
     return {
-      playerExpertsRow4And5: undefined as number|undefined,
-      playerMissionCoordinators: undefined as number|undefined,
-      playerPilotsMechanics: undefined as number|undefined,
+      playerExpertsVP: undefined as number|undefined,
       playerExpeditionTrackVP: undefined as number|undefined,
       playerStationSitesVP: undefined as number|undefined,
       playerStationsVP: undefined as number|undefined,
@@ -139,22 +112,17 @@ export default defineComponent({
       playerProjectCardsVP: undefined as number|undefined,
       playerMilestonesVP: undefined as number|undefined,
       playerMeteoriteVP: undefined as number|undefined,
-      botCardsVP: undefined as number|undefined
+      botExpeditionCardsVP: undefined as number|undefined,
+      botProjectCardsVP: undefined as number|undefined
     }
   },
   computed: {
-    playerExpertVP() : number {
+    botExpertsVP() : number {
+      const { botState } = this.navigationState
       return getExpertVP({
-        expertsRow4And5: toNumber(this.playerExpertsRow4And5),
-        missionCoordinators: toNumber(this.playerMissionCoordinators),
-        pilotsMechanics: toNumber(this.playerPilotsMechanics)
-      })
-    },
-    botExpertVP() : number {
-      return getExpertVP({
-        expertsRow4And5: toNumber(this.botExpertsRow4And5),
-        missionCoordinators: toNumber(this.botMissionCoordinators),
-        pilotsMechanics: toNumber(this.botPilotsMechanics)
+        expertsRow4And5: botState.expertsRow4And5Count,
+        missionCoordinators: botState.missionCoordinatorCount,
+        pilotsMechanics: botState.pilotMechanicCount
       })
     },
     botExpeditionTrackVP() : number {
@@ -167,7 +135,7 @@ export default defineComponent({
       return this.navigationState.scoredMilestones.reduce((sum, milestone) => sum + milestone.victoryPoints, 0)
     },
     playerTotalVP() : number {
-      return this.playerExpertVP
+      return toNumber(this.playerExpertsVP)
         + toNumber(this.playerExpeditionTrackVP)
         + toNumber(this.playerStationSitesVP)
         + toNumber(this.playerStationsVP)
@@ -179,17 +147,15 @@ export default defineComponent({
         + toNumber(this.playerMeteoriteVP)
     },
     botTotalVP() : number {
-      return this.botExpertVP
+      return this.botExpertsVP
         + this.botExpeditionTrackVP
         + this.botUpgradesVP
-        + toNumber(this.botCardsVP)
+        + toNumber(this.botExpeditionCardsVP)
+        + toNumber(this.botProjectCardsVP)
         + this.botMilestonesVP
     },
-    winner() : Player {
-      return getWinner(this.playerTotalVP, this.botTotalVP)
-    },
-    winnerAlertClass() : string {
-      return this.winner == Player.PLAYER ? 'alert-success' : 'alert-danger'
+    isTie() : boolean {
+      return this.playerTotalVP > 0 && this.playerTotalVP == this.botTotalVP
     }
   }
 })
@@ -212,9 +178,6 @@ th:nth-child(1) {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
-tr.subtotal {
-  font-style: italic;
-}
 th {
   vertical-align: middle;
 }
@@ -224,10 +187,10 @@ th {
 }
 .hint {
   font-size: 0.8rem;
-  max-width: 10rem;
+  max-width: 11rem;
   margin: 0.25rem auto 0;
 }
-.winner {
+.tie {
   max-width: 40rem;
 }
 </style>

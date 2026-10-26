@@ -121,10 +121,7 @@
   "finalScoring": {
     "title": "Schlusswertung",
     "player": "Du",
-    "expertsRow4And5": "<b>Experten</b> in der 4. und 5. Reihe <small>(Anzahl, je 2 Siegpunkte)</small>",
-    "missionCoordinators": "<b>Missionsleiter</b> <small>(Anzahl, je 1 Siegpunkt)</small>",
-    "pilotsMechanics": "<b>Pilotinnen und Mechaniker</b> <small>(Anzahl, je 2 Siegpunkte)</small>",
-    "experts": "Siegpunkte für Experten",
+    "experts": "<b>Experten</b>",
     "expeditionTrack": "<b>Expeditionsleiste</b>",
     "stationSites": "<b>Stationsfelder</b>",
     "stations": "<b>Stationen</b>",
@@ -132,15 +129,11 @@
     "negativePoints": "<b>Minuspunkte für Ausbauten</b>",
     "expeditionCards": "<b>Expeditionskarten</b>",
     "projectCards": "<b>Projektkarten</b>",
-    "arkaCards": "Karten links vom Tableau. Für Karten mit Spielende-Effekt gilt immer der niedrigere der beiden Werte als erfüllt.",
+    "arkaProjectCards": "Für Karten mit Spielende-Effekt gilt für Arka immer der niedrigere der beiden Werte als erfüllt.",
     "milestones": "<b>Meilensteine</b>",
     "meteorite": "<b>Meteorit</b> <small>(beim -60,6° Meteorit erhältst du immer den ersten Platz)</small>",
     "total": "Summe",
-    "winner": {
-      "player": "Du gewinnst!",
-      "bot": "Arka gewinnt!"
-    },
-    "tie": "Bei Gleichstand gewinnt Arka."
+    "tie": "<b>Gleichstand:</b> Arka gewinnt."
   },
   "sideBar": {
     "round": "Runde {round}",

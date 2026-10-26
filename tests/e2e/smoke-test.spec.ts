@@ -120,7 +120,7 @@ test('smoke test', async ({ page }) => {
   // game end: Arka's Milestones (4 + 8 + 12 VP) are scored
   await expect(page.getByRole('heading', { name: 'Final Scoring' })).toBeVisible()
   await expect(page.locator('tr', { hasText: 'Milestones' }).locator('td').last()).toHaveText('24')
-  await expect(page.locator('.winner')).toContainText('Arka wins!')
+  await expect(page.locator('.tie')).toHaveCount(0)
 
   // end game
   await page.getByRole('button', { name: 'End Game' }).click()
