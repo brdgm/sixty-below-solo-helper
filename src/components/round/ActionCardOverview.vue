@@ -2,7 +2,6 @@
   <div class="action-card-overview">
     <ActionCardStarMarker :card="card" class="marker"/>
     <ol class="actions">
-      <li v-html="t('actionCardOverview.rondel', {count:card.rondelSteps})"></li>
       <li v-for="(cardAction, index) in card.actions" :key="index">
         {{t(`rules.action.${cardAction.action}.title`)}}
         <template v-if="cardAction.otherwise">

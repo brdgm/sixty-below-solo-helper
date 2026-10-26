@@ -66,7 +66,6 @@
     "pass": "Arka has already played the {count} stars of her Expedition Level in this round, so she <b>passes</b>."
   },
   "actionCardOverview": {
-    "rondel": "Move the Explorer on the Rondel {count} step clockwise. | Move the Explorer on the Rondel {count} steps clockwise.",
     "otherwise": "Otherwise: {action}"
   },
   "actionCardStarMarker": {
@@ -85,7 +84,6 @@
   "sideBar": {
     "round": "Round {round}",
     "turn": "Turn {turn}",
-    "startPlayer": "Start player: {player}",
     "starsPlayed": "Stars: {played} / {limit}"
   },
   "arkaMilestoneCard": {
@@ -107,7 +105,6 @@
     "epic": "Epic"
   },
   "player": {
-    "player": "You",
     "bot": "Arka"
   },
   "rules": {

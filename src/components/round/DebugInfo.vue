@@ -7,13 +7,9 @@
       <b>player</b>: {{navigationState.player}},
       <b>startPlayer</b>: {{navigationState.startPlayer}},
       <b>botPass</b>: {{navigationState.botPass}}<br/>
-      <b>cardDeck</b>:
-        <b>pile</b>: {{cardIds(cardDeck.pile)}},
-        <b>played</b>: {{cardIds(cardDeck.played)}},
-        <b>discard</b>: {{cardIds(cardDeck.discard)}}<br/>
-      <b>botState</b>:
-        <b>rondelPosition</b>: {{botState.rondelPosition}},
-        <b>expeditionSteps</b>: {{botState.expeditionSteps}},
+      <b>currentCard</b>: {{cardDeck.currentCard ?? '-'}}<br/>
+      <b>cardDeck</b>: {{cardDeck.toPersistence()}}<br/>
+      <b>botState</b>: {{botState.toPersistence()}},
         <b>starLimit</b>: {{botState.starLimit}}
     </p>
   </div>
@@ -25,7 +21,6 @@ import { useStateStore } from '@/store/state'
 import NavigationState from '@/util/NavigationState'
 import CardDeck from '@/services/CardDeck'
 import BotState from '@/services/BotState'
-import Card from '@/services/Card'
 
 export default defineComponent({
   name: 'DebugInfo',
@@ -45,11 +40,6 @@ export default defineComponent({
     },
     botState() : BotState {
       return this.navigationState.botState
-    }
-  },
-  methods: {
-    cardIds(cards : readonly Card[]) : string {
-      return cards.map(card => card.id).join(',')
     }
   }
 })

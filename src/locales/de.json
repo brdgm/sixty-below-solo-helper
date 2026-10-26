@@ -66,7 +66,6 @@
     "pass": "Arka hat in dieser Runde bereits die {count} Sterne ihres Expeditionspfads gespielt und <b>passt</b>."
   },
   "actionCardOverview": {
-    "rondel": "Bewege den Explorer im Rondell {count} Schritt im Uhrzeigersinn. | Bewege den Explorer im Rondell {count} Schritte im Uhrzeigersinn.",
     "otherwise": "Andernfalls: {action}"
   },
   "actionCardStarMarker": {
@@ -85,7 +84,6 @@
   "sideBar": {
     "round": "Runde {round}",
     "turn": "Zug {turn}",
-    "startPlayer": "Startperson: {player}",
     "starsPlayed": "Sterne: {played} / {limit}"
   },
   "arkaMilestoneCard": {
@@ -107,7 +105,6 @@
     "epic": "Episch"
   },
   "player": {
-    "player": "Du",
     "bot": "Arka"
   },
   "rules": {

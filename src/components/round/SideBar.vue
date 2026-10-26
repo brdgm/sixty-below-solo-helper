@@ -2,7 +2,6 @@
   <div class="sidebar">
     {{t('sideBar.round', {round})}}<br/>
     <template v-if="turn > 0">{{t('sideBar.turn', {turn})}}<br/></template>
-    {{t('sideBar.startPlayer', {player:t(`player.${startPlayer}`)})}}
     <hr/>
     <div class="arka">
       <h6>{{t('player.bot')}}</h6>
@@ -18,7 +17,6 @@
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import NavigationState from '@/util/NavigationState'
-import Player from '@/services/enum/Player'
 import Card from '@/services/Card'
 import ActionCardStarMarker from '@/components/structure/ActionCardStarMarker.vue'
 
@@ -43,9 +41,6 @@ export default defineComponent({
     },
     turn() : number {
       return this.navigationState.turn
-    },
-    startPlayer() : Player {
-      return this.navigationState.startPlayer
     },
     playedCards() : readonly Card[] {
       return this.navigationState.cardDeck.played
