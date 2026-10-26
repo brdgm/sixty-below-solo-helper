@@ -95,21 +95,27 @@
     "title": "End of Round {round}",
     "scoreMilestone": "Score your <b>Milestone</b>.",
     "gainForecastTile": "Gain one <b>Forecast Tile</b>.",
-    "arkaOverfulfills": "Does Arka meet the condition compared to you?",
+    "arkaOverfulfills": "Does Arka meet the overfulfill condition compared to you?",
     "overfulfilled": "Yes: {vp} VP",
     "notOverfulfilled": "No: {vp} VP"
   },
   "arkaMilestoneScoring": {
     "title": "Arka's Milestone",
-    "milestoneTile": "Milestone Tile <b>{tile}</b>: {lower} or {higher} victory points.",
-    "overfulfillRule": "Arka automatically fulfills the condition for the lower victory point value. To exceed the requirement and thus score the higher victory point value, Arka must meet the specified condition compared to you.",
     "hint": {
-      "twice-as-many-engineers": "Arka's Engineers: <b>{count}</b> (Mission Coordinators in the same column included).",
-      "two-upgrades-more": "Arka's Upgrades: <b>{count}</b>.",
-      "two-experts-more": "Arka's Experts: <b>{count}</b> (including the three printed ones).",
-      "three-project-cards-more": "Arka's face-down Cards to the left of her Tableau: <b>{count}</b>. Only the Project Cards among them count.",
-      "twice-as-many-radio-operators": "Arka's Radio Operators: <b>{count}</b> (Mission Coordinators in the same column included).",
-      "one-presence-more-landscapes": "Arka's Presence on Landscapes: <b>{count}</b> (Explorers on Landscapes and Stations)."
+      "twice-as-many-engineers": "Arka's Engineers: <b>{count}</b>",
+      "two-upgrades-more": "Arka's Upgrades: <b>{count}</b>",
+      "two-experts-more": "Arka's Experts: <b>{count}</b>",
+      "three-project-cards-more": "Arka's face-down Cards to the left of her Tableau: <b>{count}</b>",
+      "twice-as-many-radio-operators": "Arka's Radio Operators: <b>{count}</b>",
+      "one-presence-more-landscapes": "Arka's Presence on Landscapes: <b>{count}</b>"
+    },
+    "hintLine2": {
+      "twice-as-many-engineers": "(Mission Coordinators in the same column included)",
+      "two-upgrades-more": "",
+      "two-experts-more": "(including the three printed ones)",
+      "three-project-cards-more": "Only the Project Cards among them count",
+      "twice-as-many-radio-operators": "(Mission Coordinators in the same column included)",
+      "one-presence-more-landscapes": "(Explorers on Landscapes and Stations)"
     }
   },
   "gameEnd": {
@@ -135,7 +141,7 @@
   },
   "sideBar": {
     "round": "Round {round}",
-    "starsPlayed": "Stars: {played} / {limit}",
+    "starLimit": "Expedition Level: stars Arka plays per round",
     "expeditionSteps": "Expedition Track",
     "upgrades": "Upgrades",
     "cardsDrawn": "Cards left of the Tableau",

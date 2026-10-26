@@ -95,21 +95,27 @@
     "title": "Ende Runde {round}",
     "scoreMilestone": "Werte deinen <b>Meilenstein</b>.",
     "gainForecastTile": "Du erhältst ein <b>Forecastplättchen</b>.",
-    "arkaOverfulfills": "Erfüllt Arka die Bedingung im Vergleich zu dir?",
+    "arkaOverfulfills": "Erreicht Arka die Übererfüllt-Bedingung im Vergleich zu dir?",
     "overfulfilled": "Ja: {vp} Siegpunkte",
     "notOverfulfilled": "Nein: {vp} Siegpunkte"
   },
   "arkaMilestoneScoring": {
     "title": "Arkas Meilenstein",
-    "milestoneTile": "Meilensteinplättchen <b>{tile}</b>: {lower} oder {higher} Siegpunkte.",
-    "overfulfillRule": "Die Bedingung für die geringeren Siegpunkte hat Arka immer erfüllt. Zur Übererfüllung und somit zur Wertung mit der höheren Siegpunkte-Seite, muss Arka die angegebene Bedingung im Vergleich zu dir erfüllen.",
     "hint": {
-      "twice-as-many-engineers": "Arkas Ingenieure: <b>{count}</b> (Missionsleiter in der selben Spalte zählen dazu).",
-      "two-upgrades-more": "Arkas Ausbauten: <b>{count}</b>.",
-      "two-experts-more": "Arkas Experten: <b>{count}</b> (inklusive der drei aufgedruckten).",
-      "three-project-cards-more": "Arkas verdeckte Karten links neben ihrem Tableau: <b>{count}</b>. Es zählen nur die Projektkarten darunter.",
-      "twice-as-many-radio-operators": "Arkas Funker: <b>{count}</b> (Missionsleiter in der selben Spalte zählen dazu).",
-      "one-presence-more-landscapes": "Arkas Präsenz auf Landschaften: <b>{count}</b> (Explorer auf Landschaften und Stationen)."
+      "twice-as-many-engineers": "Arkas Ingenieure: <b>{count}</b>",
+      "two-upgrades-more": "Arkas Ausbauten: <b>{count}</b>",
+      "two-experts-more": "Arkas Experten: <b>{count}</b>",
+      "three-project-cards-more": "Arkas verdeckte Karten links neben ihrem Tableau: <b>{count}</b>",
+      "twice-as-many-radio-operators": "Arkas Funker: <b>{count}</b>",
+      "one-presence-more-landscapes": "Arkas Präsenz auf Landschaften: <b>{count}</b>"
+    },
+    "hintLine2": {
+      "twice-as-many-engineers": "(Missionsleiter in der selben Spalte zählen dazu)",
+      "two-upgrades-more": "",
+      "two-experts-more": "(inklusive der drei aufgedruckten)",
+      "three-project-cards-more": "Es zählen nur die Projektkarten darunter.",
+      "twice-as-many-radio-operators": "(Missionsleiter in der selben Spalte zählen dazu).",
+      "one-presence-more-landscapes": "(Explorer auf Landschaften und Stationen)."
     }
   },
   "gameEnd": {
@@ -135,7 +141,7 @@
   },
   "sideBar": {
     "round": "Runde {round}",
-    "starsPlayed": "Sterne: {played} / {limit}",
+    "starLimit": "Sterne am Expeditionspfad: so viele Sterne spielt Arka pro Runde",
     "expeditionSteps": "Expeditionsleiste",
     "upgrades": "Ausbauten",
     "cardsDrawn": "Karten links vom Tableau",

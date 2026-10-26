@@ -5,11 +5,10 @@
     <div class="played-cards">
       <ActionCardStarMarker v-for="card in playedCards" :key="card.id" :card="card"/>
     </div>
-    <span v-html="t('sideBar.starsPlayed', {played:starsPlayed, limit:botState.starLimit})"></span>
 
     <div v-for="(row, rowIndex) in valueRows" :key="rowIndex" class="values" :class="{'mt-2': rowIndex == 0}">
       <div v-for="item in row" :key="item.name" :title="t(`sideBar.${item.name}`)">
-        <AppIcon type="misc" :name="item.icon" class="icon"/>
+        <AppIcon :type="item.iconType" :name="item.icon" class="icon"/>
         <span class="visually-hidden">{{t(`sideBar.${item.name}`)}}</span>
         {{item.value}}
       </div>
@@ -27,7 +26,9 @@
       <hr/>
       <div v-for="milestone in milestones" :key="milestone.round" class="milestone" :class="{scored: milestone.victoryPoints != undefined}">
         <div class="milestone-round">
-          {{milestone.round}}:
+          <div>
+          {{milestone.round}}
+          </div>
           <div v-if="milestone.victoryPoints != undefined" class="milestone-vp">
             {{t('sideBar.milestoneScored', {vp:milestone.victoryPoints})}}
           </div>
@@ -82,19 +83,17 @@ export default defineComponent({
     playedCards() : readonly Card[] {
       return this.navigationState.cardDeck.played
     },
-    starsPlayed() : number {
-      return this.navigationState.cardDeck.starsPlayed
-    },
     valueRows() : SideBarValue[][] {
       return [
         [
-          { name: 'expeditionSteps', icon: 'expedition-track', value: this.botState.expeditionSteps },
-          { name: 'explorersLeft', icon: 'explorer', value: this.botState.explorersLeft }
+          { name: 'expeditionSteps', iconType: 'misc', icon: 'expedition-track', value: this.botState.expeditionSteps },
+          { name: 'explorersLeft', iconType: 'misc', icon: 'explorer', value: this.botState.explorersLeft },
+          { name: 'starLimit', iconType: 'card', icon: 'star', value: this.botState.starLimit }
         ],
         [
-          { name: 'cardsDrawn', icon: 'card', value: this.botState.cardsDrawn },
-          { name: 'stationsLeft', icon: 'station', value: this.botState.stationsLeft },
-          { name: 'upgrades', icon: 'upgrade', value: this.botState.upgrades }
+          { name: 'cardsDrawn', iconType: 'misc', icon: 'card', value: this.botState.cardsDrawn },
+          { name: 'stationsLeft', iconType: 'misc', icon: 'station', value: this.botState.stationsLeft },
+          { name: 'upgrades', iconType: 'misc', icon: 'upgrade', value: this.botState.upgrades }
         ]
       ]
     },
@@ -118,6 +117,7 @@ export default defineComponent({
 
 interface SideBarValue {
   name: string
+  iconType: string
   icon: string
   value: number
 }
@@ -136,7 +136,7 @@ interface SideBarMilestone {
 <style lang="scss" scoped>
 .sidebar {
   float: right;
-  width: 190px;
+  width: 175px;
   margin-left: 15px;
   margin-bottom: 10px;
   margin-right: -12px;
@@ -144,10 +144,6 @@ interface SideBarMilestone {
   background-color: #ddd;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
-  @media (max-width: 600px) {
-    font-size: 0.9rem;
-    width: 165px;
-  }
 }
 .played-cards {
   display: flex;
@@ -170,13 +166,16 @@ interface SideBarMilestone {
   gap: 0.3rem;
   margin-bottom: 0.3rem;
   .milestone-round {
-    width: 1.6rem;
+    width: 0.8rem;
     flex-shrink: 0;
     font-weight: bold;
   }
   .milestone-vp {
     font-size: 0.7rem;
     font-weight: normal;
+    rotate: -90deg;
+    white-space: nowrap;
+    margin-top: 1rem;
   }
   .milestone-card {
     flex: 1;
@@ -198,8 +197,12 @@ interface SideBarMilestone {
     width: 1.6rem;
     height: 1.6rem;
     object-fit: contain;
+    margin-bottom: -0.5rem;
+    z-index: 10;
+    filter: drop-shadow(0 0 0.2rem rgba(0, 0, 0, 0.5));
     &.printed {
       opacity: 0.6;
+      margin-bottom: 0rem;
     }
   }
 }

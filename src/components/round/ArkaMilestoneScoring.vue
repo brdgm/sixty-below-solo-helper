@@ -3,9 +3,10 @@
   <div class="milestone">
     <ArkaMilestoneCard :milestoneCard="milestoneCard"/>
     <div>
-      <p v-html="t('arkaMilestoneScoring.milestoneTile', {tile:tileName, lower:lowerVP, higher:higherVP})"></p>
-      <p v-html="t(`arkaMilestoneScoring.hint.${milestoneCard.overfulfill}`, {count:conditionValue})"></p>
-      <p v-html="t('arkaMilestoneScoring.overfulfillRule')"></p>
+      <p>
+        <span v-html="t(`arkaMilestoneScoring.hint.${milestoneCard.overfulfill}`, {count:conditionValue})"></span><br/>
+        <span v-html="t(`arkaMilestoneScoring.hintLine2.${milestoneCard.overfulfill}`)"></span>
+      </p>
     </div>
   </div>
 </template>
