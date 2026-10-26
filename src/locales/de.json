@@ -96,10 +96,51 @@
     "title": "Ende Runde {round}",
     "scoreMilestone": "<b>Meilenstein:</b> Wähle eine Meilensteinkarte die du jetzt wertest. Lege dein Meilensteinplättchen mit der passenden Seite nach oben auf diese Karte. Diese Meilensteinkarte steht dir zur Wertung nicht mehr zur Verfügung.",
     "gainForecastTile": "Du erhältst ein <b>Forecastplättchen</b>.",
-    "moveRoundIndicator": "Schiebe den <b>Rundenmarker</b> um ein Feld weiter."
+    "moveRoundIndicator": "Schiebe den <b>Rundenmarker</b> um ein Feld weiter.",
+    "arkaOverfulfills": "Erfüllt Arka die Bedingung im Vergleich zu dir?",
+    "overfulfilled": "Ja: {vp} Siegpunkte",
+    "notOverfulfilled": "Nein: {vp} Siegpunkte"
+  },
+  "arkaMilestoneScoring": {
+    "title": "Arkas Meilenstein",
+    "milestoneTile": "Meilensteinplättchen <b>{tile}</b>: {lower} oder {higher} Siegpunkte.",
+    "overfulfillRule": "Die Bedingung für die geringeren Siegpunkte hat Arka immer erfüllt. Zur Übererfüllung und somit zur Wertung mit der höheren Siegpunkte-Seite, muss Arka die angegebene Bedingung im Vergleich zu dir erfüllen.",
+    "hint": {
+      "twice-as-many-engineers": "Arkas Ingenieure: <b>{count}</b> (Missionsleiter in der selben Spalte zählen dazu).",
+      "two-upgrades-more": "Arkas Ausbauten: <b>{count}</b>.",
+      "two-experts-more": "Arkas Experten: <b>{count}</b> (inklusive der drei aufgedruckten).",
+      "three-project-cards-more": "Arkas verdeckte Karten links neben ihrem Tableau: <b>{count}</b>. Es zählen nur die Projektkarten darunter.",
+      "twice-as-many-radio-operators": "Arkas Funker: <b>{count}</b> (Missionsleiter in der selben Spalte zählen dazu).",
+      "one-presence-more-landscapes": "Arkas Präsenz auf Landschaften: <b>{count}</b> (Explorer auf Landschaften und Stationen)."
+    }
   },
   "gameEnd": {
-    "title": "Spielende"
+    "title": "Spielende",
+    "difficultyLevel": "Schwierigkeitsgrad: <b>{level}</b> ({mode})"
+  },
+  "finalScoring": {
+    "title": "Schlusswertung",
+    "player": "Du",
+    "expertsRow4And5": "<b>Experten</b> in der 4. und 5. Reihe <small>(Anzahl, je 2 Siegpunkte)</small>",
+    "missionCoordinators": "<b>Missionsleiter</b> <small>(Anzahl, je 1 Siegpunkt)</small>",
+    "pilotsMechanics": "<b>Pilotinnen und Mechaniker</b> <small>(Anzahl, je 2 Siegpunkte)</small>",
+    "experts": "Siegpunkte für Experten",
+    "expeditionTrack": "<b>Expeditionsleiste</b>",
+    "stationSites": "<b>Stationsfelder</b>",
+    "stations": "<b>Stationen</b>",
+    "upgrades": "<b>Ausbauten</b>",
+    "negativePoints": "<b>Minuspunkte für Ausbauten</b>",
+    "expeditionCards": "<b>Expeditionskarten</b>",
+    "projectCards": "<b>Projektkarten</b>",
+    "arkaCards": "Karten links vom Tableau. Für Karten mit Spielende-Effekt gilt immer der niedrigere der beiden Werte als erfüllt.",
+    "milestones": "<b>Meilensteine</b>",
+    "meteorite": "<b>Meteorit</b> <small>(beim -60,6° Meteorit erhältst du immer den ersten Platz)</small>",
+    "total": "Summe",
+    "winner": {
+      "player": "Du gewinnst!",
+      "bot": "Arka gewinnt!"
+    },
+    "tie": "Bei Gleichstand gewinnt Arka."
   },
   "sideBar": {
     "round": "Runde {round}",
@@ -111,7 +152,8 @@
     "explorersLeft": "Explorer übrig",
     "stationsLeft": "Stationen übrig",
     "experts": "Experten",
-    "nextMilestone": "Meilenstein Ende Runde {round}:"
+    "nextMilestone": "Meilenstein Ende Runde {round}:",
+    "milestoneScored": "Meilenstein {tile} {vp} SP"
   },
   "arkaMilestoneCard": {
     "alwaysFulfilled": "Immer erfüllt",

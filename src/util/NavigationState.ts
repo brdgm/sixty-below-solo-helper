@@ -9,6 +9,8 @@ import MilestoneCard from '@/services/MilestoneCard'
 import MilestoneCards from '@/services/MilestoneCards'
 import getStartPlayer from './getStartPlayer'
 import getNextMilestoneIndex from './getNextMilestoneIndex'
+import getScoredMilestones, { ScoredMilestone } from './getScoredMilestones'
+import { MAX_ROUND } from './getMilestoneIndex'
 
 /** Turn number used to look up the state at the end of a round */
 const MAX_TURN = 999
@@ -34,6 +36,8 @@ export default class NavigationState {
   readonly botPass : boolean
   /** Arka's Milestone Cards that are not scored yet, in scoring order */
   readonly milestoneCards : readonly MilestoneCard[]
+  /** Arka's Milestones scored at the end of the previous rounds (at the game end: all) */
+  readonly scoredMilestones : readonly ScoredMilestone[]
   /** Player decisions made on the screens before the current screen */
   readonly botActionDecisions : readonly BotActionDecision[]
   /** Arka's resolved actions with the decisions before the current screen (only on Arka's turn when she does not pass) */
@@ -44,7 +48,8 @@ export default class NavigationState {
   private readonly botStateBeforeTurn : BotStatePersistence
 
   constructor(route: RouteLocation, state: State) {
-    this.round = getIntRouteParam(route, 'round')
+    const isGameEnd = route.name == 'GameEnd'
+    this.round = isGameEnd ? MAX_ROUND : getIntRouteParam(route, 'round')
     this.turn = getIntRouteParam(route, 'turn')
     this.action = getIntRouteParam(route, 'action')
     this.player = getPlayer(route)
@@ -52,8 +57,10 @@ export default class NavigationState {
     this.milestoneCards = (state.setup.arkaMilestoneCards ?? [])
         .slice(getNextMilestoneIndex(this.round))
         .map(id => MilestoneCards.get(id))
+    // the Milestone of the current round is not shown as scored before the end of the game (it can be scored again with "Back")
+    this.scoredMilestones = getScoredMilestones(state, isGameEnd ? MAX_ROUND + 1 : this.round)
 
-    const lookupTurn = route.name == 'RoundEnd' ? MAX_TURN : this.turn
+    const lookupTurn = (route.name == 'RoundEnd' || isGameEnd) ? MAX_TURN : this.turn
     const botPersistence = getBotPersistence(state, this.round, lookupTurn)
     this.botStateBeforeTurn = botPersistence.botState
     let cardDeck = CardDeck.fromPersistence(botPersistence.cardDeck)

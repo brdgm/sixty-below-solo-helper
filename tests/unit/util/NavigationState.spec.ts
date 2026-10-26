@@ -151,6 +151,29 @@ describe('util/NavigationState', () => {
     expect(step2.botState.rondelPosition).to.eq(2)
   })
 
+  it('game-end', () => {
+    const gameEndState = mockState({arkaMilestoneCards:['sm1','sm6','sm3'], rounds:[
+      mockRound({round:3, milestoneOverfulfilled:true}),
+      mockRound({round:5, milestoneOverfulfilled:false}),
+      mockRound({round:6, milestoneOverfulfilled:true, turns:[
+        mockTurn({round:6, turn:1, player:Player.BOT,
+          botPersistence: mockBotPersistence({botState: mockBotState({expeditionSteps:23, upgrades:2})})}),
+        mockTurn({round:6, turn:2, player:Player.PLAYER, pass:true})
+      ]})
+    ]})
+    const navigationState = getNavigationState('GameEnd', {}, gameEndState)
+    expect(navigationState.round).to.eq(6)
+    expect(navigationState.botState.expeditionSteps).to.eq(23)
+    expect(navigationState.botState.upgrades).to.eq(2)
+    expect(navigationState.scoredMilestones.map(item => item.victoryPoints)).to.eql([6, 5, 12])
+  })
+
+  it('round-end-own-milestone-not-scored', () => {
+    const roundEndState = mockState({rounds:[mockRound({round:3, milestoneOverfulfilled:true})]})
+    expect(getNavigationState('RoundEnd', {round:'3'}, roundEndState).scoredMilestones).to.have.lengthOf(0)
+    expect(getNavigationState('RoundStart', {round:'4'}, roundEndState).scoredMilestones).to.have.lengthOf(1)
+  })
+
   it('milestone-cards-not-scored-yet', () => {
     const milestoneState = mockState({arkaMilestoneCards:['sm1','sm6','sm3']})
     const milestoneCardIds = (round : string) => getNavigationState('RoundStart', {round}, milestoneState).milestoneCards.map(card => card.id)

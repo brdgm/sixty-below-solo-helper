@@ -32,6 +32,13 @@ export const useStateStore = defineStore(`${name}.state`, {
       }
       round.turns = round.turns.filter(item => item.turn < turn.turn)
       round.turns.push(turn)
+    },
+    storeMilestoneOverfulfilled(roundNumber : number, overfulfilled : boolean) : void {
+      const round = this.rounds.find(item => item.round == roundNumber)
+      if (!round) {
+        throw new Error(`Round ${roundNumber} not found.`)
+      }
+      round.milestoneOverfulfilled = overfulfilled
     }
   },
   persist: true
@@ -55,6 +62,8 @@ export interface Round {
   /** Arka's state at the start of the round */
   initialBotPersistence: BotPersistence
   turns: Turn[]
+  /** Rounds 3/5/6: Arka overfulfilled her Milestone (higher victory points) */
+  milestoneOverfulfilled?: boolean
 }
 export interface Turn {
   round: number

@@ -96,10 +96,51 @@
     "title": "End of Round {round}",
     "scoreMilestone": "<b>Milestone:</b> Choose which Milestone Card you want to score. Place your Milestone Tile with the correct side face up on the Milestone Card. You may not score this Milestone Card again.",
     "gainForecastTile": "Gain one <b>Forecast Tile</b>.",
-    "moveRoundIndicator": "Move the <b>Round Indicator</b> one space forward."
+    "moveRoundIndicator": "Move the <b>Round Indicator</b> one space forward.",
+    "arkaOverfulfills": "Does Arka meet the condition compared to you?",
+    "overfulfilled": "Yes: {vp} VP",
+    "notOverfulfilled": "No: {vp} VP"
+  },
+  "arkaMilestoneScoring": {
+    "title": "Arka's Milestone",
+    "milestoneTile": "Milestone Tile <b>{tile}</b>: {lower} or {higher} victory points.",
+    "overfulfillRule": "Arka automatically fulfills the condition for the lower victory point value. To exceed the requirement and thus score the higher victory point value, Arka must meet the specified condition compared to you.",
+    "hint": {
+      "twice-as-many-engineers": "Arka's Engineers: <b>{count}</b> (Mission Coordinators in the same column included).",
+      "two-upgrades-more": "Arka's Upgrades: <b>{count}</b>.",
+      "two-experts-more": "Arka's Experts: <b>{count}</b> (including the three printed ones).",
+      "three-project-cards-more": "Arka's face-down Cards to the left of her Tableau: <b>{count}</b>. Only the Project Cards among them count.",
+      "twice-as-many-radio-operators": "Arka's Radio Operators: <b>{count}</b> (Mission Coordinators in the same column included).",
+      "one-presence-more-landscapes": "Arka's Presence on Landscapes: <b>{count}</b> (Explorers on Landscapes and Stations)."
+    }
   },
   "gameEnd": {
-    "title": "End of the Game"
+    "title": "End of the Game",
+    "difficultyLevel": "Difficulty Level: <b>{level}</b> ({mode})"
+  },
+  "finalScoring": {
+    "title": "Final Scoring",
+    "player": "You",
+    "expertsRow4And5": "<b>Experts</b> in the 4th and 5th row <small>(number, 2 VP each)</small>",
+    "missionCoordinators": "<b>Mission Coordinators</b> <small>(number, 1 VP each)</small>",
+    "pilotsMechanics": "<b>Pilots and Mechanics</b> <small>(number, 2 VP each)</small>",
+    "experts": "Victory points for Experts",
+    "expeditionTrack": "<b>Expedition Track</b>",
+    "stationSites": "<b>Station Sites</b>",
+    "stations": "<b>Stations</b>",
+    "upgrades": "<b>Upgrades</b>",
+    "negativePoints": "<b>Negative points for Upgrades</b>",
+    "expeditionCards": "<b>Expedition Cards</b>",
+    "projectCards": "<b>Project Cards</b>",
+    "arkaCards": "Cards left of her Tableau. Project Cards with Game End effect always score the lower victory point value.",
+    "milestones": "<b>Milestones</b>",
+    "meteorite": "<b>Meteorite</b> <small>(at the -60.6° Meteorite you always take first place)</small>",
+    "total": "Sum",
+    "winner": {
+      "player": "You win!",
+      "bot": "Arka wins!"
+    },
+    "tie": "In case of a tie, Arka wins."
   },
   "sideBar": {
     "round": "Round {round}",
@@ -111,7 +152,8 @@
     "explorersLeft": "Explorers left",
     "stationsLeft": "Stations left",
     "experts": "Experts",
-    "nextMilestone": "Milestone end of round {round}:"
+    "nextMilestone": "Milestone end of round {round}:",
+    "milestoneScored": "Milestone {tile} {vp} VP"
   },
   "arkaMilestoneCard": {
     "alwaysFulfilled": "Always fulfilled",

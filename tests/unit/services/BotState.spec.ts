@@ -91,6 +91,11 @@ describe('services/BotState', () => {
     expect(BotState.getColumnExpertType(ExpertColumn.ENGINEER)).to.eq(ExpertType.ENGINEER)
   })
 
+  it('expertCount', () => {
+    expect(BotState.new().expertCount).to.eq(3)
+    expect(mockBotState({ investor: [ExpertType.PILOT], engineer: [ExpertType.ENGINEER, ExpertType.MISSION_COORDINATOR] }).expertCount).to.eq(6)
+  })
+
   it('moveRondel', () => {
     const botState = mockBotState({
       rondelPosition: 7,

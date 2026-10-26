@@ -25,13 +25,18 @@
       </div>
     </div>
 
-    <template v-if="nextMilestoneCard">
+    <template v-if="scoredMilestones.length > 0 || nextMilestoneCard">
       <hr/>
       <div class="milestone">
-        <div class="small">{{t('sideBar.nextMilestone', {round:nextMilestoneRound})}}</div>
-        <div class="small fst-italic">{{t(`milestoneCondition.${nextMilestoneCard.overfulfill}`)}}</div>
-        <AppIcon type="action" :name="nextMilestoneCard.specialAction" class="special-action"
-            :title="t(`rules.action.${nextMilestoneCard.specialAction}.title`)"/>
+        <div v-for="scoredMilestone in scoredMilestones" :key="scoredMilestone.milestoneIndex" class="small">
+          {{t('sideBar.milestoneScored', {tile:tileNames[scoredMilestone.milestoneIndex], vp:scoredMilestone.victoryPoints})}}
+        </div>
+        <template v-if="nextMilestoneCard">
+          <div class="small">{{t('sideBar.nextMilestone', {round:nextMilestoneRound})}}</div>
+          <div class="small fst-italic">{{t(`milestoneCondition.${nextMilestoneCard.overfulfill}`)}}</div>
+          <AppIcon type="action" :name="nextMilestoneCard.specialAction" class="special-action"
+              :title="t(`rules.action.${nextMilestoneCard.specialAction}.title`)"/>
+        </template>
       </div>
     </template>
   </div>
@@ -51,6 +56,8 @@ import ActionCardStarMarker from '@/components/structure/ActionCardStarMarker.vu
 import getAllEnumValues from '@brdgm/brdgm-commons/src/util/enum/getAllEnumValues'
 import getNextMilestoneIndex from '@/util/getNextMilestoneIndex'
 import { MILESTONE_ROUNDS } from '@/util/getMilestoneIndex'
+import { MILESTONE_TILE_NAMES } from '@/util/getMilestoneVP'
+import { ScoredMilestone } from '@/util/getScoredMilestones'
 
 export default defineComponent({
   name: 'SideBar',
@@ -60,7 +67,7 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n()
-    return { t }
+    return { t, tileNames: MILESTONE_TILE_NAMES }
   },
   props: {
     navigationState: {
@@ -102,6 +109,9 @@ export default defineComponent({
     },
     nextMilestoneCard() : MilestoneCard|undefined {
       return this.navigationState.milestoneCards[0]
+    },
+    scoredMilestones() : readonly ScoredMilestone[] {
+      return this.navigationState.scoredMilestones
     },
     nextMilestoneRound() : number|undefined {
       return MILESTONE_ROUNDS[getNextMilestoneIndex(this.round)]

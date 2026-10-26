@@ -148,6 +148,14 @@ export default class BotState {
         .reduce((sum, column) => sum + Math.max(0, this.getColumnTotal(column) - 3), 0)
   }
 
+  /**
+   * Total number of Experts on the Tableau, including the three printed ones.
+   */
+  public get expertCount() : number {
+    return getAllEnumValues(ExpertColumn)
+        .reduce((sum, column) => sum + this.getColumnTotal(column), 0)
+  }
+
   public get missionCoordinatorCount() : number {
     return this.getExpertTypeCount(ExpertType.MISSION_COORDINATOR)
   }

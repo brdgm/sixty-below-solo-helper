@@ -23,6 +23,35 @@ async function playArkaTurns(page: Page) : Promise<string> {
   return lastUrl
 }
 
+/**
+ * Play the game until the view with the given heading is shown: the player passes immediately,
+ * Arka plays her turns, round start/end continue with "Next", Arka's Milestones are overfulfilled ("Yes").
+ */
+async function playUntil(page: Page, targetHeading: string) : Promise<void> {
+  let heading = await page.locator('h1').textContent()
+  while (heading != targetHeading) {
+    if (heading == 'Arka') {
+      await playArkaTurns(page)
+    }
+    else {
+      const headingElement = await page.locator('h1').elementHandle()
+      const milestoneYes = page.getByRole('button', { name: /^Yes: / })
+      if (heading == 'Your Turn') {
+        await page.getByRole('button', { name: 'Pass' }).click()
+        await page.locator('#passModal').getByRole('button', { name: 'Pass' }).click()
+      }
+      else if (await milestoneYes.count() > 0) {
+        await milestoneYes.click()
+      }
+      else {
+        await page.getByRole('button', { name: 'Next', exact: true }).click()
+      }
+      await headingElement?.waitForElementState('hidden')
+    }
+    heading = await page.locator('h1').textContent()
+  }
+}
+
 test('smoke test', async ({ page }) => {
   await page.goto('/')
 
@@ -75,9 +104,27 @@ test('smoke test', async ({ page }) => {
   await page.getByRole('button', { name: 'Next', exact: true }).click()
   await expect(page.locator('h1')).toHaveText('Arka')
 
-  // abort game
-  await page.getByRole('button', { name: 'Abort Game' }).click()
-  await page.locator('#endGameModal').getByRole('button', { name: 'Abort Game' }).click()
+  // play until the end of round 3: Arka's first Milestone; back from the next round shows the question again
+  await playUntil(page, 'End of Round 3')
+  await expect(page.getByRole('heading', { name: "Arka's Milestone" })).toBeVisible()
+  await page.getByRole('button', { name: 'Yes: 6 VP' }).click()
+  await expect(page.locator('h1')).toHaveText('Round 4')
+  await page.getByRole('link', { name: 'Back' }).click()
+  await expect(page.locator('h1')).toHaveText('End of Round 3')
+  await page.getByRole('button', { name: 'No: 4 VP' }).click()
+  await expect(page.locator('h1')).toHaveText('Round 4')
+
+  // play rounds 4-6 (Milestones at the end of rounds 5 and 6 overfulfilled)
+  await playUntil(page, 'End of the Game')
+
+  // game end: Arka's Milestones (4 + 8 + 12 VP) are scored
+  await expect(page.getByRole('heading', { name: 'Final Scoring' })).toBeVisible()
+  await expect(page.locator('tr', { hasText: 'Milestones' }).locator('td').last()).toHaveText('24')
+  await expect(page.locator('.winner')).toContainText('Arka wins!')
+
+  // end game
+  await page.getByRole('button', { name: 'End Game' }).click()
+  await page.locator('#endGameModal').getByRole('button', { name: 'End Game' }).click()
 
   // app home
   await expect(page.locator('h1')).toHaveText('-60° Solo Helper')
