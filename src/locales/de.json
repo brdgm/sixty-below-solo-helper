@@ -1,0 +1,279 @@
+{
+  "gameTitle": "-60°",
+  "home": {
+    "title": "-60° Solo Helper",
+    "play1": "Spiele gegen Arka, die Solo-Gegnerin.",
+    "play2": "Diese Applikation verwaltet die Arka-Aktionskarten, die Arka-Meilensteinkarten und das Arka Tableau und führt dich durch das Spiel und das Solo-Regelwerk. Alle Schwierigkeitsgrade werden unterstützt.",
+    "feedback": "Diskussion und Feedback:"
+  },
+  "setup": {
+    "title": "Aufbau",
+    "difficultyLevel": {
+      "title": "Schwierigkeitsgrad",
+      "easy": "Leicht",
+      "hard": "Schwer",
+      "actionCardsWithoutStar": "keine Arka-Aktionskarten ohne Stern | {count} Arka-Aktionskarte ohne Stern | {count} Arka-Aktionskarten ohne Stern"
+    }
+  },
+  "setupGame": {
+    "gameSetup": {
+      "title": "Spielaufbau",
+      "twoPlayerSetup": "Befolge den allgemeinen Aufbau für zwei Personen. Führe außerdem den persönlichen Aufbau bis zu Schritt 12 aus.",
+      "milestoneCards": "Nimm 4 zufällige Meilensteinkarten. Wähle 3 davon und lege sie oberhalb des Expertenplans aus. Die vierte Meilensteinkarte kannst du in die Spielebox zurücklegen - sie wird nicht gebraucht.",
+      "firstPlayer": "Du bist in Runde 1 die Startperson."
+    }
+  },
+  "setupBot": {
+    "title": "Aufbau für Arka",
+    "instructions": {
+      "arkaArea": "Du benötigst Arkas Tableau nicht: Die App verwaltet ihren Expeditionspfad, die Expeditionsleiste, das Rondell, die Ausbauten und die Expertenspalten. Reserviere stattdessen neben dem Spielplan einen <b>Bereich für Arka</b>. Dort kommt alles hin, was Arka erhält: Explorer, Stationen, Stationsfelder, die Experten, die sie nimmt, und die Karten, die sie zieht (verdeckt).",
+      "arkaComponents": "Wähle eine Farbe für Arka. Lege die 4 persönlichen Stationsfelder und 5 Stationen dieser Farbe in Arkas Bereich. Nimm alle Explorer dieser Farbe, lege 2 davon in die Spielebox zurück und die übrigen in Arkas Bereich.",
+      "arkaMilestoneCards": "Arkas Meilensteinkarten, gewertet von links nach rechts. Sie werden in der App angezeigt, du kannst sie optional in Arkas Bereich auslegen:"
+    },
+    "endOfRound": "Ende Runde {round}",
+    "randomize": "Zufällig",
+    "ruleChanges": {
+      "title": "Von der App verwaltet",
+      "managedByApp": "Die Arka-Aktionskarten, Arkas Tableau und ihre Meilensteinwertung werden von der App verwaltet. Du benötigst Arkas Tableau, den Expeditionsmarker, den Energiemarker, die Meilensteinplättchen und die Ausbauten von Arkas Farbe nicht, ebenso wenig den Startmarker.",
+      "actionCardDeck": "Arkas Aktionskartenstapel besteht aus allen 9 Arka-Aktionskarten mit einem Stern und keinen Arka-Aktionskarten ohne Stern. | Arkas Aktionskartenstapel besteht aus allen 9 Arka-Aktionskarten mit einem Stern und {count} zufälligen Arka-Aktionskarte ohne Stern. | Arkas Aktionskartenstapel besteht aus allen 9 Arka-Aktionskarten mit einem Stern und {count} zufälligen Arka-Aktionskarten ohne Stern.",
+      "arkaPhases": "Für Arka entfällt die Vorbereitungs- und Planungsphase. Arka ist somit nur in der Aktionsphase aktiv und wertet am Ende der dritten, fünften und sechsten Runde Meilensteine.",
+      "meteorite": "Arka ignoriert den Meteoriten. Sie stellt keinen Explorer darauf und erhält keine Siegpunkte davon."
+    }
+  },
+  "roundStart": {
+    "title": "Runde {round}",
+    "startPlayer": {
+      "player": "<b>Du</b> bist in dieser Runde die Startperson.",
+      "bot": "<b>Arka</b> ist in dieser Runde die Startperson."
+    },
+    "preparation": {
+      "title": "I. Vorbereitung",
+      "drawCards": "<b>Karten ziehen</b> von deinem Expeditionsdeck",
+      "expeditionBonus": "<b>Expeditionsvorschuss</b> erhalten"
+    },
+    "planning": {
+      "title": "II. Planung",
+      "takeExplorers": "Nimm <b>2 Explorer</b>",
+      "drawCards": "Ziehe <b>5 Karten</b>, behalte 1 (oder 2 für 2 Energie)"
+    },
+    "arkaSkipsPhases": "Für Arka entfallen diese Phasen.",
+    "milestoneRound": "Am Ende dieser Runde werten du und Arka einen <b>Meilenstein</b>."
+  },
+  "roundTurnPlayer": {
+    "title": "Dein Zug",
+    "execute": "Führe deinen Zug aus.",
+    "passConfirm": "Passen und aus der Aktionsphase aussteigen?"
+  },
+  "roundTurnBot": {
+    "title": "Arka",
+    "pass": "Arka hat in dieser Runde bereits die {count} Sterne ihres Expeditionspfads gespielt und <b>passt</b>.",
+    "nothingToDo": "Auf dem Spielplan gibt es für dich nichts zu tun. Die App hat Arkas Werte aktualisiert (siehe Seitenleiste)."
+  },
+  "botActionNotice": {
+    "upgrade": "Arka nimmt einen <b>Ausbau</b>.",
+    "expedition-level": "Arka zieht auf dem Expeditionspfad weiter. Arka spielt ab sofort <b>{count} Sterne</b> pro Runde.",
+    "not-possible": "Für Arka nicht möglich: <b>{action}</b> ({reason})."
+  },
+  "notPossibleReason": {
+    "no-explorer": "kein Explorer übrig",
+    "no-station": "keine Station übrig",
+    "column-full": "Expertenspalte voll"
+  },
+  "actionBuildStation": {
+    "stationSite": "Stationsfeld {value}"
+  },
+  "actionDrawCards": {
+    "cards": "{count} Karte | {count} Karten"
+  },
+  "botActionDecision": {
+    "executed": "Ausgeführt",
+    "notPossible": "Nicht möglich",
+    "whichExpert": "Welchen Experten hat Arka genommen?",
+    "whichColumn": "Mehrere Spalten haben die meisten Experten. Wähle die Spalte für: <b>{expert}</b>",
+    "column": "Spalte {expert}"
+  },
+  "actionCardStarMarker": {
+    "star": "Aktionskarte mit einem Stern",
+    "noStar": "Aktionskarte ohne Stern"
+  },
+  "roundEnd": {
+    "title": "Ende Runde {round}",
+    "discardCards": "Werfe deine Stürme und Expeditionskarten ab.",
+    "scoreMilestone": "Werte deinen <b>Meilenstein</b>.",
+    "gainForecastTile": "Du erhältst ein <b>Forecastplättchen</b>.",
+    "arkaOverfulfills": "Erreicht Arka die Übererfüllt-Bedingung im Vergleich zu dir?",
+    "overfulfilled": "Ja: {vp} Siegpunkte",
+    "notOverfulfilled": "Nein: {vp} Siegpunkte"
+  },
+  "arkaMilestoneScoring": {
+    "title": "Arkas Meilenstein",
+    "hint": {
+      "twice-as-many-engineers": "Arkas Ingenieure: <b>{count}</b>",
+      "two-upgrades-more": "Arkas Ausbauten: <b>{count}</b>",
+      "two-experts-more": "Arkas Experten: <b>{count}</b>",
+      "three-project-cards-more": "Arkas verdeckte Karten in ihrem Bereich: <b>{count}</b>. Es zählen nur die Projektkarten darunter.",
+      "twice-as-many-radio-operators": "Arkas Funker: <b>{count}</b>",
+      "one-presence-more-landscapes": "Arkas Präsenz auf Landschaften: <b>{count}</b>"
+    },
+    "hintLine2": {
+      "twice-as-many-engineers": "(Missionsleiter in der selben Spalte zählen dazu)",
+      "two-upgrades-more": "",
+      "two-experts-more": "(inklusive der drei aufgedruckten)",
+      "three-project-cards-more": "Es zählen nur die Projektkarten darunter.",
+      "twice-as-many-radio-operators": "(Missionsleiter in der selben Spalte zählen dazu).",
+      "one-presence-more-landscapes": "(Explorer auf Landschaften und Stationen)."
+    }
+  },
+  "gameEnd": {
+    "title": "Spielende",
+    "difficultyLevel": "Schwierigkeitsgrad: <b>{level}</b> ({mode})"
+  },
+  "finalScoring": {
+    "title": "Schlusswertung (SP)",
+    "player": "Du",
+    "experts": "<b>Experten</b>",
+    "expeditionTrack": "<b>Expeditionsleiste</b>",
+    "stationSites": "<b>Stationsfelder</b>",
+    "stations": "<b>Stationen</b>",
+    "upgrades": "<b>Ausbauten</b>",
+    "negativePoints": "<b>Minuspunkte für Ausbauten</b>",
+    "expeditionCards": "<b>Expeditionskarten</b>",
+    "projectCards": "<b>Projektkarten</b>",
+    "arkaProjectCards": "Für Karten mit Spielende-Effekt gilt der niedrigere der beiden Werte als erfüllt.",
+    "milestones": "<b>Meilensteine</b>",
+    "meteorite": "<b>Meteorit</b> <small>(beim -60,6° Meteorit erhältst du immer den ersten Platz)</small>",
+    "total": "Summe",
+    "tie": "<b>Gleichstand:</b> Arka gewinnt."
+  },
+  "sideBar": {
+    "round": "Runde {round}",
+    "starLimit": "Sterne am Expeditionspfad: so viele Sterne spielt Arka pro Runde",
+    "expeditionSteps": "Expeditionsleiste",
+    "upgrades": "Ausbauten",
+    "cardsDrawn": "Arkas verdeckte Karten",
+    "explorersLeft": "Explorer übrig",
+    "stationsLeft": "Stationen übrig",
+    "experts": "Experten",
+    "milestoneScored": "{vp} SP"
+  },
+  "arkaMilestoneCard": {
+    "alwaysFulfilled": "Immer erfüllt",
+    "overfulfill": "Übererfüllt:",
+    "specialAction": "Spezialaktion"
+  },
+  "milestoneCondition": {
+    "twice-as-many-engineers": "Doppelt so viele Ingenieure",
+    "two-upgrades-more": "Zwei Ausbauten mehr",
+    "two-experts-more": "Zwei Experten mehr",
+    "three-project-cards-more": "Drei Projektkarten mehr",
+    "twice-as-many-radio-operators": "Doppelt so viele Funker",
+    "one-presence-more-landscapes": "Eine Präsenz mehr auf Landschaften"
+  },
+  "expertType": {
+    "radio-operator": "Funker",
+    "engineer": "Ingenieur",
+    "investor": "Investorin",
+    "mission-coordinator": "Missionsleiter",
+    "pilot": "Pilotin",
+    "mechanic": "Mechaniker"
+  },
+  "difficultyMode": {
+    "standard": "Standard",
+    "legendary": "Legendär",
+    "epic": "Episch"
+  },
+  "player": {
+    "bot": "Arka"
+  },
+  "rules": {
+    "action": {
+      "rondel": {
+        "title": "Rondell"
+      },
+      "build-station": {
+        "title": "Station bauen",
+        "text": "Nimm das Stationsfeld entsprechend der Ingenieurssymbolanzahl +1 und eine Station. Baue neben der kältesten Landschaft. Grenze dabei an möglichst viele Landschaften an. Bei Gleichstand entscheidest du. Sind mehrere Stationsfelder verfügbar, dann nimm das kälteste. Ist kein Stationsfeld verfügbar, dann nimm das nächst niedrigere."
+      },
+      "build-station-if-3-engineers": {
+        "title": "Station bauen, wenn zumindest 3 Ingenieurssymbole vorhanden sind",
+        "text": "Diese Aktion funktioniert genau gleich wie „Station bauen“, allerdings wird sie nur ausgelöst, wenn Arka zumindest 3 Ingenieurssymbole auf ihrem Tableau hat.",
+        "otherwise": "Arka hat weniger als 3 Ingenieurssymbole und baut daher keine Station. <i>Andernfalls:</i>"
+      },
+      "take-expert": {
+        "title": "Nimm den obersten am weitesten links verfügbaren Experten",
+        "text": "Nimm den obersten am weitesten links verfügbaren Experten. Falls es eine Pilotin oder ein Mechaniker ist, lege sie oder ihn in die Spalte mit den meisten Experten. Bei Gleichstand entscheidest du.",
+        "pilotMechanicColumn": "Die App verwaltet Arkas Expertenspalten: Eine Pilotin oder ein Mechaniker kommt in die Spalte mit den meisten Experten, die noch nicht voll ist (5 Experten). Bei Gleichstand wählst du die Spalte."
+      },
+      "take-engineer": {
+        "title": "Nimm den weitesten links verfügbaren Ingenieur",
+        "text": "Nimm den weitesten links verfügbaren Ingenieur. Falls keiner verfügbar ist, nimm einen Missionsleiter."
+      },
+      "take-investor": {
+        "title": "Nimm die weiteste links verfügbare Investorin",
+        "text": "Nimm die weiteste links verfügbare Investorin. Falls keine verfügbar ist, nimm einen Missionsleiter."
+      },
+      "take-radio-operator": {
+        "title": "Nimm den weitesten links verfügbaren Funker",
+        "text": "Nimm den weitesten links verfügbaren Funker. Falls keiner verfügbar ist, nimm einen Missionsleiter."
+      },
+      "take-upgrade": {
+        "title": "Nimm einen Ausbau",
+        "text": "Arka nimmt einen Ausbau. Jeder Ausbau ist bei Spielende 4 Siegpunkte wert. Arkas Ausbauten werden von der App verwaltet."
+      },
+      "explore-landscape": {
+        "title": "Erschließe die nächst mögliche Landschaft",
+        "text": "Nimm einen Explorer und erschließe die nächst mögliche Landschaft (achte auf die rote Markierung). Arka erhält kein Radarplättchen.",
+        "noLandscapeLeft": "Wurde die letzte unentdeckte Landschaft erschlossen, nimm eine zufällige weggelegte -62,1° bis -63° Landschaft und lege sie an die rote Markierung der gerade erschlossenen Landschaft an."
+      },
+      "place-explorer-landscape": {
+        "title": "Stelle einen Explorer auf eine Landschaft",
+        "text": "Nimm einen Explorer und stelle ihn auf die Landschaft mit den meisten freien Aktionsfeldern. Bei Gleichstand auf die kälteste. Wähle bevorzugt eine Münzbelohnung und dann eine Energiebelohnung. Arka führt die Aktion nicht aus und nimmt sich auch keinen Platzierungsbonus. Arka ignoriert den Meteoriten."
+      },
+      "place-explorer-expert-action-tile": {
+        "title": "Stelle einen Explorer auf ein Expertenaktionsplättchen",
+        "text": "Nimm einen Explorer und stelle ihn auf ein Expertenaktionsplättchen. Wähle das Feld mit der höchsten Münzbelohnung. Falls alle besetzt sind, wähle die höchste Energiebelohnung. Bei Gleichstand das weiter links befindliche Feld. Arka führt die Aktion nicht aus, sondern belegt nur das Feld."
+      },
+      "milestone-special-action": {
+        "title": "Spezialaktion der nächsten Arka-Meilensteinkarte",
+        "text": "Führe die Spezialaktion der nächsten Arka-Meilensteinkarte aus."
+      },
+      "milestone-special-action-all": {
+        "title": "Spezialaktionen aller noch nicht gewerteten Arka-Meilensteinkarten",
+        "text": "Führe die Spezialaktionen aller noch nicht gewerteten Arka-Meilensteinkarten aus."
+      }
+    },
+    "rondel": {
+      "draw-cards": {
+        "title": "Rondell: Karten ziehen",
+        "text": "Ziehe für Arka so viele Karten vom allgemeinen Nachziehstapel, wie sie Investorensymbole hat. Lege die Karten verdeckt in Arkas Bereich. Die Karten haben keinen Effekt, lediglich die Siegpunkte zählen bei Spielende."
+      }
+    },
+    "expertAvailability": "Wie für dich gibt die Position des Rundenmarkers an, welche Experten Arka zur Verfügung stehen: In der ersten Runde die Experten der ersten drei Spalten des Expertenplans, in jeder weiteren Runde einer zusätzlichen Spalte.",
+    "expertPlacement": "Lege den Experten in Arkas Bereich. Die App verwaltet ihre Expertenspalten (siehe Seitenleiste)."
+  },
+  "notfound": {
+    "title": "Nicht Gefunden"
+  },
+  "action": {
+    "playGame": "Spielen",
+    "startGame": "Spiel starten",
+    "next": "Weiter",
+    "pass": "Passen",
+    "abortGame": "Spiel abbrechen",
+    "abortGameConfirm": "Das aktuelle Spiel wird abgebrochen - bist du sicher?",
+    "endGame": "Spiel beenden",
+    "endGameConfirm": "Dieses Spiel wird beendet - bist du sicher?",
+    "cancel": "Abbrechen",
+    "backToHome": "Zurück zum Anfang",
+    "back": "Zurück",
+    "close": "Schließen",
+    "ok": "OK"
+  },
+  "footer": {
+    "credits": "Credits"
+  },
+  "serviceWorkerUpdatedRefresh": {
+    "title": "Applikation neu laden",
+    "notice": "Die Applikation wurde aktualisiert - möchtest du die Seite neu laden um die neueste Version zu nutzen?"
+  }
+}
