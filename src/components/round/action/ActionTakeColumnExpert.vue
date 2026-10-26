@@ -8,6 +8,7 @@
     </template>
     <template #instruction>
       <p v-html="t(`rules.action.${action}.text`)"></p>
+      <p v-html="t('rules.expertPlacement')"></p>
       <p v-html="t('rules.expertAvailability')"></p>
     </template>
   </ActionBox>

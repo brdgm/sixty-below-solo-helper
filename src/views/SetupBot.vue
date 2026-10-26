@@ -3,11 +3,8 @@
 
   <div class="instructions mt-4">
     <ol>
-      <li v-html="t('setupBot.instructions.twoPlayerSetup')"></li>
-      <li v-html="t('setupBot.instructions.milestoneCards')"></li>
-      <li v-html="t('setupBot.instructions.arkaTableau')"></li>
+      <li v-html="t('setupBot.instructions.arkaArea')"></li>
       <li v-html="t('setupBot.instructions.arkaComponents')"></li>
-      <li v-html="t('setupBot.instructions.arkaCards')"></li>
       <li v-html="t('setupBot.instructions.arkaMilestoneCards')"></li>
     </ol>
   </div>
@@ -18,6 +15,9 @@
       <ArkaMilestoneCard :milestoneCard="milestoneCard"/>
     </div>
   </div>
+  <button type="button" class="btn btn-sm btn-outline-secondary mt-3 randomize" @click="randomizeMilestoneCards()">
+    {{t('setupBot.randomize')}}
+  </button>
 
   <div class="container-fluid mt-4">
     <div class="row">
@@ -27,7 +27,6 @@
           <li v-html="t('setupBot.ruleChanges.managedByApp')"></li>
           <li v-html="t('setupBot.ruleChanges.actionCardDeck', {count:settings.actionCardsWithoutStar})"></li>
           <li v-html="t('setupBot.ruleChanges.arkaPhases')"></li>
-          <li v-html="t('setupBot.ruleChanges.firstPlayer')"></li>
           <li v-html="t('setupBot.ruleChanges.meteorite')"></li>
         </ul>
       </div>
@@ -54,6 +53,7 @@ import CardDeck from '@/services/CardDeck'
 import BotState from '@/services/BotState'
 import getDifficultyLevelSettings, { DifficultyLevelSettings } from '@/util/getDifficultyLevelSettings'
 import { MILESTONE_ROUNDS } from '@/util/getMilestoneIndex'
+import getRandomArkaMilestoneCards from '@/util/getRandomArkaMilestoneCards'
 
 export default defineComponent({
   name: 'SetupBot',
@@ -76,6 +76,9 @@ export default defineComponent({
     }
   },
   methods: {
+    randomizeMilestoneCards() : void {
+      this.state.setup.arkaMilestoneCards = getRandomArkaMilestoneCards(this.state.setup.arkaMilestoneCards)
+    },
     startGame() : void {
       this.state.storeRound({
         round: 1,
@@ -102,6 +105,9 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-left: 2rem;
+}
+.randomize {
   margin-left: 2rem;
 }
 </style>

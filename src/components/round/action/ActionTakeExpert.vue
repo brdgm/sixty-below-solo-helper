@@ -9,7 +9,8 @@
     <template #instruction>
       <p v-if="isIf3EngineersOtherwise" v-html="t('rules.action.build-station-if-3-engineers.otherwise')"></p>
       <p v-html="t('rules.action.take-expert.text')"></p>
-      <p v-html="t('rules.action.take-expert.fullColumn')"></p>
+      <p v-html="t('rules.action.take-expert.pilotMechanicColumn')"></p>
+      <p v-html="t('rules.expertPlacement')"></p>
       <p v-html="t('rules.expertAvailability')"></p>
     </template>
   </ActionBox>

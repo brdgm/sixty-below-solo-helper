@@ -15,23 +15,28 @@
       "actionCardsWithoutStar": "no Action Cards without a star | {count} Action Card without a star | {count} Action Cards without a star"
     }
   },
+  "setupGame": {
+    "gameSetup": {
+      "title": "Game Setup",
+      "twoPlayerSetup": "Follow the normal setup for a two player game. Also, complete the personal setup until step 12.",
+      "milestoneCards": "Take 4 Milestone Cards at random. Choose 3 of them and place them above the Expert Plan. Place the fourth Milestone Card back in the box, as it won't be needed.",
+      "firstPlayer": "You are the first player in round 1."
+    }
+  },
   "setupBot": {
     "title": "Setup Arka",
     "instructions": {
-      "twoPlayerSetup": "Follow the normal setup for a two player game. Also, complete the personal setup until step 12.",
-      "milestoneCards": "Take 4 Milestone Cards at random. Choose 3 of them and place them above the Expert Plan. Place the fourth Milestone Card back in the box, as it won't be needed.",
-      "arkaTableau": "Take Arka's Tableau. It is only used to place the Experts Arka takes in its three Expert columns. The Expedition Path, Expedition Track, Rondel and Upgrades are managed by the app.",
-      "arkaComponents": "Choose a color for Arka. Place the 4 personal Station Sites and 5 Stations of this color next to her Tableau. Take all Explorers of this color and place 2 of them back in the box.",
-      "arkaCards": "Leave some space to the left of Arka's Tableau for the Cards she draws face down.",
-      "arkaMilestoneCards": "Arka's Milestone Cards, scored from left to right. Optionally, place them below her Tableau:"
+      "arkaArea": "You do not need Arka's Tableau: the app manages her Expedition Path, Expedition Track, Rondel, Upgrades and Expert columns. Instead, reserve an <b>area for Arka</b> next to the board. Everything Arka gets is placed there: Explorers, Stations, Station Sites, the Experts she takes and the Cards she draws (face down).",
+      "arkaComponents": "Choose a color for Arka. Place the 4 personal Station Sites and 5 Stations of this color in Arka's area. Take all Explorers of this color, place 2 of them back in the box and the others in Arka's area.",
+      "arkaMilestoneCards": "Arka's Milestone Cards, scored from left to right. They are shown in the app, optionally place them in Arka's area:"
     },
     "endOfRound": "End of round {round}",
+    "randomize": "Randomize",
     "ruleChanges": {
       "title": "Managed by the App",
-      "managedByApp": "Arka's Action Cards and her Milestone scoring are managed by the app. You do not need the Expedition Marker, Energy Marker, Milestone Tiles and Upgrades of Arka's color, nor the Starting Indicator.",
+      "managedByApp": "Arka's Action Cards, her Tableau and her Milestone scoring are managed by the app. You do not need Arka's Tableau, the Expedition Marker, Energy Marker, Milestone Tiles and Upgrades of Arka's color, nor the Starting Indicator.",
       "actionCardDeck": "Arka's Action Card deck consists of all 9 Action Cards with one star and no Action Cards without a star. | Arka's Action Card deck consists of all 9 Action Cards with one star and {count} random Action Card without a star. | Arka's Action Card deck consists of all 9 Action Cards with one star and {count} random Action Cards without a star.",
       "arkaPhases": "Arka does not perform a Preparation and a Planning Phase. She is only active during the Action Phase and scores Milestones at the end of the third, fifth and sixth round.",
-      "firstPlayer": "You are the first player in round 1.",
       "meteorite": "Arka ignores the Meteorite. She never places an Explorer on it and scores no victory points from it."
     }
   },
@@ -62,7 +67,7 @@
   "roundTurnBot": {
     "title": "Arka",
     "pass": "Arka has already played the {count} stars of her Expedition Level in this round, so she <b>passes</b>.",
-    "nothingToDo": "Nothing to do for you on the board. The app has updated Arka's Tableau."
+    "nothingToDo": "Nothing to do for you on the board. The app has updated Arka's values (see sidebar)."
   },
   "botActionNotice": {
     "upgrade": "Arka takes an <b>Upgrade</b>.",
@@ -105,7 +110,7 @@
       "twice-as-many-engineers": "Arka's Engineers: <b>{count}</b>",
       "two-upgrades-more": "Arka's Upgrades: <b>{count}</b>",
       "two-experts-more": "Arka's Experts: <b>{count}</b>",
-      "three-project-cards-more": "Arka's face-down Cards to the left of her Tableau: <b>{count}</b>",
+      "three-project-cards-more": "Arka's face-down Cards in her area: <b>{count}</b>. Only the Project Cards among them count.",
       "twice-as-many-radio-operators": "Arka's Radio Operators: <b>{count}</b>",
       "one-presence-more-landscapes": "Arka's Presence on Landscapes: <b>{count}</b>"
     },
@@ -144,7 +149,7 @@
     "starLimit": "Expedition Level: stars Arka plays per round",
     "expeditionSteps": "Expedition Track",
     "upgrades": "Upgrades",
-    "cardsDrawn": "Cards left of the Tableau",
+    "cardsDrawn": "Arka's face-down Cards",
     "explorersLeft": "Explorers left",
     "stationsLeft": "Stations left",
     "experts": "Experts",
@@ -191,12 +196,12 @@
       "build-station-if-3-engineers": {
         "title": "Building a Station if Arka has at least 3 Engineer icons",
         "text": "This action works just like \"Build a Station\", except it can only be carried out if Arka has at least 3 Engineer icons on her Tableau.",
-        "otherwise": "Arka has fewer than 3 Engineer icons on her Tableau, so she does not build a Station. <i>Otherwise:</i>"
+        "otherwise": "Arka has fewer than 3 Engineer icons, so she does not build a Station. <i>Otherwise:</i>"
       },
       "take-expert": {
         "title": "Take the upper-most available Expert from the left",
         "text": "Take the upper-most available Expert from the left. If Arka takes a Pilot or Mechanic this way, place it in the column with the most Experts on her Tableau. In case of a tie, choose freely.",
-        "fullColumn": "If that column is already full (5 Experts), place the Pilot or Mechanic in the column with the next-most Experts."
+        "pilotMechanicColumn": "The app tracks Arka's Expert columns: for a Pilot or Mechanic it uses the column with the most Experts that is not full yet (5 Experts). On a tie, you choose the column."
       },
       "take-engineer": {
         "title": "Take the left-most Engineer",
@@ -239,10 +244,11 @@
     "rondel": {
       "draw-cards": {
         "title": "Rondel: Draw Cards",
-        "text": "If the Explorer crosses this action, Arka draws a number of Cards from the common deck equal to the number of Investor icons on her Tableau. Place these Cards face down to the left of Arka's Tableau. The Cards do not trigger any effects. They are worth only the victory points shown during final scoring."
+        "text": "If the Explorer crosses this action, Arka draws a number of Cards from the common deck equal to the number of her Investor icons. Place these Cards face down in Arka's area. The Cards do not trigger any effects. They are worth only the victory points shown during final scoring."
       }
     },
-    "expertAvailability": "Like you, Arka can only take Experts that are available according to the Round Indicator: in the first round from the first three columns of the Expert Plan, in each following round from one additional column."
+    "expertAvailability": "Like you, Arka can only take Experts that are available according to the Round Indicator: in the first round from the first three columns of the Expert Plan, in each following round from one additional column.",
+    "expertPlacement": "Place the Expert in Arka's area. The app tracks her Expert columns (see sidebar)."
   },
   "notfound": {
     "title": "Not Found"

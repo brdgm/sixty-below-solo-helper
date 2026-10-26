@@ -15,23 +15,28 @@
       "actionCardsWithoutStar": "keine Arka-Aktionskarten ohne Stern | {count} Arka-Aktionskarte ohne Stern | {count} Arka-Aktionskarten ohne Stern"
     }
   },
+  "setupGame": {
+    "gameSetup": {
+      "title": "Spielaufbau",
+      "twoPlayerSetup": "Befolge den allgemeinen Aufbau für zwei Personen. Führe außerdem den persönlichen Aufbau bis zu Schritt 12 aus.",
+      "milestoneCards": "Nimm 4 zufällige Meilensteinkarten. Wähle 3 davon und lege sie oberhalb des Expertenplans aus. Die vierte Meilensteinkarte kannst du in die Spielebox zurücklegen - sie wird nicht gebraucht.",
+      "firstPlayer": "Du bist in Runde 1 die Startperson."
+    }
+  },
   "setupBot": {
     "title": "Aufbau für Arka",
     "instructions": {
-      "twoPlayerSetup": "Befolge den allgemeinen Aufbau für zwei Personen. Führe außerdem den persönlichen Aufbau bis zu Schritt 12 aus.",
-      "milestoneCards": "Nimm 4 zufällige Meilensteinkarten. Wähle 3 davon und lege sie oberhalb des Expertenplans aus. Die vierte Meilensteinkarte kannst du in die Spielebox zurücklegen - sie wird nicht gebraucht.",
-      "arkaTableau": "Nimm das Arka Tableau. Es wird nur verwendet, um die Experten, die Arka nimmt, in die drei Expertenspalten zu legen. Expeditionspfad, Expeditionsleiste, Rondell und Ausbauten werden von der App verwaltet.",
-      "arkaComponents": "Wähle eine Farbe für Arka. Lege 4 persönliche Stationsfelder und 5 Stationen dieser Farbe neben ihr Tableau. Nimm alle Explorer dieser Farbe und lege 2 davon in die Spielebox zurück.",
-      "arkaCards": "Lass links neben Arkas Tableau etwas Platz für die Karten, die sie verdeckt zieht.",
-      "arkaMilestoneCards": "Arkas Meilensteinkarten, gewertet von links nach rechts. Du kannst sie optional unterhalb ihres Tableaus auslegen:"
+      "arkaArea": "Du benötigst Arkas Tableau nicht: Die App verwaltet ihren Expeditionspfad, die Expeditionsleiste, das Rondell, die Ausbauten und die Expertenspalten. Reserviere stattdessen neben dem Spielplan einen <b>Bereich für Arka</b>. Dort kommt alles hin, was Arka erhält: Explorer, Stationen, Stationsfelder, die Experten, die sie nimmt, und die Karten, die sie zieht (verdeckt).",
+      "arkaComponents": "Wähle eine Farbe für Arka. Lege die 4 persönlichen Stationsfelder und 5 Stationen dieser Farbe in Arkas Bereich. Nimm alle Explorer dieser Farbe, lege 2 davon in die Spielebox zurück und die übrigen in Arkas Bereich.",
+      "arkaMilestoneCards": "Arkas Meilensteinkarten, gewertet von links nach rechts. Sie werden in der App angezeigt, du kannst sie optional in Arkas Bereich auslegen:"
     },
     "endOfRound": "Ende Runde {round}",
+    "randomize": "Zufällig",
     "ruleChanges": {
       "title": "Von der App verwaltet",
-      "managedByApp": "Die Arka-Aktionskarten und Arkas Meilensteinwertung werden von der App verwaltet. Du benötigst den Expeditionsmarker, den Energiemarker, die Meilensteinplättchen und die Ausbauten von Arkas Farbe nicht, ebenso wenig den Startmarker.",
+      "managedByApp": "Die Arka-Aktionskarten, Arkas Tableau und ihre Meilensteinwertung werden von der App verwaltet. Du benötigst Arkas Tableau, den Expeditionsmarker, den Energiemarker, die Meilensteinplättchen und die Ausbauten von Arkas Farbe nicht, ebenso wenig den Startmarker.",
       "actionCardDeck": "Arkas Aktionskartenstapel besteht aus allen 9 Arka-Aktionskarten mit einem Stern und keinen Arka-Aktionskarten ohne Stern. | Arkas Aktionskartenstapel besteht aus allen 9 Arka-Aktionskarten mit einem Stern und {count} zufälligen Arka-Aktionskarte ohne Stern. | Arkas Aktionskartenstapel besteht aus allen 9 Arka-Aktionskarten mit einem Stern und {count} zufälligen Arka-Aktionskarten ohne Stern.",
       "arkaPhases": "Für Arka entfällt die Vorbereitungs- und Planungsphase. Arka ist somit nur in der Aktionsphase aktiv und wertet am Ende der dritten, fünften und sechsten Runde Meilensteine.",
-      "firstPlayer": "Du bist in Runde 1 die Startperson.",
       "meteorite": "Arka ignoriert den Meteoriten. Sie stellt keinen Explorer darauf und erhält keine Siegpunkte davon."
     }
   },
@@ -62,7 +67,7 @@
   "roundTurnBot": {
     "title": "Arka",
     "pass": "Arka hat in dieser Runde bereits die {count} Sterne ihres Expeditionspfads gespielt und <b>passt</b>.",
-    "nothingToDo": "Auf dem Spielplan gibt es für dich nichts zu tun. Die App hat Arkas Tableau aktualisiert."
+    "nothingToDo": "Auf dem Spielplan gibt es für dich nichts zu tun. Die App hat Arkas Werte aktualisiert (siehe Seitenleiste)."
   },
   "botActionNotice": {
     "upgrade": "Arka nimmt einen <b>Ausbau</b>.",
@@ -105,7 +110,7 @@
       "twice-as-many-engineers": "Arkas Ingenieure: <b>{count}</b>",
       "two-upgrades-more": "Arkas Ausbauten: <b>{count}</b>",
       "two-experts-more": "Arkas Experten: <b>{count}</b>",
-      "three-project-cards-more": "Arkas verdeckte Karten links neben ihrem Tableau: <b>{count}</b>",
+      "three-project-cards-more": "Arkas verdeckte Karten in ihrem Bereich: <b>{count}</b>. Es zählen nur die Projektkarten darunter.",
       "twice-as-many-radio-operators": "Arkas Funker: <b>{count}</b>",
       "one-presence-more-landscapes": "Arkas Präsenz auf Landschaften: <b>{count}</b>"
     },
@@ -144,7 +149,7 @@
     "starLimit": "Sterne am Expeditionspfad: so viele Sterne spielt Arka pro Runde",
     "expeditionSteps": "Expeditionsleiste",
     "upgrades": "Ausbauten",
-    "cardsDrawn": "Karten links vom Tableau",
+    "cardsDrawn": "Arkas verdeckte Karten",
     "explorersLeft": "Explorer übrig",
     "stationsLeft": "Stationen übrig",
     "experts": "Experten",
@@ -191,12 +196,12 @@
       "build-station-if-3-engineers": {
         "title": "Station bauen, wenn zumindest 3 Ingenieurssymbole vorhanden sind",
         "text": "Diese Aktion funktioniert genau gleich wie „Station bauen“, allerdings wird sie nur ausgelöst, wenn Arka zumindest 3 Ingenieurssymbole auf ihrem Tableau hat.",
-        "otherwise": "Arka hat weniger als 3 Ingenieurssymbole auf ihrem Tableau und baut daher keine Station. <i>Andernfalls:</i>"
+        "otherwise": "Arka hat weniger als 3 Ingenieurssymbole und baut daher keine Station. <i>Andernfalls:</i>"
       },
       "take-expert": {
         "title": "Nimm den obersten am weitesten links verfügbaren Experten",
         "text": "Nimm den obersten am weitesten links verfügbaren Experten. Falls es eine Pilotin oder ein Mechaniker ist, lege sie oder ihn in die Spalte mit den meisten Experten. Bei Gleichstand entscheidest du.",
-        "fullColumn": "Ist diese Spalte bereits voll (5 Experten), lege die Pilotin oder den Mechaniker in die Spalte mit den nächstmeisten Experten."
+        "pilotMechanicColumn": "Die App verwaltet Arkas Expertenspalten: Eine Pilotin oder ein Mechaniker kommt in die Spalte mit den meisten Experten, die noch nicht voll ist (5 Experten). Bei Gleichstand wählst du die Spalte."
       },
       "take-engineer": {
         "title": "Nimm den weitesten links verfügbaren Ingenieur",
@@ -239,10 +244,11 @@
     "rondel": {
       "draw-cards": {
         "title": "Rondell: Karten ziehen",
-        "text": "Überquerst du diese Aktion, dann ziehe für Arka so viele Karten vom allgemeinen Nachziehstapel, wie Investorensymbole auf dem Tableau vorhanden sind. Lege die Karten links neben dem Tableau verdeckt ab. Die Karten haben keinen Effekt, lediglich die Siegpunkte zählen bei Spielende."
+        "text": "Überquerst du diese Aktion, dann ziehe für Arka so viele Karten vom allgemeinen Nachziehstapel, wie sie Investorensymbole hat. Lege die Karten verdeckt in Arkas Bereich. Die Karten haben keinen Effekt, lediglich die Siegpunkte zählen bei Spielende."
       }
     },
-    "expertAvailability": "Wie für dich gibt die Position des Rundenmarkers an, welche Experten Arka zur Verfügung stehen: In der ersten Runde die Experten der ersten drei Spalten des Expertenplans, in jeder weiteren Runde einer zusätzlichen Spalte."
+    "expertAvailability": "Wie für dich gibt die Position des Rundenmarkers an, welche Experten Arka zur Verfügung stehen: In der ersten Runde die Experten der ersten drei Spalten des Expertenplans, in jeder weiteren Runde einer zusätzlichen Spalte.",
+    "expertPlacement": "Lege den Experten in Arkas Bereich. Die App verwaltet ihre Expertenspalten (siehe Seitenleiste)."
   },
   "notfound": {
     "title": "Nicht Gefunden"

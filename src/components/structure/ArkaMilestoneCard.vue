@@ -18,7 +18,8 @@
   <ModalDialog :id="modalId" :title="specialActionTitle">
     <template #body>
       <p v-html="t(`rules.action.${milestoneCard.specialAction}.text`)"></p>
-      <p v-if="isTakeAnyExpert" v-html="t('rules.action.take-expert.fullColumn')"></p>
+      <p v-if="isTakeAnyExpert" v-html="t('rules.action.take-expert.pilotMechanicColumn')"></p>
+      <p v-if="isTakeExpert" v-html="t('rules.expertPlacement')"></p>
       <p v-if="isTakeExpert" v-html="t('rules.expertAvailability')"></p>
     </template>
   </ModalDialog>

@@ -3,6 +3,13 @@
 
   <DifficultyLevel/>
 
+  <h3 class="mt-4 mb-3">{{t('setupGame.gameSetup.title')}}</h3>
+  <ol class="instructions">
+    <li v-html="t('setupGame.gameSetup.twoPlayerSetup')"></li>
+    <li v-html="t('setupGame.gameSetup.milestoneCards')"></li>
+    <li v-html="t('setupGame.gameSetup.firstPlayer')"></li>
+  </ol>
+
   <button type="button" class="btn btn-primary btn-lg mt-4" @click="setupBot()">
     {{t('setupBot.title')}}
   </button>
@@ -40,3 +47,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss" scoped>
+.instructions {
+  max-width: 1000px;
+  & > li {
+    margin-top: 0.5rem;
+  }
+}
+</style>
