@@ -139,7 +139,7 @@
     "negativePoints": "<b>Negative points for Upgrades</b>",
     "expeditionCards": "<b>Expedition Cards</b>",
     "projectCards": "<b>Project Cards</b>",
-    "arkaProjectCards": "For Arka, Project Cards with Game End effect always score the lower victory point value.",
+    "arkaProjectCards": "Project Cards with Game End effect score the lower victory point value.",
     "milestones": "<b>Milestones</b>",
     "meteorite": "<b>Meteorite</b> <small>(at the -60.6° Meteorite you always take first place)</small>",
     "total": "Sum",
@@ -245,7 +245,7 @@
     "rondel": {
       "draw-cards": {
         "title": "Rondel: Draw Cards",
-        "text": "If the Explorer crosses this action, Arka draws a number of Cards from the common deck equal to the number of her Investor icons. Place these Cards face down in Arka's area. The Cards do not trigger any effects. They are worth only the victory points shown during final scoring."
+        "text": "Arka draws a number of Cards from the common deck equal to the number of her Investor icons. Place these Cards face down in Arka's area. The Cards do not trigger any effects. They are worth only the victory points shown during final scoring."
       }
     },
     "expertAvailability": "Like you, Arka can only take Experts that are available according to the Round Indicator: in the first round from the first three columns of the Expert Plan, in each following round from one additional column.",

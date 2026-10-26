@@ -139,7 +139,7 @@
     "negativePoints": "<b>Minuspunkte für Ausbauten</b>",
     "expeditionCards": "<b>Expeditionskarten</b>",
     "projectCards": "<b>Projektkarten</b>",
-    "arkaProjectCards": "Für Karten mit Spielende-Effekt gilt für Arka immer der niedrigere der beiden Werte als erfüllt.",
+    "arkaProjectCards": "Für Karten mit Spielende-Effekt gilt der niedrigere der beiden Werte als erfüllt.",
     "milestones": "<b>Meilensteine</b>",
     "meteorite": "<b>Meteorit</b> <small>(beim -60,6° Meteorit erhältst du immer den ersten Platz)</small>",
     "total": "Summe",
@@ -245,7 +245,7 @@
     "rondel": {
       "draw-cards": {
         "title": "Rondell: Karten ziehen",
-        "text": "Überquerst du diese Aktion, dann ziehe für Arka so viele Karten vom allgemeinen Nachziehstapel, wie sie Investorensymbole hat. Lege die Karten verdeckt in Arkas Bereich. Die Karten haben keinen Effekt, lediglich die Siegpunkte zählen bei Spielende."
+        "text": "Ziehe für Arka so viele Karten vom allgemeinen Nachziehstapel, wie sie Investorensymbole hat. Lege die Karten verdeckt in Arkas Bereich. Die Karten haben keinen Effekt, lediglich die Siegpunkte zählen bei Spielende."
       }
     },
     "expertAvailability": "Wie für dich gibt die Position des Rundenmarkers an, welche Experten Arka zur Verfügung stehen: In der ersten Runde die Experten der ersten drei Spalten des Expertenplans, in jeder weiteren Runde einer zusätzlichen Spalte.",
