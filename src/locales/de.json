@@ -147,8 +147,7 @@
   "arkaMilestoneCard": {
     "alwaysFulfilled": "Immer erfüllt",
     "overfulfill": "Übererfüllt:",
-    "specialAction": "Spezialaktion",
-    "specialActionInfo": "Arka führt diese Spezialaktion aus, wenn eine ihrer Aktionskarten die Meilenstein-Spezialaktion zeigt und diese Meilensteinkarte noch nicht gewertet wurde."
+    "specialAction": "Spezialaktion"
   },
   "milestoneCondition": {
     "twice-as-many-engineers": "Doppelt so viele Ingenieure",

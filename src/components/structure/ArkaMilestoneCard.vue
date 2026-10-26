@@ -9,7 +9,6 @@
       <span class="special-action">
         <span class="special-action-title">
           <AppIcon type="action" name="milestone-special-action" class="cog"/>
-          <span v-if="!compact">{{t('arkaMilestoneCard.specialAction')}}</span>
         </span>
         <AppIcon type="action" :name="milestoneCard.specialAction" class="action-icon"/>
       </span>
@@ -20,7 +19,6 @@
     <template #body>
       <p v-html="t(`rules.action.${milestoneCard.specialAction}.text`)"></p>
       <p v-if="isTakeExpert" v-html="t('rules.expertAvailability')"></p>
-      <p class="fst-italic" v-html="t('arkaMilestoneCard.specialActionInfo')"></p>
     </template>
   </ModalDialog>
 </template>
@@ -111,6 +109,7 @@ export default defineComponent({
     display: block;
     font-weight: bold;
     font-style: italic;
+    font-size: 0.85rem;
     text-align: center;
     padding: 0.3rem 1.5rem;
     border-bottom: 3px solid #c2aa89;
@@ -123,6 +122,7 @@ export default defineComponent({
   .overfulfill {
     flex: 1;
     font-style: italic;
+    font-size: 0.85rem;
     .label, .condition {
       display: block;
     }
@@ -136,6 +136,7 @@ export default defineComponent({
     align-items: center;
     gap: 0.3rem;
     padding: 0.3rem 0.4rem;
+    min-width: 5rem;
     border-left: 3px solid #c2aa89;
     border-top: 3px solid #c2aa89;
     border-top-left-radius: 0.3rem;
@@ -164,6 +165,7 @@ export default defineComponent({
       flex-direction: column;
       gap: 0.3rem;
       padding: 0.3rem 0.4rem 0.4rem;
+      line-height: 0.95rem;
     }
     .overfulfill {
       padding-right: 0.8rem;

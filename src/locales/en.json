@@ -147,8 +147,7 @@
   "arkaMilestoneCard": {
     "alwaysFulfilled": "Always fulfilled",
     "overfulfill": "Overfulfill:",
-    "specialAction": "Special Action",
-    "specialActionInfo": "Arka carries out this special action when one of her Action Cards shows the Milestone special action and this Milestone Card has not been scored yet."
+    "specialAction": "Special Action"
   },
   "milestoneCondition": {
     "twice-as-many-engineers": "Twice as many Engineers",
