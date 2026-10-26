@@ -101,6 +101,8 @@ export default defineComponent({
     gap: 0.25rem;
     :deep(.icon) {
       height: 5rem;
+      width: 7rem;
+      object-fit: contain;
     }
     .milestone-icon {
       height: 3rem;

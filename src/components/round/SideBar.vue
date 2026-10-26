@@ -136,7 +136,7 @@ interface SideBarMilestone {
 <style lang="scss" scoped>
 .sidebar {
   float: right;
-  width: 175px;
+  width: 180px;
   margin-left: 15px;
   margin-bottom: 10px;
   margin-right: -12px;
@@ -144,6 +144,9 @@ interface SideBarMilestone {
   background-color: #ddd;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
+  @media (max-width: 600px) {
+    width: 165px;
+  }
 }
 .played-cards {
   display: flex;
