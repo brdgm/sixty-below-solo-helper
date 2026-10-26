@@ -11,13 +11,11 @@
   <p v-html="t('home.play1')"></p>
   <p v-html="t('home.play2')"></p>
 
-  <!-- TODO: enable when the BGG thread exists
   <p class="text-muted fst-italic">
     {{t('home.feedback')}}
-    <a href="https://boardgamegeek.com/thread/xxx" target="_blank" rel="noopener">Board Game Geek Thread</a> |
+    <a href="https://boardgamegeek.com/thread/3788510/brdgmme-60deg-solo-helper-web-application" target="_blank" rel="noopener">Board Game Geek Thread</a> |
     <a href="https://github.com/brdgm/sixty-below-solo-helper" target="_blank" rel="noopener">GitHub</a>
   </p>
-  -->
 
   <router-link to="/setupGame" class="btn btn-primary btn-lg mt-3">{{t('action.playGame')}}</router-link>
 
