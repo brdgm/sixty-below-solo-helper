@@ -41,14 +41,13 @@ export default defineComponent({
 // colors of Arka's Action Cards: icy top, dark body, star/minus badge at the bottom
 .action-card {
   display: inline-flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   width: 1.3rem;
   height: 1.85rem;
-  padding-bottom: 0.15rem;
   border: 1px solid #555;
   border-radius: 3px;
-  background: linear-gradient(#d3dfd6 0, #d3dfd6 35%, #2f2c2c 35%);
+  background: #2f2c2c;
   .badge-icon {
     width: 1rem;
     height: 1rem;
