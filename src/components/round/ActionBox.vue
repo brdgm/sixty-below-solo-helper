@@ -1,17 +1,16 @@
 <template>
-  <div class="action-box" role="button" tabindex="0" :aria-label="instructionTitle"
-      @click="showInstructions" @keydown.enter="showInstructions">
-    <div class="action">
+  <button type="button" class="action-box" :aria-label="instructionTitle" @click="showInstructions">
+    <span class="action">
       <template v-if="step.milestoneCard">
         <AppIcon type="action" :name="step.sourceAction ?? 'milestone-special-action'" class="milestone-icon"/>
         <span class="separator">:</span>
       </template>
       <slot name="action"></slot>
-    </div>
-    <div class="values" v-if="hasValues">
+    </span>
+    <span class="values" v-if="hasValues">
       <slot name="values"></slot>
-    </div>
-  </div>
+    </span>
+  </button>
 
   <ModalDialog :id="modalId" :title="instructionTitle" :scrollable="true">
     <template #body>
@@ -83,6 +82,7 @@ export default defineComponent({
   border: 4px solid #8d918c;
   border-radius: 1.5rem;
   box-shadow: 0 0 0 4px #d3dfd6;
+  font: inherit;
   cursor: pointer;
   &::after {
     content: '';

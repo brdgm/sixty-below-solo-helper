@@ -1,21 +1,20 @@
 <template>
-  <div class="milestone-card" :class="{compact}" role="button" tabindex="0" :aria-label="specialActionTitle"
-      @click="showRules" @keydown.enter="showRules">
-    <div class="always-fulfilled" v-if="!compact">{{t('arkaMilestoneCard.alwaysFulfilled')}}</div>
-    <div class="content">
-      <div class="overfulfill">
-        <div class="label" v-if="!compact">{{t('arkaMilestoneCard.overfulfill')}}</div>
-        <div class="condition">{{t(`milestoneCondition.${milestoneCard.overfulfill}`)}}</div>
-      </div>
-      <div class="special-action">
-        <div class="special-action-title">
+  <button type="button" class="milestone-card" :class="{compact}" :aria-label="specialActionTitle" @click="showRules">
+    <span class="always-fulfilled" v-if="!compact">{{t('arkaMilestoneCard.alwaysFulfilled')}}</span>
+    <span class="content">
+      <span class="overfulfill">
+        <span class="label" v-if="!compact">{{t('arkaMilestoneCard.overfulfill')}}</span>
+        <span class="condition">{{t(`milestoneCondition.${milestoneCard.overfulfill}`)}}</span>
+      </span>
+      <span class="special-action">
+        <span class="special-action-title">
           <AppIcon type="action" name="milestone-special-action" class="cog"/>
           <span v-if="!compact">{{t('arkaMilestoneCard.specialAction')}}</span>
-        </div>
+        </span>
         <AppIcon type="action" :name="milestoneCard.specialAction" class="action-icon"/>
-      </div>
-    </div>
-  </div>
+      </span>
+    </span>
+  </button>
 
   <ModalDialog :id="modalId" :title="specialActionTitle">
     <template #body>
@@ -35,7 +34,7 @@ import AppIcon from '@/components/structure/AppIcon.vue'
 import MilestoneCard from '@/services/MilestoneCard'
 import Action from '@/services/enum/Action'
 
-const TAKE_EXPERT_ACTIONS : Action[] = [Action.TAKE_EXPERT, Action.TAKE_ENGINEER, Action.TAKE_INVESTOR, Action.TAKE_RADIO_OPERATOR]
+const TAKE_EXPERT_ACTIONS = new Set<Action>([Action.TAKE_EXPERT, Action.TAKE_ENGINEER, Action.TAKE_INVESTOR, Action.TAKE_RADIO_OPERATOR])
 
 /**
  * Arka's Milestone Card in the look of the physical card. Click shows the rules text of the special action.
@@ -64,10 +63,13 @@ export default defineComponent({
   },
   computed: {
     specialActionTitle() : string {
-      return `${this.t('arkaMilestoneCard.specialAction')}: ${this.t(`rules.action.${this.milestoneCard.specialAction}.title`)}`
+      return `${this.t('arkaMilestoneCard.specialAction')}: ${this.t(this.specialActionTitleKey)}`
+    },
+    specialActionTitleKey() : string {
+      return `rules.action.${this.milestoneCard.specialAction}.title`
     },
     isTakeExpert() : boolean {
-      return TAKE_EXPERT_ACTIONS.includes(this.milestoneCard.specialAction)
+      return TAKE_EXPERT_ACTIONS.has(this.milestoneCard.specialAction)
     }
   },
   methods: {
@@ -82,9 +84,14 @@ export default defineComponent({
 // colors of the physical Arka Milestone Cards: dark brown body, cream text, light wood strips
 .milestone-card {
   position: relative;
+  display: block;
   width: 17rem;
+  padding: 0;
+  text-align: start;
+  font: inherit;
   color: #ece4c6;
   background-color: #322d2c;
+  border: none;
   border-top: 6px solid #e7dab4;
   border-radius: 0.6rem;
   overflow: hidden;
@@ -101,6 +108,7 @@ export default defineComponent({
     filter: invert(1);
   }
   .always-fulfilled {
+    display: block;
     font-weight: bold;
     font-style: italic;
     text-align: center;
@@ -115,6 +123,9 @@ export default defineComponent({
   .overfulfill {
     flex: 1;
     font-style: italic;
+    .label, .condition {
+      display: block;
+    }
     .label {
       font-weight: bold;
     }

@@ -19,7 +19,7 @@
 
   <p class="fst-italic" v-html="t('roundStart.arkaSkipsPhases')"></p>
 
-  <div v-if="isMilestoneRound" class="alert alert-warning notice" role="status" v-html="t('roundStart.milestoneRound')"></div>
+  <output v-if="isMilestoneRound" class="alert alert-warning notice d-block" v-html="t('roundStart.milestoneRound')"></output>
 
   <button type="button" class="btn btn-primary btn-lg mt-3" @click="next()">
     {{t('action.next')}}

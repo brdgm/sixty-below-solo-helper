@@ -30,14 +30,14 @@ export default class RouteCalculator {
     if (!this.player) {
       throw new Error('Player of current turn is not set.')
     }
-    const passedPlayers = getTurns(state, this.round)
+    const passedPlayers = new Set(getTurns(state, this.round)
         .filter(item => item.turn <= this.turn && item.pass)
-        .map(item => item.player)
+        .map(item => item.player))
     const otherPlayer = this.player == Player.PLAYER ? Player.BOT : Player.PLAYER
-    if (passedPlayers.includes(this.player) && passedPlayers.includes(otherPlayer)) {
+    if (passedPlayers.has(this.player) && passedPlayers.has(otherPlayer)) {
       return `/round/${this.round}/end`
     }
-    const nextPlayer = passedPlayers.includes(otherPlayer) ? this.player : otherPlayer
+    const nextPlayer = passedPlayers.has(otherPlayer) ? this.player : otherPlayer
     return routeTo(this.round, this.turn + 1, nextPlayer)
   }
 

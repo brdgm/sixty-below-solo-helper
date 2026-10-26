@@ -69,7 +69,7 @@
     </table>
   </div>
 
-  <div v-if="isTie" class="alert alert-info mt-3 tie" role="status" v-html="t('finalScoring.tie')"></div>
+  <output v-if="isTie" class="alert alert-info mt-3 tie d-block" v-html="t('finalScoring.tie')"></output>
 </template>
 
 <script lang="ts">

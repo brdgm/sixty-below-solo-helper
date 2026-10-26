@@ -1,10 +1,10 @@
 <template>
-  <div v-for="(item, index) in items" :key="index" class="alert alert-warning notice mt-3 mb-0" role="status">
+  <output v-for="(item, index) in items" :key="index" class="alert alert-warning notice mt-3 mb-0">
     <AppIcon v-if="item.icon" type="misc" :name="item.icon" class="icon"/>
     <span v-if="item.notice.type == 'not-possible'" v-html="t('botActionNotice.not-possible', {
         action:t(`rules.action.${item.notice.action}.title`), reason:t(`notPossibleReason.${item.notice.reason}`)})"></span>
     <span v-else v-html="t(`botActionNotice.${item.notice.type}`, {count:item.notice.starLimit})"></span>
-  </div>
+  </output>
 </template>
 
 <script lang="ts">

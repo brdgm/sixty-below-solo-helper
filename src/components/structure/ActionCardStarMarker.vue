@@ -1,7 +1,9 @@
 <template>
-  <span class="action-card" :class="{star: card.star}" role="img" :aria-label="label" :title="label">
-    {{card.star ? '★' : '−'}}
-  </span>
+  <svg class="action-card" :class="{star: card.star}" viewBox="0 0 18 26" :aria-label="label">
+    <title>{{label}}</title>
+    <rect x="0.5" y="0.5" width="17" height="25" rx="3" class="card"/>
+    <text x="9" y="17.5" text-anchor="middle" class="marker">{{card.star ? '★' : '−'}}</text>
+  </svg>
 </template>
 
 <script lang="ts">
@@ -37,16 +39,21 @@ export default defineComponent({
   display: inline-block;
   width: 1.1rem;
   height: 1.6rem;
-  line-height: 1.6rem;
-  border: 1px solid #333;
-  border-radius: 3px;
-  text-align: center;
-  font-size: 0.9rem;
-  background-color: #6c757d;
-  color: #fff;
+  .card {
+    fill: #6c757d;
+    stroke: #333;
+  }
+  .marker {
+    fill: #fff;
+    font-size: 14px;
+  }
   &.star {
-    background-color: #2a5c8a;
-    color: #ffd84a;
+    .card {
+      fill: #2a5c8a;
+    }
+    .marker {
+      fill: #ffd84a;
+    }
   }
 }
 </style>

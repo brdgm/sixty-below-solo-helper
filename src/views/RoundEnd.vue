@@ -4,7 +4,7 @@
   <h1>{{t('roundEnd.title', {round})}}</h1>
 
   <p v-if="isMilestoneRound" class="mt-4" v-html="t('roundEnd.scoreMilestone')"></p>
-  <div v-if="isForecastRound" class="alert alert-warning notice mt-4" role="status" v-html="t('roundEnd.gainForecastTile')"></div>
+  <output v-if="isForecastRound" class="alert alert-warning notice mt-4 d-block" v-html="t('roundEnd.gainForecastTile')"></output>
 
   <template v-if="milestoneCard && milestoneIndex != undefined">
     <ArkaMilestoneScoring :milestoneCard="milestoneCard" :milestoneIndex="milestoneIndex" :botState="botState"/>

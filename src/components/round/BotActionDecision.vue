@@ -50,7 +50,7 @@ import Action from '@/services/enum/Action'
 import ExpertType from '@/services/enum/ExpertType'
 import ExpertColumn from '@/services/enum/ExpertColumn'
 
-const EXECUTED_OR_NOT_POSSIBLE_ACTIONS : string[] = [Action.BUILD_STATION, Action.PLACE_EXPLORER_LANDSCAPE, Action.PLACE_EXPLORER_EXPERT_ACTION_TILE]
+const EXECUTED_OR_NOT_POSSIBLE_ACTIONS = new Set<string>([Action.BUILD_STATION, Action.PLACE_EXPLORER_LANDSCAPE, Action.PLACE_EXPLORER_EXPERT_ACTION_TILE])
 const COLUMN_EXPERT_TYPES : Partial<Record<string, ExpertType>> = {
   [Action.TAKE_ENGINEER]: ExpertType.ENGINEER,
   [Action.TAKE_INVESTOR]: ExpertType.INVESTOR,
@@ -87,7 +87,7 @@ export default defineComponent({
   },
   computed: {
     isExecutedOrNotPossible() : boolean {
-      return EXECUTED_OR_NOT_POSSIBLE_ACTIONS.includes(this.step.action)
+      return EXECUTED_OR_NOT_POSSIBLE_ACTIONS.has(this.step.action)
     },
     columnExpertType() : ExpertType|undefined {
       return COLUMN_EXPERT_TYPES[this.step.action]
