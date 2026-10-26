@@ -205,7 +205,8 @@ export default class BotActions {
   }
 
   /**
-   * Take the upper-most available Expert from the left: own column, Pilots and Mechanics in the column with the most Experts.
+   * Take the upper-most available Expert from the left: own column, Pilots and Mechanics in the column with the most Experts
+   * that is not full yet (C21).
    */
   private resolveTakeExpert(step : BotActionStep) : void {
     step.pilotMechanicColumns = this.botState.columnsWithMostExperts
@@ -215,7 +216,7 @@ export default class BotActions {
           ?? this.getPilotMechanicColumn(decision.expertColumn, step.pilotMechanicColumns ?? [])
       step.expertType = expertType
       step.expertColumn = column
-      if (this.botState.isColumnFull(column)) {
+      if (!column || this.botState.isColumnFull(column)) {
         step.notPossibleReason = NotPossibleReason.COLUMN_FULL
         return false
       }
@@ -224,11 +225,11 @@ export default class BotActions {
     })
   }
 
-  private getPilotMechanicColumn(chosenColumn : ExpertColumn|undefined, candidates : readonly ExpertColumn[]) : ExpertColumn {
+  private getPilotMechanicColumn(chosenColumn : ExpertColumn|undefined, candidates : readonly ExpertColumn[]) : ExpertColumn|undefined {
     if (chosenColumn && candidates.includes(chosenColumn)) {
       return chosenColumn
     }
-    return candidates[0] ?? ExpertColumn.INVESTOR
+    return candidates[0]
   }
 
   /**

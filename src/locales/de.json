@@ -195,7 +195,8 @@
       },
       "take-expert": {
         "title": "Nimm den obersten am weitesten links verfügbaren Experten",
-        "text": "Nimm den obersten am weitesten links verfügbaren Experten. Falls es eine Pilotin oder ein Mechaniker ist, lege sie oder ihn in die Spalte mit den meisten Experten. Bei Gleichstand entscheidest du."
+        "text": "Nimm den obersten am weitesten links verfügbaren Experten. Falls es eine Pilotin oder ein Mechaniker ist, lege sie oder ihn in die Spalte mit den meisten Experten. Bei Gleichstand entscheidest du.",
+        "fullColumn": "Ist diese Spalte bereits voll (5 Experten), lege die Pilotin oder den Mechaniker in die Spalte mit den nächstmeisten Experten."
       },
       "take-engineer": {
         "title": "Nimm den weitesten links verfügbaren Ingenieur",

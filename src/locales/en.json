@@ -195,7 +195,8 @@
       },
       "take-expert": {
         "title": "Take the upper-most available Expert from the left",
-        "text": "Take the upper-most available Expert from the left. If Arka takes a Pilot or Mechanic this way, place it in the column with the most Experts on her Tableau. In case of a tie, choose freely."
+        "text": "Take the upper-most available Expert from the left. If Arka takes a Pilot or Mechanic this way, place it in the column with the most Experts on her Tableau. In case of a tie, choose freely.",
+        "fullColumn": "If that column is already full (5 Experts), place the Pilot or Mechanic in the column with the next-most Experts."
       },
       "take-engineer": {
         "title": "Take the left-most Engineer",

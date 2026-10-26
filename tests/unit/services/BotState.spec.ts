@@ -41,6 +41,22 @@ describe('services/BotState', () => {
     expect(botState.columnsWithMostExperts).to.eql([ExpertColumn.RADIO_OPERATOR])
   })
 
+  it('columnsWithMostExperts-skip-full-column', () => {
+    const botState = mockBotState({
+      investor: [ExpertType.INVESTOR, ExpertType.PILOT],
+      radioOperator: [ExpertType.RADIO_OPERATOR, ExpertType.RADIO_OPERATOR, ExpertType.MECHANIC, ExpertType.PILOT],
+      engineer: [ExpertType.ENGINEER, ExpertType.MISSION_COORDINATOR, ExpertType.ENGINEER]
+    })
+    // column totals: 3, 5 (full), 4
+    expect(botState.columnsWithMostExperts).to.eql([ExpertColumn.ENGINEER])
+  })
+
+  it('columnsWithMostExperts-all-full', () => {
+    const fullColumn = [ExpertType.PILOT, ExpertType.PILOT, ExpertType.MECHANIC, ExpertType.MECHANIC]
+    const botState = mockBotState({ investor: fullColumn, radioOperator: fullColumn, engineer: fullColumn })
+    expect(botState.columnsWithMostExperts).to.eql([])
+  })
+
   it('experts-scoring-counts', () => {
     const botState = mockBotState({
       investor: [ExpertType.INVESTOR, ExpertType.PILOT],

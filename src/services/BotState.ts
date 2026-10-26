@@ -132,10 +132,11 @@ export default class BotState {
   }
 
   /**
-   * Columns with the most Experts: candidates for placing a Pilot or Mechanic (player chooses on a tie, C6).
+   * Columns with the most Experts that are not full yet: candidates for placing a Pilot or Mechanic
+   * (if the column with the most Experts is full, the next-most full one is used, C21; player chooses on a tie, C6).
    */
   public get columnsWithMostExperts() : ExpertColumn[] {
-    const columns = getAllEnumValues(ExpertColumn)
+    const columns = getAllEnumValues(ExpertColumn).filter(column => !this.isColumnFull(column))
     const maxTotal = Math.max(...columns.map(column => this.getColumnTotal(column)))
     return columns.filter(column => this.getColumnTotal(column) == maxTotal)
   }

@@ -18,6 +18,7 @@
   <ModalDialog :id="modalId" :title="specialActionTitle">
     <template #body>
       <p v-html="t(`rules.action.${milestoneCard.specialAction}.text`)"></p>
+      <p v-if="isTakeAnyExpert" v-html="t('rules.action.take-expert.fullColumn')"></p>
       <p v-if="isTakeExpert" v-html="t('rules.expertAvailability')"></p>
     </template>
   </ModalDialog>
@@ -68,6 +69,9 @@ export default defineComponent({
     },
     isTakeExpert() : boolean {
       return TAKE_EXPERT_ACTIONS.has(this.milestoneCard.specialAction)
+    },
+    isTakeAnyExpert() : boolean {
+      return this.milestoneCard.specialAction == Action.TAKE_EXPERT
     }
   },
   methods: {

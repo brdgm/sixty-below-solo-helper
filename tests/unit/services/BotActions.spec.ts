@@ -102,6 +102,27 @@ describe('services/BotActions', () => {
     expect(botActions.botState.getExperts(ExpertColumn.INVESTOR)).to.eql([ExpertType.INVESTOR, ExpertType.PILOT])
   })
 
+  it('take-expert-pilot-most-full-column-full', () => {
+    const fullColumn = [ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR]
+    const botState = { investor: fullColumn, engineer: [ExpertType.ENGINEER] }
+    const botActions = resolve('saa2', botState, [{ executed: true, expertType: ExpertType.PILOT }])
+
+    expect(botActions.screens[0].step?.pilotMechanicColumns).to.eql([ExpertColumn.ENGINEER])
+    expect(botActions.screens[0].step?.status).to.eq(BotActionStatus.EXECUTED)
+    expect(botActions.botState.getExperts(ExpertColumn.ENGINEER)).to.eql([ExpertType.ENGINEER, ExpertType.PILOT])
+    expect(botActions.botState.getExperts(ExpertColumn.INVESTOR)).to.eql(fullColumn)
+  })
+
+  it('take-expert-mechanic-all-columns-full', () => {
+    const fullColumn = [ExpertType.PILOT, ExpertType.PILOT, ExpertType.MECHANIC, ExpertType.MECHANIC]
+    const botState = { investor: fullColumn, radioOperator: fullColumn, engineer: fullColumn }
+    const botActions = resolve('saa2', botState, [{ executed: true, expertType: ExpertType.MECHANIC }])
+
+    expect(botActions.screens[0].step?.status).to.eq(BotActionStatus.NOT_POSSIBLE)
+    expect(botActions.screens[0].step?.notPossibleReason).to.eq(NotPossibleReason.COLUMN_FULL)
+    expect(botActions.botState.rondelPosition).to.eq(2)
+  })
+
   it('take-expert-mechanic-tie-chosen-column', () => {
     const botActions = resolve('saa2', {}, [{ executed: true, expertType: ExpertType.MECHANIC, expertColumn: ExpertColumn.ENGINEER }])
 
