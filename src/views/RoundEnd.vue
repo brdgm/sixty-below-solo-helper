@@ -11,7 +11,7 @@
   <template v-if="milestoneCard && milestoneIndex != undefined">
     <ArkaMilestoneScoring :milestoneCard="milestoneCard" :milestoneIndex="milestoneIndex" :botState="botState"/>
     <p class="mt-3 fw-bold" v-html="t('roundEnd.arkaOverfulfills')"></p>
-    <button type="button" class="btn btn-success btn-lg me-2" @click="milestoneScored(true)">
+    <button type="button" class="btn btn-success btn-lg me-2 mb-2" @click="milestoneScored(true)">
       {{t('roundEnd.overfulfilled', {vp:higherVP})}}
     </button>
     <button type="button" class="btn btn-danger btn-lg" @click="milestoneScored(false)">

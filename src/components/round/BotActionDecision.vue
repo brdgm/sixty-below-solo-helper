@@ -1,7 +1,7 @@
 <template>
   <div class="decision mt-4">
     <template v-if="isExecutedOrNotPossible">
-      <button type="button" class="btn btn-success btn-lg me-2" @click="executed()">
+      <button type="button" class="btn btn-success btn-lg me-2 mb-2" @click="executed()">
         {{t('botActionDecision.executed')}}
       </button>
       <button type="button" class="btn btn-danger btn-lg" @click="notPossible()">

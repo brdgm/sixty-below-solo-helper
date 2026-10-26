@@ -42,10 +42,6 @@
   },
   "roundStart": {
     "title": "Round {round}",
-    "startPlayer": {
-      "player": "<b>You</b> are the start player in this round.",
-      "bot": "<b>Arka</b> is the start player in this round."
-    },
     "preparation": {
       "title": "I. Preparation",
       "drawCards": "<b>Draw Cards</b> from your Expedition Deck",

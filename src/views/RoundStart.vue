@@ -3,8 +3,6 @@
 
   <h1>{{t('roundStart.title', {round})}}</h1>
 
-  <p class="mt-4" v-html="t(`roundStart.startPlayer.${startPlayer}`)"></p>
-
   <h5 class="mt-4">{{t('roundStart.preparation.title')}}</h5>
   <ul>
     <li v-html="t('roundStart.preparation.drawCards')"></li>

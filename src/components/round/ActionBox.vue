@@ -84,6 +84,9 @@ export default defineComponent({
   box-shadow: 0 0 0 4px #d3dfd6;
   font: inherit;
   cursor: pointer;
+  @media (max-width: 600px) {
+    width: 12rem;
+  }
   &::after {
     content: '';
     position: absolute;

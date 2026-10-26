@@ -42,10 +42,6 @@
   },
   "roundStart": {
     "title": "Runde {round}",
-    "startPlayer": {
-      "player": "<b>Du</b> bist in dieser Runde die Startperson.",
-      "bot": "<b>Arka</b> ist in dieser Runde die Startperson."
-    },
     "preparation": {
       "title": "I. Vorbereitung",
       "drawCards": "<b>Karten ziehen</b> von deinem Expeditionsdeck",
