@@ -135,7 +135,6 @@
   },
   "sideBar": {
     "round": "Runde {round}",
-    "turn": "Zug {turn}",
     "starsPlayed": "Sterne: {played} / {limit}",
     "expeditionSteps": "Expeditionsleiste",
     "upgrades": "Ausbauten",
@@ -143,8 +142,7 @@
     "explorersLeft": "Explorer übrig",
     "stationsLeft": "Stationen übrig",
     "experts": "Experten",
-    "nextMilestone": "Meilenstein Ende Runde {round}:",
-    "milestoneScored": "Meilenstein {tile} {vp} SP"
+    "milestoneScored": "{vp} SP"
   },
   "arkaMilestoneCard": {
     "alwaysFulfilled": "Immer erfüllt",

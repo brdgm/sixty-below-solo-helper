@@ -135,7 +135,6 @@
   },
   "sideBar": {
     "round": "Round {round}",
-    "turn": "Turn {turn}",
     "starsPlayed": "Stars: {played} / {limit}",
     "expeditionSteps": "Expedition Track",
     "upgrades": "Upgrades",
@@ -143,8 +142,7 @@
     "explorersLeft": "Explorers left",
     "stationsLeft": "Stations left",
     "experts": "Experts",
-    "nextMilestone": "Milestone end of round {round}:",
-    "milestoneScored": "Milestone {tile} {vp} VP"
+    "milestoneScored": "{vp} VP"
   },
   "arkaMilestoneCard": {
     "alwaysFulfilled": "Always fulfilled",

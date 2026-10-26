@@ -34,6 +34,8 @@ export default class NavigationState {
   readonly botState : BotState
   /** Arka passes in this turn because she has already played as many stars as her Expedition Level */
   readonly botPass : boolean
+  /** All of Arka's Milestone Cards, in scoring order */
+  readonly arkaMilestoneCards : readonly MilestoneCard[]
   /** Arka's Milestone Cards that are not scored yet, in scoring order */
   readonly milestoneCards : readonly MilestoneCard[]
   /** Arka's Milestones scored at the end of the previous rounds (at the game end: all) */
@@ -54,9 +56,8 @@ export default class NavigationState {
     this.action = getIntRouteParam(route, 'action')
     this.player = getPlayer(route)
     this.startPlayer = getStartPlayer(this.round)
-    this.milestoneCards = (state.setup.arkaMilestoneCards ?? [])
-        .slice(getNextMilestoneIndex(this.round))
-        .map(id => MilestoneCards.get(id))
+    this.arkaMilestoneCards = (state.setup.arkaMilestoneCards ?? []).map(id => MilestoneCards.get(id))
+    this.milestoneCards = this.arkaMilestoneCards.slice(getNextMilestoneIndex(this.round))
     // the Milestone of the current round is not shown as scored before the end of the game (it can be scored again with "Back")
     this.scoredMilestones = getScoredMilestones(state, isGameEnd ? MAX_ROUND + 1 : this.round)
 

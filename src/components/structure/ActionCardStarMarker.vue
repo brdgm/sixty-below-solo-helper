@@ -1,21 +1,24 @@
 <template>
-  <svg class="action-card" :class="{star: card.star}" viewBox="0 0 18 26" :aria-label="label">
-    <title>{{label}}</title>
-    <rect x="0.5" y="0.5" width="17" height="25" rx="3" class="card"/>
-    <text x="9" y="17.5" text-anchor="middle" class="marker">{{card.star ? '★' : '−'}}</text>
-  </svg>
+  <span class="action-card" :title="label">
+    <AppIcon type="card" :name="card.star ? 'star' : 'minus'" class="badge-icon"/>
+    <span class="visually-hidden">{{label}}</span>
+  </span>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { useI18n } from 'vue-i18n'
+import AppIcon from '@/components/structure/AppIcon.vue'
 import Card from '@/services/Card'
 
 /**
- * Small Action Card symbol showing the star marking of the card.
+ * Small Action Card symbol in the colors of Arka's Action Cards, showing the star marking of the card.
  */
 export default defineComponent({
   name: 'ActionCardStarMarker',
+  components: {
+    AppIcon
+  },
   setup() {
     const { t } = useI18n()
     return { t }
@@ -35,25 +38,20 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+// colors of Arka's Action Cards: icy top, dark body, star/minus badge at the bottom
 .action-card {
-  display: inline-block;
-  width: 1.1rem;
-  height: 1.6rem;
-  .card {
-    fill: #6c757d;
-    stroke: #333;
-  }
-  .marker {
-    fill: #fff;
-    font-size: 14px;
-  }
-  &.star {
-    .card {
-      fill: #2a5c8a;
-    }
-    .marker {
-      fill: #ffd84a;
-    }
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 1.3rem;
+  height: 1.85rem;
+  padding-bottom: 0.15rem;
+  border: 1px solid #555;
+  border-radius: 3px;
+  background: linear-gradient(#d3dfd6 0, #d3dfd6 35%, #2f2c2c 35%);
+  .badge-icon {
+    width: 1rem;
+    height: 1rem;
   }
 }
 </style>
