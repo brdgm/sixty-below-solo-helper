@@ -149,7 +149,8 @@
   "arkaMilestoneCard": {
     "alwaysFulfilled": "Always fulfilled",
     "overfulfill": "Overfulfill:",
-    "specialAction": "Special Action:"
+    "specialAction": "Special Action",
+    "specialActionInfo": "Arka carries out this special action when one of her Action Cards shows the Milestone special action and this Milestone Card has not been scored yet."
   },
   "milestoneCondition": {
     "twice-as-many-engineers": "Twice as many Engineers",
@@ -206,7 +207,8 @@
         "text": "Take the left-most Radio Operator. If none is available, take a Mission Coordinator instead."
       },
       "take-upgrade": {
-        "title": "Take an Upgrade"
+        "title": "Take an Upgrade",
+        "text": "Arka takes an Upgrade. Each Upgrade is worth 4 victory points at the end of the game. Arka's Upgrades are managed by the app."
       },
       "explore-landscape": {
         "title": "Explore the next Landscape",

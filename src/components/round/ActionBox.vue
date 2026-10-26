@@ -68,6 +68,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .action-box {
+  position: relative;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -76,26 +77,33 @@ export default defineComponent({
   min-width: 12rem;
   min-height: 8rem;
   padding: 1.25rem 2.25rem;
-  color: #212529;
-  background-color: #cfe1e8;
-  border: 3px solid #7d98a3;
-  border-radius: 0.75rem;
+  // look of the black action circle on Arka's Action Cards: dark center, metal ring, icy surroundings
+  color: #fff;
+  background-color: #222320;
+  border: 4px solid #8d918c;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 0 4px #d3dfd6;
   cursor: pointer;
-  background-image: url('@/assets/icons/help-semi-transparent.webp');
-  background-repeat: no-repeat;
-  background-position: right 5px top 5px;
-  background-size: 1.25rem;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-image: url('@/assets/icons/help-semi-transparent.webp');
+    background-size: contain;
+    filter: invert(1);
+  }
   .action {
     display: flex;
     align-items: center;
     gap: 0.25rem;
     :deep(.icon) {
       height: 5rem;
-      border-radius: 0.5rem;
     }
     .milestone-icon {
       height: 3rem;
-      border-radius: 0.35rem;
     }
     .separator {
       font-size: 1.5rem;

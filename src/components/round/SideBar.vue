@@ -32,10 +32,8 @@
           {{t('sideBar.milestoneScored', {tile:tileNames[scoredMilestone.milestoneIndex], vp:scoredMilestone.victoryPoints})}}
         </div>
         <template v-if="nextMilestoneCard">
-          <div class="small">{{t('sideBar.nextMilestone', {round:nextMilestoneRound})}}</div>
-          <div class="small fst-italic">{{t(`milestoneCondition.${nextMilestoneCard.overfulfill}`)}}</div>
-          <AppIcon type="action" :name="nextMilestoneCard.specialAction" class="special-action"
-              :title="t(`rules.action.${nextMilestoneCard.specialAction}.title`)"/>
+          <div class="small mb-1">{{t('sideBar.nextMilestone', {round:nextMilestoneRound})}}</div>
+          <ArkaMilestoneCard :milestoneCard="nextMilestoneCard" compact/>
         </template>
       </div>
     </template>
@@ -53,6 +51,7 @@ import ExpertColumn from '@/services/enum/ExpertColumn'
 import ExpertType from '@/services/enum/ExpertType'
 import AppIcon from '@/components/structure/AppIcon.vue'
 import ActionCardStarMarker from '@/components/structure/ActionCardStarMarker.vue'
+import ArkaMilestoneCard from '@/components/structure/ArkaMilestoneCard.vue'
 import getAllEnumValues from '@brdgm/brdgm-commons/src/util/enum/getAllEnumValues'
 import getNextMilestoneIndex from '@/util/getNextMilestoneIndex'
 import { MILESTONE_ROUNDS } from '@/util/getMilestoneIndex'
@@ -63,7 +62,8 @@ export default defineComponent({
   name: 'SideBar',
   components: {
     AppIcon,
-    ActionCardStarMarker
+    ActionCardStarMarker,
+    ArkaMilestoneCard
   },
   setup() {
     const { t } = useI18n()
@@ -177,13 +177,6 @@ interface SideBarExpertColumn {
     &.printed {
       opacity: 0.6;
     }
-  }
-}
-.milestone {
-  .special-action {
-    height: 2rem;
-    margin-top: 0.25rem;
-    border-radius: 0.25rem;
   }
 }
 </style>

@@ -149,7 +149,8 @@
   "arkaMilestoneCard": {
     "alwaysFulfilled": "Immer erfüllt",
     "overfulfill": "Übererfüllt:",
-    "specialAction": "Spezialaktion:"
+    "specialAction": "Spezialaktion",
+    "specialActionInfo": "Arka führt diese Spezialaktion aus, wenn eine ihrer Aktionskarten die Meilenstein-Spezialaktion zeigt und diese Meilensteinkarte noch nicht gewertet wurde."
   },
   "milestoneCondition": {
     "twice-as-many-engineers": "Doppelt so viele Ingenieure",
@@ -206,7 +207,8 @@
         "text": "Nimm den weitesten links verfügbaren Funker. Falls keiner verfügbar ist, nimm einen Missionsleiter."
       },
       "take-upgrade": {
-        "title": "Nimm einen Ausbau"
+        "title": "Nimm einen Ausbau",
+        "text": "Arka nimmt einen Ausbau. Jeder Ausbau ist bei Spielende 4 Siegpunkte wert. Arkas Ausbauten werden von der App verwaltet."
       },
       "explore-landscape": {
         "title": "Erschließe die nächst mögliche Landschaft",
