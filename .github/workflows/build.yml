@@ -14,5 +14,5 @@ jobs:
     steps:
       - uses: brdgm/github-action-build@v1
         with:
-          sonar-token: ${{ secrets.SONARCLOUD_TOKEN }}
+          # SonarQube Cloud Automatic Analysis is enabled, so skip CI analysis.
           github-token: ${{ secrets.GITHUB_TOKEN }}
