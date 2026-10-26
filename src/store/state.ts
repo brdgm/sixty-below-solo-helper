@@ -61,6 +61,8 @@ export interface Turn {
   turn: number
   player: Player
   pass?: boolean
+  /** Arka's state after her turn (only stored for Arka's turns) */
+  botPersistence?: BotPersistence
 }
 
 export interface BotPersistence {

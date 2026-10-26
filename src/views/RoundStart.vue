@@ -3,6 +3,8 @@
 
   <h1>{{t('roundStart.title', {round})}}</h1>
 
+  <p class="mt-4" v-html="t(`roundStart.startPlayer.${startPlayer}`)"></p>
+
   <h4 class="mt-4">{{t('roundStart.preparation.title')}}</h4>
   <ul>
     <li v-html="t('roundStart.preparation.drawCards')"></li>
@@ -18,8 +20,7 @@
   <p class="fst-italic" v-html="t('roundStart.arkaSkipsPhases')"></p>
   <p v-if="isMilestoneRound" class="fst-italic" v-html="t('roundStart.milestoneRound')"></p>
 
-  <!-- TODO: route to the first turn of the round in step 5 (game flow) -->
-  <button type="button" class="btn btn-primary btn-lg mt-4" disabled>
+  <button type="button" class="btn btn-primary btn-lg mt-4" @click="next()">
     {{t('action.next')}}
   </button>
 
@@ -31,12 +32,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useStateStore } from '@/store/state'
 import FooterButtons from '@/components/structure/FooterButtons.vue'
 import SideBar from '@/components/round/SideBar.vue'
 import DebugInfo from '@/components/round/DebugInfo.vue'
 import NavigationState from '@/util/NavigationState'
+import RouteCalculator from '@/services/RouteCalculator'
 import getMilestoneIndex from '@/util/getMilestoneIndex'
 
 export default defineComponent({
@@ -49,12 +51,14 @@ export default defineComponent({
   setup() {
     const { t } = useI18n()
     const route = useRoute()
+    const router = useRouter()
     const state = useStateStore()
 
     const navigationState = new NavigationState(route, state)
-    const { round } = navigationState
+    const { round, startPlayer } = navigationState
+    const routeCalculator = new RouteCalculator({round})
 
-    return { t, navigationState, round }
+    return { t, router, navigationState, routeCalculator, round, startPlayer }
   },
   computed: {
     isMilestoneRound() : boolean {
@@ -65,6 +69,11 @@ export default defineComponent({
         return `/round/${this.round - 1}/end`
       }
       return '/setupBot'
+    }
+  },
+  methods: {
+    next() : void {
+      this.router.push(this.routeCalculator.getFirstTurnRouteTo())
     }
   }
 })

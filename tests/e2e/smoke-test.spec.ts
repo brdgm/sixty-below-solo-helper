@@ -17,6 +17,33 @@ test('smoke test', async ({ page }) => {
 
   // round 1 start
   await expect(page.locator('h1')).toHaveText('Round 1')
+  await page.getByRole('button', { name: 'Next' }).click()
+
+  // round 1: player starts, then Arka
+  await expect(page.locator('h1')).toHaveText('Your Turn')
+  await page.getByRole('button', { name: 'Next' }).click()
+  await expect(page.locator('h1')).toHaveText('Arka')
+  await page.getByRole('button', { name: 'Next' }).click()
+
+  // player passes
+  await expect(page.locator('h1')).toHaveText('Your Turn')
+  await page.getByRole('button', { name: 'Pass' }).click()
+  await page.locator('#passModal').getByRole('button', { name: 'Pass' }).click()
+
+  // Arka continues alone until she has played 3 stars (difficulty level 1: only cards with a star) and passes
+  for (let i = 0; i < 3; i++) {
+    await expect(page.locator('h1')).toHaveText('Arka')
+    await page.getByRole('button', { name: 'Next' }).click()
+  }
+
+  // round 1 end
+  await expect(page.locator('h1')).toHaveText('End of Round 1')
+  await page.getByRole('button', { name: 'Next' }).click()
+
+  // round 2: Arka starts
+  await expect(page.locator('h1')).toHaveText('Round 2')
+  await page.getByRole('button', { name: 'Next' }).click()
+  await expect(page.locator('h1')).toHaveText('Arka')
 
   // abort game
   await page.getByRole('button', { name: 'Abort Game' }).click()

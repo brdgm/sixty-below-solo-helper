@@ -37,6 +37,10 @@
   },
   "roundStart": {
     "title": "Runde {round}",
+    "startPlayer": {
+      "player": "<b>Du</b> bist in dieser Runde die Startperson.",
+      "bot": "<b>Arka</b> ist in dieser Runde die Startperson."
+    },
     "preparation": {
       "title": "I. Vorbereitung",
       "drawCards": "<b>Karte ziehen</b> von deinem Expeditionsdeck.",
@@ -50,8 +54,39 @@
     "arkaSkipsPhases": "Für Arka entfällt die Vorbereitungs- und Planungsphase.",
     "milestoneRound": "Am Ende dieser Runde werten du und Arka einen Meilenstein."
   },
+  "roundTurnPlayer": {
+    "title": "Dein Zug",
+    "execute": "Immer wenn du an der Reihe bist, f?hrst du <b>genau eine Aktion</b> aus oder passt.",
+    "passConfirm": "Passen und aus der Aktionsphase aussteigen?",
+    "passInfo": "Lege alle St?rme und Expeditionskarten von deinem Tableau auf deine Expeditionsablage. Falls du einen Explorer nicht einsetzen willst, kannst du ihn in die n?chste Runde mitnehmen."
+  },
+  "roundTurnBot": {
+    "title": "Arka",
+    "revealActionCard": "Arka deckt ihre n?chste Aktionskarte auf und f?hrt die Aktionen von oben nach unten aus:",
+    "pass": "Arka hat in dieser Runde bereits die {count} Sterne ihres Expeditionspfads gespielt und <b>passt</b>."
+  },
+  "actionCardOverview": {
+    "rondel": "Bewege den Explorer im Rondell {count} Schritt im Uhrzeigersinn. | Bewege den Explorer im Rondell {count} Schritte im Uhrzeigersinn.",
+    "otherwise": "Andernfalls: {action}"
+  },
+  "actionCardStarMarker": {
+    "star": "Aktionskarte mit einem Stern",
+    "noStar": "Aktionskarte ohne Stern"
+  },
+  "roundEnd": {
+    "title": "Ende Runde {round}",
+    "scoreMilestone": "<b>Meilenstein:</b> W?hle eine Meilensteinkarte die du jetzt wertest. Lege dein Meilensteinpl?ttchen mit der passenden Seite nach oben auf diese Karte. Diese Meilensteinkarte steht dir zur Wertung nicht mehr zur Verf?gung.",
+    "gainForecastTile": "Du erh?ltst ein <b>Forecastpl?ttchen</b>.",
+    "moveRoundIndicator": "Schiebe den <b>Rundenmarker</b> um ein Feld weiter."
+  },
+  "gameEnd": {
+    "title": "Spielende"
+  },
   "sideBar": {
-    "round": "Runde {round}"
+    "round": "Runde {round}",
+    "turn": "Zug {turn}",
+    "startPlayer": "Startperson: {player}",
+    "starsPlayed": "Sterne: {played} / {limit}"
   },
   "arkaMilestoneCard": {
     "alwaysFulfilled": "Immer erfüllt",
@@ -70,6 +105,10 @@
     "standard": "Standard",
     "legendary": "Legendär",
     "epic": "Episch"
+  },
+  "player": {
+    "player": "Du",
+    "bot": "Arka"
   },
   "rules": {
     "action": {
@@ -121,6 +160,7 @@
     "playGame": "Spielen",
     "startGame": "Spiel starten",
     "next": "Weiter",
+    "pass": "Passen",
     "abortGame": "Spiel abbrechen",
     "abortGameConfirm": "Das aktuelle Spiel wird abgebrochen - bist du sicher?",
     "endGame": "Spiel beenden",

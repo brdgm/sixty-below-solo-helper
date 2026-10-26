@@ -37,6 +37,10 @@
   },
   "roundStart": {
     "title": "Round {round}",
+    "startPlayer": {
+      "player": "<b>You</b> are the start player in this round.",
+      "bot": "<b>Arka</b> is the start player in this round."
+    },
     "preparation": {
       "title": "I. Preparation",
       "drawCards": "<b>Draw Cards</b> from your Expedition Deck.",
@@ -50,8 +54,39 @@
     "arkaSkipsPhases": "Arka does not perform a Preparation and a Planning Phase.",
     "milestoneRound": "At the end of this round, you and Arka score a Milestone."
   },
+  "roundTurnPlayer": {
+    "title": "Your Turn",
+    "execute": "On your turn, you must perform <b>exactly one action</b> or pass.",
+    "passConfirm": "Pass and drop out of the Action Phase?",
+    "passInfo": "Place all Storm and Expedition Cards from your Tableau on your personal discard pile. You can bring one unused Explorer to the next round."
+  },
+  "roundTurnBot": {
+    "title": "Arka",
+    "revealActionCard": "Arka reveals her next Action Card and carries out the actions from top to bottom:",
+    "pass": "Arka has already played the {count} stars of her Expedition Level in this round, so she <b>passes</b>."
+  },
+  "actionCardOverview": {
+    "rondel": "Move the Explorer on the Rondel {count} step clockwise. | Move the Explorer on the Rondel {count} steps clockwise.",
+    "otherwise": "Otherwise: {action}"
+  },
+  "actionCardStarMarker": {
+    "star": "Action Card with one star",
+    "noStar": "Action Card without a star"
+  },
+  "roundEnd": {
+    "title": "End of Round {round}",
+    "scoreMilestone": "<b>Milestone:</b> Choose which Milestone Card you want to score. Place your Milestone Tile with the correct side face up on the Milestone Card. You may not score this Milestone Card again.",
+    "gainForecastTile": "Gain one <b>Forecast Tile</b>.",
+    "moveRoundIndicator": "Move the <b>Round Indicator</b> one space forward."
+  },
+  "gameEnd": {
+    "title": "End of the Game"
+  },
   "sideBar": {
-    "round": "Round {round}"
+    "round": "Round {round}",
+    "turn": "Turn {turn}",
+    "startPlayer": "Start player: {player}",
+    "starsPlayed": "Stars: {played} / {limit}"
   },
   "arkaMilestoneCard": {
     "alwaysFulfilled": "Always fulfilled",
@@ -70,6 +105,10 @@
     "standard": "Standard",
     "legendary": "Legendary",
     "epic": "Epic"
+  },
+  "player": {
+    "player": "You",
+    "bot": "Arka"
   },
   "rules": {
     "action": {
@@ -121,6 +160,7 @@
     "playGame": "Play Game",
     "startGame": "Start Game",
     "next": "Next",
+    "pass": "Pass",
     "abortGame": "Abort Game",
     "abortGameConfirm": "Aborting the running game - are you sure?",
     "endGame": "End Game",
