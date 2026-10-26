@@ -2,7 +2,7 @@
   "gameTitle": "-60°",
   "home": {
     "title": "-60° Solo Helper",
-    "play1": "Play a <a href='https://boardgamegeek.com/boardgame/474125/60deg' target='_blank' rel='noopener'><b>-60°</b></a> solo game against Arka.",
+    "play1": "Play a against Arka, the solo opponent.",
     "play2": "This application manages Arka's Action Cards, Arka's Milestone Cards and Arka's Tableau and guides you through the game and solo ruleset. It supports all difficulty levels.",
     "feedback": "Discussion and Feedback:"
   },
