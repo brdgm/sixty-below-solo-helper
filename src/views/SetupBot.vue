@@ -1,7 +1,8 @@
 <template>
   <h1>{{t('setupBot.title')}}</h1>
 
-  <div class="instructions mt-4">
+  <img src="@/assets/setup-arka-components.webp" alt="" class="float-md-end components-picture"/>
+  <div class="instructions mt-3">
     <ol>
       <li v-html="t('setupBot.instructions.arkaArea')"></li>
       <li v-html="t('setupBot.instructions.arkaComponents')"></li>
@@ -109,5 +110,15 @@ export default defineComponent({
 }
 .randomize {
   margin-left: 2rem;
+}
+.components-picture {
+  width: 350px;
+  border-radius: 10px;
+  margin-left: 15px;
+  margin-bottom: 10px;
+  @media (max-width: 768px) {
+    width: 250px;
+    margin-bottom: 0;
+  }
 }
 </style>
