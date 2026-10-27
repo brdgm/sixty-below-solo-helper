@@ -14,7 +14,7 @@
     <button type="button" class="btn btn-success btn-lg me-2 mb-2" @click="milestoneScored(true)">
       {{t('roundEnd.overfulfilled', {vp:higherVP})}}
     </button>
-    <button type="button" class="btn btn-danger btn-lg" @click="milestoneScored(false)">
+    <button type="button" class="btn btn-danger btn-lg me-2 mb-2" @click="milestoneScored(false)">
       {{t('roundEnd.notOverfulfilled', {vp:lowerVP})}}
     </button>
   </template>

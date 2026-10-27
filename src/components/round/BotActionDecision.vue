@@ -4,7 +4,7 @@
       <button type="button" class="btn btn-success btn-lg me-2 mb-2" @click="executed()">
         {{t('botActionDecision.executed')}}
       </button>
-      <button type="button" class="btn btn-danger btn-lg" @click="notPossible()">
+      <button type="button" class="btn btn-danger btn-lg me-2 mb-2" @click="notPossible()">
         {{t('botActionDecision.notPossible')}}
       </button>
     </template>
@@ -32,7 +32,7 @@
           <AppIcon type="expert" :name="expertType" class="expert-icon"/> {{t(`expertType.${expertType}`)}}
         </button>
         <br/>
-        <button type="button" class="btn btn-danger btn-lg mt-2" @click="notPossible()">
+        <button type="button" class="btn btn-danger btn-lg me-2 mb-2" @click="notPossible()">
           {{t('botActionDecision.notPossible')}}
         </button>
       </template>
