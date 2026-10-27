@@ -21,7 +21,7 @@
 
   <p class="disclaimer">
     This is not an official Nanox Games product and has no affiliation with <a href="https://www.nanox.games/" target="_blank" rel="noopener">Nanox Games</a>.
-    All art in this app is from <a href="https://boardgamegeek.com/boardgame/474125/60deg" target="_blank" rel="noopener">-60°</a>.
+    All art in this app is from <a href="https://www.nanox.games/sixtybelow" target="_blank" rel="noopener">-60°</a>.
     See <a href="#" data-bs-toggle="modal" data-bs-target="#creditsModal">{{t('footer.credits')}}</a>.
     <a href="https://ko-fi.com/brdgm_me" target="_blank" rel="noopener"><img class="kofi-button" src="@/assets/kofi_button_dark.png" alt="Support me on Ko-fi"/></a>
   </p>

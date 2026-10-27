@@ -63,6 +63,7 @@
   "roundTurnBot": {
     "title": "Arka",
     "pass": "Arka hat in dieser Runde bereits die {count} Sterne ihres Expeditionspfads gespielt und <b>passt</b>.",
+    "passAfterTurn": "Arka hat in dieser Runde nun die {count} Sterne ihres Expeditionspfads gespielt und <b>passt</b> nach diesem Zug.",
     "nothingToDo": "Auf dem Spielplan gibt es für dich nichts zu tun. Die App hat Arkas Werte aktualisiert (siehe Seitenleiste)."
   },
   "botActionNotice": {
@@ -198,7 +199,7 @@
       "take-expert": {
         "title": "Nimm den obersten am weitesten links verfügbaren Experten",
         "text": "Nimm den obersten am weitesten links verfügbaren Experten. Falls es eine Pilotin oder ein Mechaniker ist, lege sie oder ihn in die Spalte mit den meisten Experten. Bei Gleichstand entscheidest du.",
-        "pilotMechanicColumn": "Die App verwaltet Arkas Expertenspalten: Eine Pilotin oder ein Mechaniker kommt in die Spalte mit den meisten Experten, die noch nicht voll ist (5 Experten). Bei Gleichstand wählst du die Spalte."
+        "pilotMechanicColumn": "Die App verwaltet Arkas Expertenspalten: Eine Pilotin oder ein Mechaniker kommt in die Spalte mit den meisten Experten, die noch nicht voll ist (5 platzierte Experten plus der aufgedruckte). Bei Gleichstand wählst du die Spalte."
       },
       "take-engineer": {
         "title": "Nimm den weitesten links verfügbaren Ingenieur",

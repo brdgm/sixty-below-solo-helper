@@ -103,7 +103,7 @@ describe('services/BotActions', () => {
   })
 
   it('take-expert-pilot-most-full-column-full', () => {
-    const fullColumn = [ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR]
+    const fullColumn = [ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.PILOT]
     const botState = { investor: fullColumn, engineer: [ExpertType.ENGINEER] }
     const botActions = resolve('saa2', botState, [{ executed: true, expertType: ExpertType.PILOT }])
 
@@ -114,7 +114,7 @@ describe('services/BotActions', () => {
   })
 
   it('take-expert-mechanic-all-columns-full', () => {
-    const fullColumn = [ExpertType.PILOT, ExpertType.PILOT, ExpertType.MECHANIC, ExpertType.MECHANIC]
+    const fullColumn = [ExpertType.PILOT, ExpertType.PILOT, ExpertType.MECHANIC, ExpertType.MECHANIC, ExpertType.MISSION_COORDINATOR]
     const botState = { investor: fullColumn, radioOperator: fullColumn, engineer: fullColumn }
     const botActions = resolve('saa2', botState, [{ executed: true, expertType: ExpertType.MECHANIC }])
 
@@ -131,7 +131,7 @@ describe('services/BotActions', () => {
   })
 
   it('take-expert-column-full-notice', () => {
-    const fullColumn = [ExpertType.RADIO_OPERATOR, ExpertType.RADIO_OPERATOR, ExpertType.PILOT, ExpertType.MECHANIC]
+    const fullColumn = [ExpertType.RADIO_OPERATOR, ExpertType.RADIO_OPERATOR, ExpertType.PILOT, ExpertType.MECHANIC, ExpertType.RADIO_OPERATOR]
     const botActions = resolve('saa2', { radioOperator: fullColumn }, [{ executed: true, expertType: ExpertType.RADIO_OPERATOR }])
 
     expect(botActions.screens).to.have.lengthOf(2)
@@ -220,7 +220,7 @@ describe('services/BotActions', () => {
   })
 
   it('take-column-expert-column-full-notice', () => {
-    const fullColumn = [ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR]
+    const fullColumn = [ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR]
     const botActions = resolve('sab12', { investor: fullColumn }, [{ executed: true, expertType: ExpertType.ENGINEER }], ['sm1'])
 
     expect(botActions.screens.map(screen => screen.step?.action)).to.eql([Action.TAKE_ENGINEER, undefined])
@@ -245,9 +245,82 @@ describe('services/BotActions', () => {
     expect(botActions.botState.explorersExpertActionTile).to.eq(1)
     expect(botActions.botState.explorersLeft).to.eq(EXPLORER_COUNT - 1)
   })
+
+  it('no-pass-below-star-limit', () => {
+    const botActions = resolve('saa4', {}, [], undefined, 2)
+
+    expect(botActions.pass).to.be.false
+    expect(botActions.screens).to.have.lengthOf(1)
+    expect(botActions.screens[0].pass).to.be.undefined
+  })
+
+  it('pass-on-last-screen-without-decision', () => {
+    const botActions = resolve('saa4', {}, [], undefined, 3)
+
+    expect(botActions.pass).to.be.true
+    expect(botActions.screens).to.have.lengthOf(1)
+    expect(botActions.screens[0].step?.action).to.eq(Action.EXPLORE_LANDSCAPE)
+    expect(botActions.screens[0].pass).to.be.true
+  })
+
+  it('pass-nothing-to-do', () => {
+    const botActions = resolve('sab13', { rondelPosition: 7 }, [], [], 3)
+
+    expect(botActions.pass).to.be.true
+    expect(botActions.screens).to.eql([{ notices: [], botState: botActions.botState.toPersistence(), pass: true }])
+  })
+
+  it('pass-known-before-last-decision', () => {
+    const pending = resolve('saa1', {}, [], undefined, 3)
+    expect(pending.pass).to.be.false
+    expect(pending.screens).to.have.lengthOf(1)
+    expect(pending.screens[0].pass).to.be.true
+
+    for (const executed of [true, false]) {
+      const botActions = resolve('saa1', {}, [{ executed }], undefined, 3)
+      expect(botActions.pass).to.be.true
+      expect(botActions.screens).to.have.lengthOf(1)
+      expect(botActions.screens[0].pass).to.be.true
+    }
+  })
+
+  it('pass-not-known-before-decision-not-possible-raises-expedition-level', () => {
+    const botState = { rondelPosition: 7, expeditionSteps: 9 }
+    const pending = resolve('saa1', botState, [], undefined, 3)
+    expect(pending.screens).to.have.lengthOf(1)
+    expect(pending.screens[0].pass).to.be.undefined
+
+    const executed = resolve('saa1', botState, [{ executed: true }], undefined, 3)
+    expect(executed.pass).to.be.true
+    expect(executed.screens).to.have.lengthOf(2)
+    expect(executed.screens[0].pass).to.be.undefined
+    expect(executed.screens[1]).to.eql({ notices: [], botState: executed.botState.toPersistence(), pass: true })
+
+    const notPossible = resolve('saa1', botState, [{ executed: false }], undefined, 3)
+    expect(notPossible.pass).to.be.false
+    expect(notPossible.botState.starLimit).to.eq(4)
+    expect(notPossible.screens).to.have.lengthOf(2)
+    expect(notPossible.screens[1].notices).to.eql([{ type: BotActionNoticeType.EXPEDITION_LEVEL, starLimit: 4 }])
+    expect(notPossible.screens[1].pass).to.be.undefined
+  })
+
+  it('pass-not-known-before-decision-with-upcoming-actions', () => {
+    const decisions : BotActionDecision[] = [
+      { executed: true, expertType: ExpertType.ENGINEER },
+      { executed: true },
+      { executed: true, expertType: ExpertType.INVESTOR }
+    ]
+    expect(resolve('sab10', {}, [], undefined, 3).screens[0].pass).to.be.undefined
+    expect(resolve('sab10', {}, decisions.slice(0, 2), undefined, 3).screens[2].pass).to.be.true
+
+    const botActions = resolve('sab10', {}, decisions, undefined, 3)
+    expect(botActions.pass).to.be.true
+    expect(botActions.screens.map(screen => screen.pass)).to.eql([undefined, undefined, true])
+  })
 })
 
-function resolve(cardId : string, botState : MockBotStateParams, decisions : BotActionDecision[] = [], milestoneCardIds? : string[]) : BotActions {
+function resolve(cardId : string, botState : MockBotStateParams, decisions : BotActionDecision[] = [], milestoneCardIds? : string[],
+    starsPlayed = 1) : BotActions {
   const cards = milestoneCardIds ? milestoneCardIds.map(MilestoneCards.get) : milestoneCards
-  return new BotActions(Cards.get(cardId), mockBotState(botState), cards, decisions)
+  return new BotActions(Cards.get(cardId), mockBotState(botState), cards, decisions, starsPlayed)
 }

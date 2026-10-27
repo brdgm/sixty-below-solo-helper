@@ -63,6 +63,7 @@
   "roundTurnBot": {
     "title": "Arka",
     "pass": "Arka has already played the {count} stars of her Expedition Level in this round, so she <b>passes</b>.",
+    "passAfterTurn": "Arka has now played the {count} stars of her Expedition Level in this round, so she <b>passes</b> after this turn.",
     "nothingToDo": "Nothing to do for you on the board. The app has updated Arka's values (see sidebar)."
   },
   "botActionNotice": {
@@ -198,7 +199,7 @@
       "take-expert": {
         "title": "Take the upper-most available Expert from the left",
         "text": "Take the upper-most available Expert from the left. If Arka takes a Pilot or Mechanic this way, place it in the column with the most Experts on her Tableau. In case of a tie, choose freely.",
-        "pilotMechanicColumn": "The app tracks Arka's Expert columns: for a Pilot or Mechanic it uses the column with the most Experts that is not full yet (5 Experts). On a tie, you choose the column."
+        "pilotMechanicColumn": "The app tracks Arka's Expert columns: for a Pilot or Mechanic it uses the column with the most Experts that is not full yet (5 placed Experts plus the printed one). On a tie, you choose the column."
       },
       "take-engineer": {
         "title": "Take the left-most Engineer",
