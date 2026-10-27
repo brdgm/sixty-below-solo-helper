@@ -103,7 +103,7 @@ describe('services/BotActions', () => {
   })
 
   it('take-expert-pilot-most-full-column-full', () => {
-    const fullColumn = [ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR]
+    const fullColumn = [ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.PILOT]
     const botState = { investor: fullColumn, engineer: [ExpertType.ENGINEER] }
     const botActions = resolve('saa2', botState, [{ executed: true, expertType: ExpertType.PILOT }])
 
@@ -114,7 +114,7 @@ describe('services/BotActions', () => {
   })
 
   it('take-expert-mechanic-all-columns-full', () => {
-    const fullColumn = [ExpertType.PILOT, ExpertType.PILOT, ExpertType.MECHANIC, ExpertType.MECHANIC]
+    const fullColumn = [ExpertType.PILOT, ExpertType.PILOT, ExpertType.MECHANIC, ExpertType.MECHANIC, ExpertType.MISSION_COORDINATOR]
     const botState = { investor: fullColumn, radioOperator: fullColumn, engineer: fullColumn }
     const botActions = resolve('saa2', botState, [{ executed: true, expertType: ExpertType.MECHANIC }])
 
@@ -131,7 +131,7 @@ describe('services/BotActions', () => {
   })
 
   it('take-expert-column-full-notice', () => {
-    const fullColumn = [ExpertType.RADIO_OPERATOR, ExpertType.RADIO_OPERATOR, ExpertType.PILOT, ExpertType.MECHANIC]
+    const fullColumn = [ExpertType.RADIO_OPERATOR, ExpertType.RADIO_OPERATOR, ExpertType.PILOT, ExpertType.MECHANIC, ExpertType.RADIO_OPERATOR]
     const botActions = resolve('saa2', { radioOperator: fullColumn }, [{ executed: true, expertType: ExpertType.RADIO_OPERATOR }])
 
     expect(botActions.screens).to.have.lengthOf(2)
@@ -220,7 +220,7 @@ describe('services/BotActions', () => {
   })
 
   it('take-column-expert-column-full-notice', () => {
-    const fullColumn = [ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR]
+    const fullColumn = [ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR, ExpertType.INVESTOR]
     const botActions = resolve('sab12', { investor: fullColumn }, [{ executed: true, expertType: ExpertType.ENGINEER }], ['sm1'])
 
     expect(botActions.screens.map(screen => screen.step?.action)).to.eql([Action.TAKE_ENGINEER, undefined])
