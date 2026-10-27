@@ -95,6 +95,13 @@ test('smoke test', async ({ page }) => {
   await expect(page.locator('h1')).toHaveText('Arka')
   await playArkaTurns(page)
 
+  // round 1 end - back: Arka passes after her last turn, no extra turn for passing
+  await expect(page.locator('h1')).toHaveText('End of Round 1')
+  await page.getByRole('link', { name: 'Back' }).click()
+  await expect(page.locator('h1')).toHaveText('Arka')
+  await expect(page.getByText('so she passes after this turn')).toBeVisible()
+  await playArkaTurns(page)
+
   // round 1 end
   await expect(page.locator('h1')).toHaveText('End of Round 1')
   await page.getByRole('button', { name: 'Next', exact: true }).click()
