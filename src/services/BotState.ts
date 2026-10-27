@@ -9,8 +9,8 @@ import getAllEnumValues from '@brdgm/brdgm-commons/src/util/enum/getAllEnumValue
 import getExpeditionPathPosition from '@/util/getExpeditionPathPosition'
 import getStarLimit from '@/util/getStarLimit'
 
-/** Max. Experts per column on Arka's Tableau, including the printed one (C5) */
-export const MAX_EXPERTS_PER_COLUMN = 5
+/** Max. Experts per column on Arka's Tableau: 5 placed Experts plus the printed one (C5) */
+export const MAX_EXPERTS_PER_COLUMN = 6
 /** Upgrades of one color: 4 level one, 4 level two, 3 level three */
 export const MAX_UPGRADES = 11
 /** Explorers available for the board: 17 of one color, minus the 2 on the Expedition Path and the Rondel replaced by the app (C19) */
@@ -142,11 +142,12 @@ export default class BotState {
   }
 
   /**
-   * Number of Experts in the 4th and 5th row of all columns (2 VP each).
+   * Number of Experts in the two upper rows of all columns (2 VP each):
+   * the 4th and 5th Expert placed in a column, not counting the printed one.
    */
   public get expertsRow4And5Count() : number {
     return getAllEnumValues(ExpertColumn)
-        .reduce((sum, column) => sum + Math.max(0, this.getColumnTotal(column) - 3), 0)
+        .reduce((sum, column) => sum + Math.max(0, this.getExperts(column).length - 3), 0)
   }
 
   /**
