@@ -333,7 +333,7 @@ export default class BotActions {
    * Other effects of the decision get an own screen and are covered there.
    */
   private isPassKnownBeforeDecision(screen : BotActionScreen) : boolean {
-    if (!screen.step || screen.step.decisionIndex == undefined || screen.step != this.lastCardStep) {
+    if (screen.step?.decisionIndex == undefined || screen.step != this.lastCardStep) {
       return false
     }
     const botState = BotState.fromPersistence(screen.botState)
