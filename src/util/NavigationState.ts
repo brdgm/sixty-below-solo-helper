@@ -17,8 +17,8 @@ const MAX_TURN = 999
 
 /**
  * Navigation state of the current view, derived from the route parameters and the persisted state.
- * Restores Arka's state from the persisted turns. On Arka's turn, she either passes or reveals the next Action Card,
- * which is resolved into action steps with the player decisions made so far.
+ * Restores Arka's state from the persisted turns. On Arka's turn, she reveals the next Action Card,
+ * which is resolved into action steps with the player decisions made so far (after the card she may pass, see BotActions.pass).
  */
 export default class NavigationState {
 
@@ -32,7 +32,8 @@ export default class NavigationState {
   readonly cardDeck : CardDeck
   /** Arka's state - on Arka's turn as of the current screen */
   readonly botState : BotState
-  /** Arka passes in this turn because she has already played as many stars as her Expedition Level */
+  /** Arka passes in this turn instead of revealing a card, because she has already played as many stars as her Expedition Level
+   * (only for turns stored by older app versions - she passes at the end of the turn in which she reaches it, see BotActions.pass) */
   readonly botPass : boolean
   /** All of Arka's Milestone Cards, in scoring order */
   readonly arkaMilestoneCards : readonly MilestoneCard[]
@@ -70,14 +71,14 @@ export default class NavigationState {
 
     if (this.player == Player.BOT) {
       const storedTurn = getStoredTurn(state, this.round, this.turn)
-      if (storedTurn?.player == Player.BOT && storedTurn.botPersistence) {
+      if (cardDeck.starsPlayed >= BotState.fromPersistence(this.botStateBeforeTurn).starLimit) {
+        // usually Arka already passes at the end of her turn reaching the star limit - only for turns stored before that
+        botPass = true
+      }
+      else if (storedTurn?.player == Player.BOT && storedTurn.botPersistence) {
         // reuse the card revealed when the turn was stored first (drawing again after a reshuffle would be random)
         cardDeck = CardDeck.fromPersistence(storedTurn.botPersistence.cardDeck)
-        botPass = storedTurn.pass ?? false
         storedDecisions = storedTurn.botActionDecisions ?? []
-      }
-      else if (cardDeck.starsPlayed >= BotState.fromPersistence(this.botStateBeforeTurn).starLimit) {
-        botPass = true
       }
       else {
         cardDeck.draw()
@@ -110,7 +111,8 @@ export default class NavigationState {
     if (!card) {
       throw new Error('No current Action Card.')
     }
-    return new BotActions(card, BotState.fromPersistence(this.botStateBeforeTurn), this.milestoneCards, decisions)
+    return new BotActions(card, BotState.fromPersistence(this.botStateBeforeTurn), this.milestoneCards, decisions,
+        this.cardDeck.starsPlayed)
   }
 
 }

@@ -63,6 +63,7 @@
   "roundTurnBot": {
     "title": "Arka",
     "pass": "Arka hat in dieser Runde bereits die {count} Sterne ihres Expeditionspfads gespielt und <b>passt</b>.",
+    "passAfterTurn": "Arka hat in dieser Runde nun die {count} Sterne ihres Expeditionspfads gespielt und <b>passt</b> nach diesem Zug.",
     "nothingToDo": "Auf dem Spielplan gibt es für dich nichts zu tun. Die App hat Arkas Werte aktualisiert (siehe Seitenleiste)."
   },
   "botActionNotice": {

@@ -91,6 +91,23 @@ describe('util/NavigationState', () => {
     expect(navigationState.cardDeck.pile).to.have.lengthOf(1)
   })
 
+  it('bot-turn-stored-pass-after-card', () => {
+    const passState = mockState({rounds:[
+      mockRound({round:1,
+        initialBotPersistence: mockBotPersistence({cardDeck: mockCardDeck({pile:['saa3','saa4'], played:['saa1','saa2']})}),
+        turns:[
+          mockTurn({round:1, turn:1, player:Player.BOT, pass:true,
+            botPersistence: mockBotPersistence({cardDeck: mockCardDeck({pile:['saa4'], played:['saa1','saa2','saa3']})})})
+        ]
+      })
+    ]})
+    const navigationState = getNavigationState('RoundTurnBot', {round:'1', turn:'1'}, passState)
+    expect(navigationState.botPass).to.be.false
+    expect(navigationState.cardDeck.currentCard?.id).to.eq('saa3')
+    expect(navigationState.botActions?.pendingStep?.action).to.eq(Action.PLACE_EXPLORER_EXPERT_ACTION_TILE)
+    expect(navigationState.botActionScreen?.pass).to.be.true
+  })
+
   it('bot-turn-star-limit-from-expedition-path', () => {
     const navigationState = getNavigationState('RoundTurnBot', {round:'2', turn:'1'})
     expect(navigationState.startPlayer).to.eq(Player.BOT)

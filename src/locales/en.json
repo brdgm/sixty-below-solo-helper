@@ -63,6 +63,7 @@
   "roundTurnBot": {
     "title": "Arka",
     "pass": "Arka has already played the {count} stars of her Expedition Level in this round, so she <b>passes</b>.",
+    "passAfterTurn": "Arka has now played the {count} stars of her Expedition Level in this round, so she <b>passes</b> after this turn.",
     "nothingToDo": "Nothing to do for you on the board. The app has updated Arka's values (see sidebar)."
   },
   "botActionNotice": {

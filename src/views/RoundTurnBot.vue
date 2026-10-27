@@ -10,10 +10,11 @@
     <div class="mt-4" v-if="screen.step">
       <BotAction :step="screen.step"/>
     </div>
-    <p v-else-if="screen.notices.length == 0" class="mt-4" v-html="t('roundTurnBot.nothingToDo')"></p>
+    <p v-else-if="nothingToDo" class="mt-4" v-html="t('roundTurnBot.nothingToDo')"></p>
     <div :class="{'mt-4': !screen.step}">
       <BotActionNotices :notices="screen.notices"/>
     </div>
+    <p v-if="screen.pass" class="mt-4" v-html="t('roundTurnBot.passAfterTurn', {count:botState.starLimit})"></p>
   </template>
 
   <BotActionDecision v-if="pendingStep" :step="pendingStep" @decide="decide"/>
@@ -73,6 +74,10 @@ export default defineComponent({
       const step = this.screen?.step
       return step?.status == BotActionStatus.PENDING ? step : undefined
     },
+    nothingToDo() : boolean {
+      // the card had no action for the player - an extra final screen only for Arka passing is not "nothing to do"
+      return this.screen?.notices.length == 0 && (this.botActions?.screens.length ?? 0) == 1
+    },
     backButtonRouteTo() : string {
       return this.routeCalculator.getBackRouteTo(this.state)
     }
@@ -91,11 +96,12 @@ export default defineComponent({
      */
     storeTurnAndNavigate(botActions : BotActions|undefined, decisions : BotActionDecisionData[]) : void {
       const hasNextScreen = (botActions?.screens.length ?? 0) > this.action + 1
+      const pass = this.botPass || (!hasNextScreen && botActions?.pass)
       this.state.storeRoundTurn({
         round: this.round,
         turn: this.turn,
         player: Player.BOT,
-        pass: this.botPass ? true : undefined,
+        pass: pass ? true : undefined,
         botPersistence: {
           cardDeck: this.navigationState.cardDeck.toPersistence(),
           botState: (botActions?.botState ?? this.botState).toPersistence()
