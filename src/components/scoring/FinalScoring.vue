@@ -15,7 +15,10 @@
         <tr>
           <th scope="row"><span v-html="t('finalScoring.expeditionTrack')"></span></th>
           <td><NumberInput v-model="playerExpeditionTrackVP"/></td>
-          <td>{{botExpeditionTrackVP}}</td>
+          <td>
+            {{botExpeditionTrackVP}}
+            <div class="hint" v-html="t('finalScoring.arkaExpeditionTrack')"></div>
+          </td>
         </tr>
         <tr>
           <th scope="row"><span v-html="t('finalScoring.stationSites')"></span></th>
@@ -80,6 +83,7 @@ import toNumber from '@brdgm/brdgm-commons/src/util/form/toNumber'
 import NavigationState from '@/util/NavigationState'
 import getExpertVP from '@/util/getExpertVP'
 import getArkaUpgradeVP from '@/util/getArkaUpgradeVP'
+import getArkaExpeditionVP from '@/util/getArkaExpeditionVP'
 
 /**
  * Final scoring for the player and Arka: victory points per scoring category of the base game plus the Meteorite.
@@ -126,7 +130,7 @@ export default defineComponent({
       })
     },
     botExpeditionTrackVP() : number {
-      return this.navigationState.botState.expeditionSteps
+      return getArkaExpeditionVP(this.navigationState.botState.expeditionSteps)
     },
     botUpgradesVP() : number {
       return getArkaUpgradeVP(this.navigationState.botState.upgrades)
