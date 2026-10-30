@@ -130,6 +130,7 @@
     "player": "Du",
     "experts": "<b>Experten</b>",
     "expeditionTrack": "<b>Expeditionsleiste</b>",
+    "arkaExpeditionTrack": "1 SP pro Schritt, plus 5 SP für das erste Feld des Expeditionspfads.",
     "stationSites": "<b>Stationsfelder</b>",
     "stations": "<b>Stationen</b>",
     "upgrades": "<b>Ausbauten</b>",
@@ -189,7 +190,7 @@
       },
       "build-station": {
         "title": "Station bauen",
-        "text": "Nimm das Stationsfeld entsprechend der Ingenieurssymbolanzahl +1 und eine Station. Baue neben der kältesten Landschaft. Grenze dabei an möglichst viele Landschaften an. Bei Gleichstand entscheidest du. Sind mehrere Stationsfelder verfügbar, dann nimm das kälteste. Ist kein Stationsfeld verfügbar, dann nimm das nächst niedrigere."
+        "text": "Nimm eine Station und ein Stationsfeld mit genau dem Wert der Ingenieurssymbolanzahl +1. Bei einem Wert von 1 bis 3 wählst du eine beliebige verfügbare Seite von Arkas persönlichen Stationsfeldern mit diesem Wert. Ab einem Wert von 4 nimm das oberste Stationsfeld vom verdeckten Stapel mit diesem Wert. Nur wenn kein Stationsfeld mit diesem Wert mehr verfügbar ist, nimm das nächst niedrigere. Baue neben der kältesten Landschaft. Grenze dabei an möglichst viele Landschaften an. Bei Gleichstand entscheidest du."
       },
       "build-station-if-3-engineers": {
         "title": "Station bauen, wenn zumindest 3 Ingenieurssymbole vorhanden sind",
