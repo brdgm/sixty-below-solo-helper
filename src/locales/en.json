@@ -130,6 +130,7 @@
     "player": "You",
     "experts": "<b>Experts</b>",
     "expeditionTrack": "<b>Expedition Track</b>",
+    "arkaExpeditionTrack": "1 VP per step, plus 5 VP for the first space of the Expedition Path.",
     "stationSites": "<b>Station Sites</b>",
     "stations": "<b>Stations</b>",
     "upgrades": "<b>Upgrades</b>",
@@ -189,7 +190,7 @@
       },
       "build-station": {
         "title": "Build a Station",
-        "text": "Take a Station and the Station Site corresponding to the number of Engineer icons +1. Build next to the coldest Landscape adjacent to as many Landscapes as possible. In the event of a tie, you decide. If there are several Station Sites available, choose the coldest one. If there are no more Station Sites with that value available, take the next lower one."
+        "text": "Take a Station and a Station Site with exactly the value of Arka's Engineer icons +1. For a value of 1 to 3, you choose any available side of Arka's personal Station Sites with that value. For a value of 4 or more, take the top Station Site from the face-down pile with that value. Only if there are no more Station Sites with that value available, take the next lower one. Build next to the coldest Landscape adjacent to as many Landscapes as possible. In the event of a tie, you decide."
       },
       "build-station-if-3-engineers": {
         "title": "Building a Station if Arka has at least 3 Engineer icons",
