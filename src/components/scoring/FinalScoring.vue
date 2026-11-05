@@ -8,12 +8,12 @@
           <th scope="col"><span class="fw-bold">{{t('player.bot')}}</span></th>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.experts')"></span></th>
+          <th scope="row">{{t('finalScoring.experts')}}</th>
           <td><NumberInput v-model="playerExpertsVP"/></td>
           <td>{{botExpertsVP}}</td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.expeditionTrack')"></span></th>
+          <th scope="row">{{t('finalScoring.expeditionTrack')}}</th>
           <td><NumberInput v-model="playerExpeditionTrackVP"/></td>
           <td>
             <span class="with-hint">
@@ -23,7 +23,7 @@
           </td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.stationSites')"></span></th>
+          <th scope="row">{{t('finalScoring.stationSites')}}</th>
           <td><NumberInput v-model="playerStationSitesVP"/></td>
           <td>
             <span class="with-hint">
@@ -33,27 +33,27 @@
           </td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.stations')"></span></th>
+          <th scope="row">{{t('finalScoring.stations')}}</th>
           <td><NumberInput v-model="playerStationsVP"/></td>
           <td>–</td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.upgrades')"></span></th>
+          <th scope="row">{{t('finalScoring.upgrades')}}</th>
           <td><NumberInput v-model="playerUpgradesVP"/></td>
           <td>{{botUpgradesVP}}</td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.negativePoints')"></span></th>
+          <th scope="row">{{t('finalScoring.negativePoints')}}</th>
           <td class="text-nowrap">− <NumberInput v-model="playerNegativePoints" class="minusVP"/></td>
           <td>–</td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.expeditionCards')"></span></th>
+          <th scope="row">{{t('finalScoring.expeditionCards')}}</th>
           <td><NumberInput v-model="playerExpeditionCardsVP"/></td>
           <td><NumberInput v-model="botExpeditionCardsVP"/></td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.projectCards')"></span></th>
+          <th scope="row">{{t('finalScoring.projectCards')}}</th>
           <td><NumberInput v-model="playerProjectCardsVP"/></td>
           <td>
             <span class="with-hint">
@@ -63,12 +63,12 @@
           </td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.milestones')"></span></th>
+          <th scope="row">{{t('finalScoring.milestones')}}</th>
           <td><NumberInput v-model="playerMilestonesVP"/></td>
           <td>{{botMilestonesVP}}</td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.meteorite')"></span></th>
+          <th scope="row">{{t('finalScoring.meteorite')}}</th>
           <td>
             <span class="with-hint">
               <NumberInput v-model="playerMeteoriteVP"/>
@@ -78,7 +78,7 @@
           <td>–</td>
         </tr>
         <tr>
-          <th scope="row" class="fw-bold">{{t('finalScoring.total')}}</th>
+          <th scope="row">{{t('finalScoring.total')}}</th>
           <td class="fw-bold">{{playerTotalVP}}</td>
           <td class="fw-bold">{{botTotalVP}}</td>
         </tr>
@@ -193,7 +193,6 @@ th, td {
   text-align: center;
   vertical-align: top;
   padding: 0.5rem;
-  font-weight: normal;
   min-width: 5rem;
 }
 th:nth-child(1) {
