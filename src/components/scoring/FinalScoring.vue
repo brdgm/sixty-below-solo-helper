@@ -8,63 +8,77 @@
           <th scope="col"><span class="fw-bold">{{t('player.bot')}}</span></th>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.experts')"></span></th>
+          <th scope="row">{{t('finalScoring.experts')}}</th>
           <td><NumberInput v-model="playerExpertsVP"/></td>
           <td>{{botExpertsVP}}</td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.expeditionTrack')"></span></th>
+          <th scope="row">{{t('finalScoring.expeditionTrack')}}</th>
           <td><NumberInput v-model="playerExpeditionTrackVP"/></td>
           <td>
-            {{botExpeditionTrackVP}}
-            <div class="hint" v-html="t('finalScoring.arkaExpeditionTrack')"></div>
+            <span class="with-hint">
+              {{botExpeditionTrackVP}}
+              <InfoHint :text="t('finalScoring.arkaExpeditionTrack')" class="hint"/>
+            </span>
           </td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.stationSites')"></span></th>
+          <th scope="row">{{t('finalScoring.stationSites')}}</th>
           <td><NumberInput v-model="playerStationSitesVP"/></td>
-          <td>–</td>
+          <td>
+            <span class="with-hint">
+              <NumberInput v-model="botStationSitesVP"/>
+              <InfoHint :text="t('finalScoring.arkaStationSites')" class="hint"/>
+            </span>
+          </td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.stations')"></span></th>
+          <th scope="row">{{t('finalScoring.stations')}}</th>
           <td><NumberInput v-model="playerStationsVP"/></td>
           <td>–</td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.upgrades')"></span></th>
+          <th scope="row">{{t('finalScoring.upgrades')}}</th>
           <td><NumberInput v-model="playerUpgradesVP"/></td>
           <td>{{botUpgradesVP}}</td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.negativePoints')"></span></th>
+          <th scope="row">{{t('finalScoring.negativePoints')}}</th>
           <td class="text-nowrap">− <NumberInput v-model="playerNegativePoints" class="minusVP"/></td>
           <td>–</td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.expeditionCards')"></span></th>
+          <th scope="row">{{t('finalScoring.expeditionCards')}}</th>
           <td><NumberInput v-model="playerExpeditionCardsVP"/></td>
           <td><NumberInput v-model="botExpeditionCardsVP"/></td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.projectCards')"></span></th>
+          <th scope="row">{{t('finalScoring.projectCards')}}</th>
           <td><NumberInput v-model="playerProjectCardsVP"/></td>
           <td>
-            <NumberInput v-model="botProjectCardsVP"/>
-            <div class="hint" v-html="t('finalScoring.arkaProjectCards')"></div>
+            <span class="with-hint">
+              <NumberInput v-model="botProjectCardsVP"/>
+              <InfoHint :text="t('finalScoring.arkaProjectCards')" class="hint"/>
+            </span>
           </td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.milestones')"></span></th>
+          <th scope="row">{{t('finalScoring.milestones')}}</th>
           <td><NumberInput v-model="playerMilestonesVP"/></td>
           <td>{{botMilestonesVP}}</td>
         </tr>
         <tr>
-          <th scope="row"><span v-html="t('finalScoring.meteorite')"></span></th>
-          <td><NumberInput v-model="playerMeteoriteVP"/></td>
+          <th scope="row">{{t('finalScoring.meteorite')}}</th>
+          <td>
+            <span class="with-hint">
+              <NumberInput v-model="playerMeteoriteVP"/>
+              <InfoHint :text="t('finalScoring.playerMeteorite')" class="hint"/>
+            </span>
+          </td>
           <td>–</td>
         </tr>
         <tr>
-          <th scope="row" class="fw-bold">{{t('finalScoring.total')}}</th>
+          <th scope="row">{{t('finalScoring.total')}}</th>
           <td class="fw-bold">{{playerTotalVP}}</td>
           <td class="fw-bold">{{botTotalVP}}</td>
         </tr>
@@ -84,15 +98,19 @@ import NavigationState from '@/util/NavigationState'
 import getExpertVP from '@/util/getExpertVP'
 import getArkaUpgradeVP from '@/util/getArkaUpgradeVP'
 import getArkaExpeditionVP from '@/util/getArkaExpeditionVP'
+import getArkaStationSitesVP from '@/util/getArkaStationSitesVP'
+import InfoHint from '@/components/structure/InfoHint.vue'
 
 /**
  * Final scoring for the player and Arka: victory points per scoring category of the base game plus the Meteorite.
  * The player enters victory points, Arka's are calculated where tracked by the app.
+ * Arka's Station Sites VP are pre-filled, but can be corrected (she may have taken a Station Site with a lower value).
  */
 export default defineComponent({
   name: 'FinalScoring',
   components: {
-    NumberInput
+    NumberInput,
+    InfoHint
   },
   setup() {
     const { t } = useI18n()
@@ -116,6 +134,7 @@ export default defineComponent({
       playerProjectCardsVP: undefined as number|undefined,
       playerMilestonesVP: undefined as number|undefined,
       playerMeteoriteVP: undefined as number|undefined,
+      botStationSitesVP: getArkaStationSitesVP(this.navigationState.botState.stationSiteValues) as number|undefined,
       botExpeditionCardsVP: undefined as number|undefined,
       botProjectCardsVP: undefined as number|undefined
     }
@@ -153,6 +172,7 @@ export default defineComponent({
     botTotalVP() : number {
       return this.botExpertsVP
         + this.botExpeditionTrackVP
+        + toNumber(this.botStationSitesVP)
         + this.botUpgradesVP
         + toNumber(this.botExpeditionCardsVP)
         + toNumber(this.botProjectCardsVP)
@@ -173,7 +193,6 @@ th, td {
   text-align: center;
   vertical-align: top;
   padding: 0.5rem;
-  font-weight: normal;
   min-width: 5rem;
 }
 th:nth-child(1) {
@@ -183,6 +202,22 @@ th:nth-child(1) {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+// Value columns: space for the help icons on the right in all rows, the icons are placed next to the value
+// without shifting it, so all values of a column are centered on the same axis
+th:not(:first-child), td {
+  padding-right: 2.25rem;
+}
+.with-hint {
+  position: relative;
+  display: inline-block;
+  .hint {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 0.25rem;
+  }
+}
 :deep(input) {
   width: 5rem;
   display: inline-block;
@@ -190,12 +225,26 @@ tr:nth-child(even) {
     width: 4.1rem;
   }
 }
-.hint {
-  font-size: 0.8rem;
-  max-width: 11rem;
-  margin: 0.25rem auto 0;
-}
 .tie {
   max-width: 40rem;
+}
+// small screens: compact cells and inputs (VP have max. 3 digits) to avoid horizontal scrolling
+@media (max-width: 575.98px) {
+  th, td {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+  th:not(:first-child), td {
+    padding-right: 2rem;
+  }
+  .with-hint .hint {
+    margin-left: 0;
+  }
+  :deep(input) {
+    width: 4rem;
+    &.minusVP {
+      width: 3.1rem;
+    }
+  }
 }
 </style>

@@ -90,6 +90,13 @@ export default class BotState {
   }
 
   /**
+   * Values of the Station Sites built by Arka (Engineer icons +1 at the time of building), in the order built.
+   */
+  public get stationSiteValues() : readonly number[] {
+    return this._state.value.stationSiteValues ?? []
+  }
+
+  /**
    * Arka's Presence on Landscapes: Explorers on Landscapes and Stations (C16).
    */
   public get presenceLandscapes() : number {
@@ -251,6 +258,7 @@ export default class BotState {
     if (this.stationsLeft <= 0) {
       throw new Error('No Station left.')
     }
+    this._state.value.stationSiteValues = [...this.stationSiteValues, this.stationSiteValue]
     this._state.value.stationsBuilt++
   }
 
@@ -294,7 +302,8 @@ export default class BotState {
       cardsDrawn: 0,
       explorersLandscape: 0,
       explorersExpertActionTile: 0,
-      stationsBuilt: 0
+      stationsBuilt: 0,
+      stationSiteValues: []
     })
   }
 

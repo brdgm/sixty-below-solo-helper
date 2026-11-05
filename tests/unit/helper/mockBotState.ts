@@ -15,7 +15,8 @@ export default function mockBotState(params?: MockBotStateParams) : BotState {
     cardsDrawn: params?.cardsDrawn ?? 0,
     explorersLandscape: params?.explorersLandscape ?? 0,
     explorersExpertActionTile: params?.explorersExpertActionTile ?? 0,
-    stationsBuilt: params?.stationsBuilt ?? 0
+    stationsBuilt: params?.stationsBuilt ?? 0,
+    stationSiteValues: params?.stationSiteValues ?? []
   })
 }
 
@@ -33,4 +34,5 @@ export interface MockBotStateParams {
   explorersLandscape?: number
   explorersExpertActionTile?: number
   stationsBuilt?: number
+  stationSiteValues?: number[]
 }
