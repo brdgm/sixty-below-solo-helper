@@ -16,16 +16,20 @@
           <th scope="row"><span v-html="t('finalScoring.expeditionTrack')"></span></th>
           <td><NumberInput v-model="playerExpeditionTrackVP"/></td>
           <td>
-            {{botExpeditionTrackVP}}
-            <div class="hint" v-html="t('finalScoring.arkaExpeditionTrack')"></div>
+            <span class="with-hint">
+              {{botExpeditionTrackVP}}
+              <InfoHint :text="t('finalScoring.arkaExpeditionTrack')" class="hint"/>
+            </span>
           </td>
         </tr>
         <tr>
           <th scope="row"><span v-html="t('finalScoring.stationSites')"></span></th>
           <td><NumberInput v-model="playerStationSitesVP"/></td>
           <td>
-            <NumberInput v-model="botStationSitesVP"/>
-            <div class="hint" v-html="t('finalScoring.arkaStationSites')"></div>
+            <span class="with-hint">
+              <NumberInput v-model="botStationSitesVP"/>
+              <InfoHint :text="t('finalScoring.arkaStationSites')" class="hint"/>
+            </span>
           </td>
         </tr>
         <tr>
@@ -52,8 +56,10 @@
           <th scope="row"><span v-html="t('finalScoring.projectCards')"></span></th>
           <td><NumberInput v-model="playerProjectCardsVP"/></td>
           <td>
-            <NumberInput v-model="botProjectCardsVP"/>
-            <div class="hint" v-html="t('finalScoring.arkaProjectCards')"></div>
+            <span class="with-hint">
+              <NumberInput v-model="botProjectCardsVP"/>
+              <InfoHint :text="t('finalScoring.arkaProjectCards')" class="hint"/>
+            </span>
           </td>
         </tr>
         <tr>
@@ -63,7 +69,12 @@
         </tr>
         <tr>
           <th scope="row"><span v-html="t('finalScoring.meteorite')"></span></th>
-          <td><NumberInput v-model="playerMeteoriteVP"/></td>
+          <td>
+            <span class="with-hint">
+              <NumberInput v-model="playerMeteoriteVP"/>
+              <InfoHint :text="t('finalScoring.playerMeteorite')" class="hint"/>
+            </span>
+          </td>
           <td>–</td>
         </tr>
         <tr>
@@ -88,6 +99,7 @@ import getExpertVP from '@/util/getExpertVP'
 import getArkaUpgradeVP from '@/util/getArkaUpgradeVP'
 import getArkaExpeditionVP from '@/util/getArkaExpeditionVP'
 import getArkaStationSitesVP from '@/util/getArkaStationSitesVP'
+import InfoHint from '@/components/structure/InfoHint.vue'
 
 /**
  * Final scoring for the player and Arka: victory points per scoring category of the base game plus the Meteorite.
@@ -97,7 +109,8 @@ import getArkaStationSitesVP from '@/util/getArkaStationSitesVP'
 export default defineComponent({
   name: 'FinalScoring',
   components: {
-    NumberInput
+    NumberInput,
+    InfoHint
   },
   setup() {
     const { t } = useI18n()
@@ -190,6 +203,22 @@ th:nth-child(1) {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+// Value columns: space for the help icons on the right in all rows, the icons are placed next to the value
+// without shifting it, so all values of a column are centered on the same axis
+th:not(:first-child), td {
+  padding-right: 2.25rem;
+}
+.with-hint {
+  position: relative;
+  display: inline-block;
+  .hint {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 0.25rem;
+  }
+}
 :deep(input) {
   width: 5rem;
   display: inline-block;
@@ -197,12 +226,26 @@ tr:nth-child(even) {
     width: 4.1rem;
   }
 }
-.hint {
-  font-size: 0.8rem;
-  max-width: 11rem;
-  margin: 0.25rem auto 0;
-}
 .tie {
   max-width: 40rem;
+}
+// small screens: compact cells and inputs (VP have max. 3 digits) to avoid horizontal scrolling
+@media (max-width: 575.98px) {
+  th, td {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+  th:not(:first-child), td {
+    padding-right: 2rem;
+  }
+  .with-hint .hint {
+    margin-left: 0;
+  }
+  :deep(input) {
+    width: 4rem;
+    &.minusVP {
+      width: 3.1rem;
+    }
+  }
 }
 </style>

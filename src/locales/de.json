@@ -140,7 +140,8 @@
     "projectCards": "<b>Projektkarten</b>",
     "arkaProjectCards": "Für Karten mit Spielende-Effekt gilt der niedrigere der beiden Werte als erfüllt.",
     "milestones": "<b>Meilensteine</b>",
-    "meteorite": "<b>Meteorit</b> <small>(beim -60,6° Meteorit erhältst du immer den ersten Platz)</small>",
+    "meteorite": "<b>Meteorit</b>",
+    "playerMeteorite": "Beim -60,6° Meteorit erhältst du immer den ersten Platz.",
     "total": "Summe",
     "tie": "<b>Gleichstand:</b> Arka gewinnt."
   },

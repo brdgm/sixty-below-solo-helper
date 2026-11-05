@@ -140,7 +140,8 @@
     "projectCards": "<b>Project Cards</b>",
     "arkaProjectCards": "Project Cards with Game End effect score the lower victory point value.",
     "milestones": "<b>Milestones</b>",
-    "meteorite": "<b>Meteorite</b> <small>(at the -60.6° Meteorite you always take first place)</small>",
+    "meteorite": "<b>Meteorite</b>",
+    "playerMeteorite": "At the -60.6° Meteorite you always take first place.",
     "total": "Sum",
     "tie": "<b>Tie:</b> Arka wins."
   },
