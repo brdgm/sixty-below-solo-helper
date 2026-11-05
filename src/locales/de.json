@@ -132,6 +132,7 @@
     "expeditionTrack": "<b>Expeditionsleiste</b>",
     "arkaExpeditionTrack": "1 SP pro Schritt, plus 5 SP für das erste Feld des Expeditionspfads.",
     "stationSites": "<b>Stationsfelder</b>",
+    "arkaStationSites": "Berechnet aus den Werten der Stationsfelder, die Arka gebaut hat. Musste sie ein Stationsfeld mit niedrigerem Wert nehmen, korrigiere die Siegpunkte.",
     "stations": "<b>Stationen</b>",
     "upgrades": "<b>Ausbauten</b>",
     "negativePoints": "<b>Minuspunkte für Ausbauten</b>",

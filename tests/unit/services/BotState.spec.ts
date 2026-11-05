@@ -167,7 +167,8 @@ describe('services/BotState', () => {
   })
 
   it('explorers-stations', () => {
-    const botState = mockBotState({explorersLandscape: EXPLORER_COUNT - 3, explorersExpertActionTile: 2, stationsBuilt: 4})
+    const botState = mockBotState({explorersLandscape: EXPLORER_COUNT - 3, explorersExpertActionTile: 2, stationsBuilt: 4,
+        stationSiteValues: [1, 2, 2, 3], engineer: [ExpertType.ENGINEER, ExpertType.MISSION_COORDINATOR]})
     expect(botState.explorersLeft).to.eq(1)
     expect(botState.stationsLeft).to.eq(1)
     expect(botState.presenceLandscapes).to.eq(16)
@@ -177,6 +178,7 @@ describe('services/BotState', () => {
 
     expect(botState.explorersLeft).to.eq(0)
     expect(botState.stationsLeft).to.eq(0)
+    expect(botState.stationSiteValues).to.eql([1, 2, 2, 3, 4])
     expect(botState.presenceLandscapes).to.eq(18)
     expect(() => botState.placeExplorerLandscape()).to.throw('No Explorer left.')
     expect(() => botState.placeExplorerExpertActionTile()).to.throw('No Explorer left.')
@@ -193,9 +195,20 @@ describe('services/BotState', () => {
     expect(botState.presenceLandscapes).to.eq(0)
   })
 
+  it('buildStation-legacy-persistence', () => {
+    // games persisted before the Station Site values were tracked
+    const botState = BotState.fromPersistence({ ...BotState.new().toPersistence(), stationsBuilt: 2, stationSiteValues: undefined })
+    expect(botState.stationSiteValues).to.eql([])
+
+    botState.buildStation()
+
+    expect(botState.stationsBuilt).to.eq(3)
+    expect(botState.stationSiteValues).to.eql([2])
+  })
+
   it('persistence', () => {
     const botState = mockBotState({rondelPosition: 5, expeditionSteps: 12, engineer: [ExpertType.ENGINEER],
-        upgrades: 3, cardsDrawn: 4, explorersLandscape: 5, explorersExpertActionTile: 1, stationsBuilt: 2})
+        upgrades: 3, cardsDrawn: 4, explorersLandscape: 5, explorersExpertActionTile: 1, stationsBuilt: 2, stationSiteValues: [2, 3]})
     const persistence = botState.toPersistence()
 
     expect(BotState.fromPersistence(persistence).toPersistence()).to.eql(persistence)

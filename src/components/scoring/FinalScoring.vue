@@ -23,7 +23,10 @@
         <tr>
           <th scope="row"><span v-html="t('finalScoring.stationSites')"></span></th>
           <td><NumberInput v-model="playerStationSitesVP"/></td>
-          <td>–</td>
+          <td>
+            <NumberInput v-model="botStationSitesVP"/>
+            <div class="hint" v-html="t('finalScoring.arkaStationSites')"></div>
+          </td>
         </tr>
         <tr>
           <th scope="row"><span v-html="t('finalScoring.stations')"></span></th>
@@ -84,10 +87,12 @@ import NavigationState from '@/util/NavigationState'
 import getExpertVP from '@/util/getExpertVP'
 import getArkaUpgradeVP from '@/util/getArkaUpgradeVP'
 import getArkaExpeditionVP from '@/util/getArkaExpeditionVP'
+import getArkaStationSitesVP from '@/util/getArkaStationSitesVP'
 
 /**
  * Final scoring for the player and Arka: victory points per scoring category of the base game plus the Meteorite.
  * The player enters victory points, Arka's are calculated where tracked by the app.
+ * Arka's Station Sites VP are pre-filled, but can be corrected (she may have taken a Station Site with a lower value).
  */
 export default defineComponent({
   name: 'FinalScoring',
@@ -116,6 +121,7 @@ export default defineComponent({
       playerProjectCardsVP: undefined as number|undefined,
       playerMilestonesVP: undefined as number|undefined,
       playerMeteoriteVP: undefined as number|undefined,
+      botStationSitesVP: getArkaStationSitesVP(this.navigationState.botState.stationSiteValues) as number|undefined,
       botExpeditionCardsVP: undefined as number|undefined,
       botProjectCardsVP: undefined as number|undefined
     }
@@ -153,6 +159,7 @@ export default defineComponent({
     botTotalVP() : number {
       return this.botExpertsVP
         + this.botExpeditionTrackVP
+        + toNumber(this.botStationSitesVP)
         + this.botUpgradesVP
         + toNumber(this.botExpeditionCardsVP)
         + toNumber(this.botProjectCardsVP)

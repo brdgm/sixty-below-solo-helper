@@ -132,6 +132,7 @@
     "expeditionTrack": "<b>Expedition Track</b>",
     "arkaExpeditionTrack": "1 VP per step, plus 5 VP for the first space of the Expedition Path.",
     "stationSites": "<b>Station Sites</b>",
+    "arkaStationSites": "Calculated from the values of the Station Sites Arka built. If she had to take a Station Site with a lower value, correct the victory points.",
     "stations": "<b>Stations</b>",
     "upgrades": "<b>Upgrades</b>",
     "negativePoints": "<b>Negative points for Upgrades</b>",

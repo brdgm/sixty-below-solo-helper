@@ -47,6 +47,7 @@ describe('services/BotActions', () => {
     expect(botActions.screens[0].step?.status).to.eq(BotActionStatus.EXECUTED)
     expect(botActions.decisionCount).to.eq(1)
     expect(botActions.botState.stationsBuilt).to.eq(1)
+    expect(botActions.botState.stationSiteValues).to.eql([2])
   })
 
   it('build-station-not-possible-rondel-draw-cards', () => {

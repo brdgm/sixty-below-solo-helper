@@ -109,4 +109,6 @@ export interface BotStatePersistence {
   explorersLandscape: number
   explorersExpertActionTile: number
   stationsBuilt: number
+  /** Values of the Station Sites built by Arka (Engineer icons +1), in the order built - missing in games started before it was tracked */
+  stationSiteValues?: number[]
 }
