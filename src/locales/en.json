@@ -37,7 +37,7 @@
       "managedByApp": "Arka's Action Cards, her Tableau and her Milestone scoring are managed by the app. You do not need Arka's Tableau, the Expedition Marker, Energy Marker, Milestone Tiles and Upgrades of Arka's color, nor the Starting Indicator.",
       "actionCardDeck": "Arka's Action Card deck consists of all 9 Action Cards with one star and no Action Cards without a star. | Arka's Action Card deck consists of all 9 Action Cards with one star and {count} random Action Card without a star. | Arka's Action Card deck consists of all 9 Action Cards with one star and {count} random Action Cards without a star.",
       "arkaPhases": "Arka does not perform a Preparation and a Planning Phase. She is only active during the Action Phase and scores Milestones at the end of the third, fifth and sixth round.",
-      "meteorite": "Arka ignores the Meteorite. She never places an Explorer on it and scores no victory points from it."
+      "meteorite": "Arka ignores the Meteorite. She never places an Explorer on it, does not treat it as the coldest Landscape when building a Station and scores no victory points from it."
     }
   },
   "roundStart": {
@@ -192,7 +192,8 @@
       },
       "build-station": {
         "title": "Build a Station",
-        "text": "Take a Station and a Station Site with exactly the value of Arka's Engineer icons +1. For a value of 1 to 3, you choose any available side of Arka's personal Station Sites with that value. For a value of 4 or more, take the top Station Site from the face-down pile with that value. Only if there are no more Station Sites with that value available, take the next lower one. Build next to the coldest Landscape adjacent to as many Landscapes as possible. In the event of a tie, you decide."
+        "text": "Take a Station and a Station Site with exactly the value of Arka's Engineer icons +1. For a value of 1 to 3, you choose any available side of Arka's personal Station Sites with that value. For a value of 4 or more, take the top Station Site from the face-down pile with that value. Only if there are no more Station Sites with that value available, take the next lower one. Build next to the coldest Landscape adjacent to as many Landscapes as possible. In the event of a tie, you decide.",
+        "meteorite": "Arka ignores the Meteorite: it does not count as the coldest Landscape."
       },
       "build-station-if-3-engineers": {
         "title": "Building a Station if Arka has at least 3 Engineer icons",
