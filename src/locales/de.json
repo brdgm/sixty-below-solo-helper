@@ -37,7 +37,7 @@
       "managedByApp": "Die Arka-Aktionskarten, Arkas Tableau und ihre Meilensteinwertung werden von der App verwaltet. Du benötigst Arkas Tableau, den Expeditionsmarker, den Energiemarker, die Meilensteinplättchen und die Ausbauten von Arkas Farbe nicht, ebenso wenig den Startmarker.",
       "actionCardDeck": "Arkas Aktionskartenstapel besteht aus allen 9 Arka-Aktionskarten mit einem Stern und keinen Arka-Aktionskarten ohne Stern. | Arkas Aktionskartenstapel besteht aus allen 9 Arka-Aktionskarten mit einem Stern und {count} zufälligen Arka-Aktionskarte ohne Stern. | Arkas Aktionskartenstapel besteht aus allen 9 Arka-Aktionskarten mit einem Stern und {count} zufälligen Arka-Aktionskarten ohne Stern.",
       "arkaPhases": "Für Arka entfällt die Vorbereitungs- und Planungsphase. Arka ist somit nur in der Aktionsphase aktiv und wertet am Ende der dritten, fünften und sechsten Runde Meilensteine.",
-      "meteorite": "Arka ignoriert den Meteoriten. Sie stellt keinen Explorer darauf und erhält keine Siegpunkte davon."
+      "meteorite": "Arka ignoriert den Meteoriten. Sie stellt keinen Explorer darauf, behandelt ihn beim Bau einer Station nicht als kälteste Landschaft und erhält keine Siegpunkte davon."
     }
   },
   "roundStart": {
@@ -192,7 +192,8 @@
       },
       "build-station": {
         "title": "Station bauen",
-        "text": "Nimm eine Station und ein Stationsfeld mit genau dem Wert der Ingenieurssymbolanzahl +1. Bei einem Wert von 1 bis 3 wählst du eine beliebige verfügbare Seite von Arkas persönlichen Stationsfeldern mit diesem Wert. Ab einem Wert von 4 nimm das oberste Stationsfeld vom verdeckten Stapel mit diesem Wert. Nur wenn kein Stationsfeld mit diesem Wert mehr verfügbar ist, nimm das nächst niedrigere. Baue neben der kältesten Landschaft. Grenze dabei an möglichst viele Landschaften an. Bei Gleichstand entscheidest du."
+        "text": "Nimm eine Station und ein Stationsfeld mit genau dem Wert der Ingenieurssymbolanzahl +1. Bei einem Wert von 1 bis 3 wählst du eine beliebige verfügbare Seite von Arkas persönlichen Stationsfeldern mit diesem Wert. Ab einem Wert von 4 nimm das oberste Stationsfeld vom verdeckten Stapel mit diesem Wert. Nur wenn kein Stationsfeld mit diesem Wert mehr verfügbar ist, nimm das nächst niedrigere. Baue neben der kältesten Landschaft. Grenze dabei an möglichst viele Landschaften an. Bei Gleichstand entscheidest du.",
+        "meteorite": "Arka ignoriert den Meteoriten: Er zählt nicht als kälteste Landschaft."
       },
       "build-station-if-3-engineers": {
         "title": "Station bauen, wenn zumindest 3 Ingenieurssymbole vorhanden sind",
