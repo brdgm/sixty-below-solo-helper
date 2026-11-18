@@ -9,6 +9,7 @@
     <template #instruction>
       <p v-if="isIf3Engineers" v-html="t('rules.action.build-station-if-3-engineers.text')"></p>
       <p v-html="t('rules.action.build-station.text')"></p>
+      <p v-html="t('rules.action.build-station.meteorite')"></p>
     </template>
   </ActionBox>
 </template>
